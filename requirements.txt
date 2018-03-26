@@ -1,0 +1,6 @@
+requests
+bravado
+swagger-spec-validator
+bravado-core
+pytest
+coverage
