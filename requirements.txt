@@ -2,5 +2,5 @@ requests
 bravado
 swagger-spec-validator
 bravado-core
-pytest
+pytest-cov
 coverage
