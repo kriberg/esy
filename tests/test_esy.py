@@ -5,9 +5,34 @@ from esy.exceptions import ESIError, ESIAuthorizationError
 VITTOROS = 941287462
 EVOLUTION = 144749962
 
+
+class DummyCache(object):
+    def __init__(self):
+        self.dummy = {}
+        self.hits = 0
+
+    def get(self, key):
+        if key in self.dummy:
+            self.hits += 1
+        return self.dummy.get(key)
+
+    def set(self, key, data, *args):
+        self.dummy[key] = data
+
+    def clear(self):
+        self.dummy.clear()
+
+    def __len__(self):
+        return len(self.dummy)
+
+    def __contains__(self, item):
+        return item in self.dummy
+
+
 class TestESIClient(unittest.TestCase):
     def setUp(self):
         self.client = ESIClient.get_client('test')
+        self.cache = DummyCache()
 
     def test_get_client(self):
         self.assertIsInstance(self.client, ESIClient)
@@ -37,8 +62,6 @@ class TestESIClient(unittest.TestCase):
         alliances = self.client.Alliance.get_alliances()
         self.assertIsInstance(alliances, list)
         self.assertTrue(len(alliances) > 100)
-
-
 
     def test_pagination(self):
         types_generator = self.client.Universe.get_universe_types()
@@ -73,3 +96,15 @@ class TestESIClient(unittest.TestCase):
             self.client.Character.get_characters_character_id_blueprints(
                 character_id=VITTOROS
             )
+
+    def test_caching(self):
+        self.cache.clear()
+        self.client.cache = self.cache
+        self.assertIsInstance(self.client.cache, DummyCache)
+        self.assertTrue(len(self.cache) == 0)
+        status1 = self.client.Status.get_status()
+        self.assertTrue(len(self.cache) == 1)
+        self.assertTrue(self.cache.hits == 0)
+        status2 = self.client.Status.get_status()
+        self.assertTrue(self.cache.hits == 1)
+        self.assertEqual(status1, status2)

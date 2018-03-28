@@ -1,8 +1,9 @@
 import requests
 import json
 import logging
+import pytz
 from datetime import datetime
-from typing import Any, Callable, Dict, Optional
+from email.utils import parsedate
 from bravado.client import SwaggerClient, ResourceDecorator, \
     CallableOperation, warn_for_deprecated_op, construct_request, \
     REQUEST_OPTIONS_DEFAULTS
@@ -56,7 +57,6 @@ class ESICallableOperation(CallableOperation):
         #     config['also_return_response'])
 
         # Check if we need an authorization token and if so set it up
-        authorization_token = None
         if self.require_authorization and _token is None:
             raise ESIAuthorizationError('Missing required authorization token')
 
@@ -71,26 +71,63 @@ class ESIPageGenerator(object):
     """
     Generator for ESI API calls.
     """
-    def __init__(self, requests_future, RequestsResponseAdapter, operation,
-                 response_callbacks):
+    def __init__(self, requests_future, requestsresponse_adapter, operation,
+                 response_callbacks, cache=None):
         self.requests_future = requests_future
-        self.RequestsResponseAdapter = RequestsResponseAdapter
+        self.requestsresponse_adapter = requestsresponse_adapter
         self.operation = operation
         self.response_callbacks = response_callbacks
         self.page = 1
+        self.num_pages = 1
         self.stop = False
+        self.cache = cache
+        if self.cache is not None:
+            assert callable(getattr(self.cache, 'get', None))
+            assert callable(getattr(self.cache, 'set', None))
+            assert callable(getattr(self.cache, '__contains__', None))
 
-    def result(self):
+    def __iter__(self):
+        return self
+
+    def _get_cache_key(self):
+        return hash((
+            self.requests_future.request.url,
+            str(self.requests_future.request.params),
+            str(self.requests_future.request.auth),
+            str(self.requests_future.request.headers),
+            str(self.requests_future.request.method),
+            self.page
+        ))
+
+    def _send(self):
         return HttpFuture(self.requests_future,
-                          self.RequestsResponseAdapter,
+                          self.requestsresponse_adapter,
                           self.operation,
                           self.response_callbacks,
                           also_return_response=True).result()
 
+    def result(self):
+        if self.cache is not None:
+            key = self._get_cache_key()
+            if key in self.cache:
+                data, num_pages = self.cache.get(key)
+                self.num_pages = num_pages
+            else:
+                data, response = self._send()
+                self.num_pages = int(response.headers.get('x-pages', '1'))
+                expires = datetime(
+                    *parsedate(response.headers.get('expires'))[:7], pytz.UTC
+                )
+                self.cache.set(key, (data, self.num_pages), expires)
+        else:
+            data, response = self._send()
+            self.num_pages = int(response.headers.get('x-pages', '1'))
+
+        return data
+
     def get(self):
         try:
-            data, response = self.result()
-            return data
+            return self.result()
         except (HTTPInternalServerError, HTTPBadRequest) as ex:
             raise ESIError(str(ex))
         except HTTPNotFound as ex:
@@ -107,8 +144,7 @@ class ESIPageGenerator(object):
             raise StopIteration
         else:
             self.requests_future.request.params['page'] = self.page
-            swagger_result, incoming_response = self.result()
-            self.num_pages = int(incoming_response.headers.get('x-pages', '1'))
+            swagger_result = self.result()
             self.page += 1
             if self.page > self.num_pages:
                 self.stop = True
@@ -120,9 +156,10 @@ class ESIRequestsClient(RequestsClient):
     Extends the bravado RequestsClient to handle pagination, user agent and
     per-request authorizations.
     """
-    def __init__(self, user_agent):
+    def __init__(self, user_agent, cache=None):
         super().__init__()
         self.user_agent = user_agent
+        self.cache = cache
 
     def request(self, request_params, operation=None, response_callbacks=None,
                 authorization_token=None):
@@ -146,21 +183,24 @@ class ESIRequestsClient(RequestsClient):
             return ESIPageGenerator(requests_future,
                                     RequestsResponseAdapter,
                                     operation,
-                                    response_callbacks)
+                                    response_callbacks,
+                                    cache=self.cache)
         else:
             return ESIPageGenerator(requests_future,
                                     RequestsResponseAdapter,
                                     operation,
-                                    response_callbacks).get()
+                                    response_callbacks,
+                                    cache=self.cache).get()
 
 
 class ESIClient(SwaggerClient):
     """
-    Wraps calls to ESI through the bravado library
+    Swagger client interface adapted to use with the ESI.
     """
 
-    def __init__(self, swagger_spec, esi_endpoint, user_agent, use_models):
-        self.http_client = ESIRequestsClient(user_agent)
+    def __init__(self, swagger_spec, esi_endpoint, user_agent, use_models,
+                 cache):
+        self.http_client = ESIRequestsClient(user_agent, cache=cache)
         swagger_spec = Spec.from_dict(swagger_spec,
                                       esi_endpoint,
                                       self.http_client,
@@ -175,7 +215,7 @@ class ESIClient(SwaggerClient):
 
     @staticmethod
     def get_client(user_agent, use_models=False, endpoint=ESI_ENDPOINT,
-                   datasource=ESI_DATASOURCE):
+                   datasource=ESI_DATASOURCE, cache=None):
         """
         Generates a client interface for ESI.
 
@@ -183,16 +223,25 @@ class ESIClient(SwaggerClient):
         :param use_models:
         :param endpoint:
         :param datasource:
+        :param cache: A class which implements the cache interface
         :return: An initalized client
         :rtype: ESIClient
         """
         target = ESIClient._generate_esi_endpoint(endpoint, datasource)
         spec = ESIClient.get_swagger_spec(endpoint=endpoint,
                                           datasource=datasource)
-        return ESIClient(spec, target, user_agent, use_models)
+        return ESIClient(spec, target, user_agent, use_models, cache)
 
     @staticmethod
     def get_swagger_spec(endpoint=ESI_ENDPOINT, datasource=ESI_DATASOURCE):
+        """
+        Downloads and parses the swagger specification from the ESI endpoint.
+
+        :param endpoint: URL to the ESI endpoint. Defaults to latest.
+        :param datasource: ESI datasource to use. Defaults to Tranquility.
+        :return: Swagger specification
+        :rtype: dict
+        """
         endpoint = ESIClient._generate_esi_endpoint(endpoint, datasource)
         try:
             start = datetime.now()
@@ -205,6 +254,14 @@ class ESIClient(SwaggerClient):
         except Exception as ex:
             log.error(f'Could not connect to ESI: {ex}')
             raise ESIError(str(ex))
+
+    @property
+    def cache(self):
+        return self.http_client.cache
+
+    @cache.setter
+    def cache(self, cache):
+        self.http_client.cache = cache
 
     def __getattr__(self, item):
         resource = self.swagger_spec.resources.get(item)
@@ -219,6 +276,9 @@ class ESIClient(SwaggerClient):
 
 
 class ESIResourceDecorator(ResourceDecorator):
+    """
+    Extends ResourceDecorator to wrap operations with ESICallableOperation
+    """
 
     def __getattr__(self, name):
         """
