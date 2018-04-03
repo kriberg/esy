@@ -20,3 +20,6 @@ ESY API
 
 .. automodule:: esy.constants
    :members:
+
+.. automodule:: esy.auth
+   :members:

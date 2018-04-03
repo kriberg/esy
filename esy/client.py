@@ -15,7 +15,7 @@ from bravado.exception import HTTPInternalServerError, HTTPNotFound, \
     HTTPBadRequest, HTTPForbidden
 from .exceptions import ESIError, ESINotFound, ESIForbidden, \
     ESIAuthorizationError
-from .constants import ESI_ENDPOINT, ESI_DATASOURCE
+from .constants import ESI_ENDPOINT, ESI_DATASOURCE, ESI_SWAGGER_CACHE_TIMER
 
 
 log = logging.getLogger(__name__)
@@ -128,15 +128,16 @@ class ESIPageGenerator(object):
     def get(self):
         try:
             return self.result()
-        except (HTTPInternalServerError, HTTPBadRequest) as ex:
+        except (HTTPInternalServerError,
+                HTTPBadRequest) as ex:  # pragma: no cover
             raise ESIError(str(ex))
-        except HTTPNotFound as ex:
+        except HTTPNotFound as ex:  # pragma: no cover
             try:
                 error_msg = json.loads(ex.response.text)
                 raise ESINotFound(error_msg.get('error', 'Not found'))
             except Exception as ex:
                 raise ESINotFound(str(ex))
-        except HTTPForbidden:
+        except HTTPForbidden:  # pragma: no cover
             raise ESIForbidden('Access denied')
 
     def __next__(self):
@@ -200,6 +201,16 @@ class ESIClient(SwaggerClient):
 
     def __init__(self, swagger_spec, esi_endpoint, user_agent, use_models,
                  cache):
+        """
+        Internal constructor for ESIClient. Use get_client instead of
+        instancing ESIClient directly.
+
+        :param swagger_spec:
+        :param esi_endpoint:
+        :param user_agent:
+        :param use_models:
+        :param cache:
+        """
         self.http_client = ESIRequestsClient(user_agent, cache=cache)
         swagger_spec = Spec.from_dict(swagger_spec,
                                       esi_endpoint,
@@ -220,40 +231,64 @@ class ESIClient(SwaggerClient):
         Generates a client interface for ESI.
 
         :param user_agent:
+        :type user_agent: str
         :param use_models:
+        :type use_models: bool
         :param endpoint:
+        :type endpoint: str
         :param datasource:
+        :type datasource: str
         :param cache: A class which implements the cache interface
         :return: An initalized client
         :rtype: ESIClient
         """
         target = ESIClient._generate_esi_endpoint(endpoint, datasource)
         spec = ESIClient.get_swagger_spec(endpoint=endpoint,
-                                          datasource=datasource)
+                                          datasource=datasource,
+                                          cache=cache)
         return ESIClient(spec, target, user_agent, use_models, cache)
 
     @staticmethod
-    def get_swagger_spec(endpoint=ESI_ENDPOINT, datasource=ESI_DATASOURCE):
+    def get_swagger_spec(endpoint=ESI_ENDPOINT, datasource=ESI_DATASOURCE,
+                         cache=None):
         """
         Downloads and parses the swagger specification from the ESI endpoint.
 
         :param endpoint: URL to the ESI endpoint. Defaults to latest.
+        :type endpoint: str
         :param datasource: ESI datasource to use. Defaults to Tranquility.
+        :type datasource: str
+        :param cache: Optional cache
         :return: Swagger specification
         :rtype: dict
         """
         endpoint = ESIClient._generate_esi_endpoint(endpoint, datasource)
+        key = hash((endpoint, 'spec'))
+        if cache is not None and key in cache:
+            swagger_data = cache.get(key)
+        else:
+            try:
+                start = datetime.now()
+                resp = requests.get(endpoint)
+                resp.raise_for_status()
+                swagger_data = resp.text
+                log.debug(f'Swagger spec downloaded in {datetime.now()-start} '
+                          'seconds')
+            except Exception as ex:
+                error = f'Could not connect to ESI: {ex}'
+                log.error(error)
+                raise ESIError(error)
+
+        if cache is not None and key not in cache:
+            cache.set(key, swagger_data, ESI_SWAGGER_CACHE_TIMER)
+
         try:
-            start = datetime.now()
-            resp = requests.get(endpoint)
-            resp.raise_for_status()
-            spec = json.loads(resp.text)
-            log.debug(f'Swagger spec downloaded and parsed in '
-                      f'{datetime.now()-start} seconds')
+            spec = json.loads(swagger_data)
             return spec
-        except Exception as ex:
-            log.error(f'Could not connect to ESI: {ex}')
-            raise ESIError(str(ex))
+        except Exception as ex:  # pragma: no cover
+            error = f'Could not parse ESI swagger specification: {ex}'
+            log.error(error)
+            raise ESIError(error)
 
     @property
     def cache(self):

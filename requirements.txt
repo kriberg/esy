@@ -1,4 +1,5 @@
 requests
+requests-oauthlib
 bravado
 swagger-spec-validator
 bravado-core
