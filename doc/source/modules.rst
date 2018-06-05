@@ -20,3 +20,6 @@ ESY Swagger Interface
 
 .. automodule:: esy.constants
    :members:
+
+.. automodule:: esy.auth
+   :members:

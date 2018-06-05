@@ -1,4 +1,5 @@
 requests
+requests-oauthlib
 bravado
 swagger-spec-validator
 bravado-core
@@ -7,3 +8,4 @@ coverage
 sphinx
 sphinx_rtd_theme
 m2r
+pytz

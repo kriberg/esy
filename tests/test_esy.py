@@ -68,6 +68,15 @@ class TestESIClient(unittest.TestCase):
         with self.assertRaises(AttributeError):
             self.client.Character.bar()
 
+        size1 = len(self.cache)
+        spec1 = ESIClient.get_swagger_spec(cache=self.cache)
+        size2 = len(self.cache)
+        spec2 = ESIClient.get_swagger_spec(cache=self.cache)
+        size3 = len(self.cache)
+        self.assertDictEqual(spec1, spec2)
+        self.assertTrue(size1 + 1 == size2)
+        self.assertTrue(size2 == size3)
+
     def test_alliance(self):
         alliances = self.client.Alliance.get_alliances()
         self.assertIsInstance(alliances, list)
@@ -114,6 +123,11 @@ class TestESIClient(unittest.TestCase):
                 _token='hunter2'
             )
             next(gen)
+
+    def test_with_token(self):
+        alliances = self.client.Alliance.get_alliances(_token='Foo')
+        self.assertIsInstance(alliances, list)
+        self.assertTrue(len(alliances) > 100)
 
     def test_caching(self):
         self.cache.clear()
