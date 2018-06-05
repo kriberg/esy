@@ -3,9 +3,4 @@ requests-oauthlib
 bravado
 swagger-spec-validator
 bravado-core
-pytest-cov
-coverage
-sphinx
-sphinx_rtd_theme
-m2r
 pytz
