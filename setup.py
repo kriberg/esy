@@ -32,8 +32,14 @@ with io.open(os.path.join(here, 'README.md'), encoding='utf-8') as f:
 # Load the package's __version__.py module as a dictionary.
 about = {'__version__': __version__}
 
-with io.open(os.path.join(here, 'requirements.txt')) as f:
-    REQUIRED = f.read().splitlines()
+REQUIRED = [
+    'requests',
+    'requests-oauthlib',
+    'bravado',
+    'swagger-spec-validator',
+    'bravado-core',
+    'pytz'
+]
 
 
 class UploadCommand(Command):
