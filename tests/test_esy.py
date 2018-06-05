@@ -2,9 +2,9 @@ import unittest
 import os
 import os.path
 import json
-import collections
 from esy.client import ESIClient, ESIPageGenerator
 from esy.exceptions import ESIError, ESIAuthorizationError, ESIForbidden
+
 
 VITTOROS = 941287462
 EVOLUTION = 144749962

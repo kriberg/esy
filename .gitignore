@@ -102,3 +102,8 @@ ENV/
 
 # esi test
 .esi
+
+.idea
+.pytest_cache
+doc/_build
+tests/.pytest_cache
