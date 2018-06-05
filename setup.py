@@ -38,7 +38,8 @@ REQUIRED = [
     'bravado',
     'swagger-spec-validator',
     'bravado-core',
-    'pytz'
+    'pytz',
+    'm2r'
 ]
 
 
