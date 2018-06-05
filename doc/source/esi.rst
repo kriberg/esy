@@ -21,7 +21,7 @@ Alliance
       :rtype: list
 
 
-   .. py:method:: get_alliances_alliance_id(alliance_id)
+   .. py:method:: get_alliances_alliance_id(alliance_id=None)
 
    Get alliance information
 
@@ -30,7 +30,7 @@ Alliance
       :rtype: dict
 
 
-   .. py:method:: get_alliances_alliance_id_corporations(alliance_id)
+   .. py:method:: get_alliances_alliance_id_corporations(alliance_id=None)
 
    List alliance's corporations
 
@@ -39,7 +39,7 @@ Alliance
       :rtype: list
 
 
-   .. py:method:: get_alliances_alliance_id_icons(alliance_id)
+   .. py:method:: get_alliances_alliance_id_icons(alliance_id=None)
 
    Get alliance icon
 
@@ -48,7 +48,7 @@ Alliance
       :rtype: dict
 
 
-   .. py:method:: get_alliances_names(alliance_ids)
+   .. py:method:: get_alliances_names(alliance_ids=None)
 
    Get alliance names
 
@@ -64,7 +64,7 @@ Assets
 
 .. py:class:: Assets
 
-   .. py:method:: get_characters_character_id_assets(character_id, [_token=None])
+   .. py:method:: get_characters_character_id_assets(character_id=None, _token=None)
 
    Get character assets
 
@@ -74,7 +74,7 @@ Assets
       :rtype: :class:`~esy.client.ESIPageGenerator` list
 
 
-   .. py:method:: get_corporations_corporation_id_assets(corporation_id, [_token=None])
+   .. py:method:: get_corporations_corporation_id_assets(corporation_id=None, _token=None)
 
    Get corporation assets
 
@@ -84,7 +84,7 @@ Assets
       :rtype: :class:`~esy.client.ESIPageGenerator` list
 
 
-   .. py:method:: post_characters_character_id_assets_locations(character_id, item_ids, [_token=None])
+   .. py:method:: post_characters_character_id_assets_locations(character_id=None, item_ids=None, _token=None)
 
    Get character asset locations
 
@@ -95,7 +95,7 @@ Assets
       :rtype: list
 
 
-   .. py:method:: post_characters_character_id_assets_names(character_id, item_ids, [_token=None])
+   .. py:method:: post_characters_character_id_assets_names(character_id=None, item_ids=None, _token=None)
 
    Get character asset names
 
@@ -106,7 +106,7 @@ Assets
       :rtype: list
 
 
-   .. py:method:: post_corporations_corporation_id_assets_locations(corporation_id, item_ids, [_token=None])
+   .. py:method:: post_corporations_corporation_id_assets_locations(corporation_id=None, item_ids=None, _token=None)
 
    Get corporation asset locations
 
@@ -117,7 +117,7 @@ Assets
       :rtype: list
 
 
-   .. py:method:: post_corporations_corporation_id_assets_names(corporation_id, item_ids, [_token=None])
+   .. py:method:: post_corporations_corporation_id_assets_names(corporation_id=None, item_ids=None, _token=None)
 
    Get coporation asset names
 
@@ -135,7 +135,7 @@ Bookmarks
 
 .. py:class:: Bookmarks
 
-   .. py:method:: get_characters_character_id_bookmarks(character_id, [_token=None])
+   .. py:method:: get_characters_character_id_bookmarks(character_id=None, _token=None)
 
    List bookmarks
 
@@ -145,7 +145,7 @@ Bookmarks
       :rtype: :class:`~esy.client.ESIPageGenerator` list
 
 
-   .. py:method:: get_characters_character_id_bookmarks_folders(character_id, [_token=None])
+   .. py:method:: get_characters_character_id_bookmarks_folders(character_id=None, _token=None)
 
    List bookmark folders
 
@@ -155,7 +155,7 @@ Bookmarks
       :rtype: :class:`~esy.client.ESIPageGenerator` list
 
 
-   .. py:method:: get_corporations_corporation_id_bookmarks(corporation_id, [_token=None])
+   .. py:method:: get_corporations_corporation_id_bookmarks(corporation_id=None, _token=None)
 
    List corporation bookmarks
 
@@ -165,7 +165,7 @@ Bookmarks
       :rtype: :class:`~esy.client.ESIPageGenerator` list
 
 
-   .. py:method:: get_corporations_corporation_id_bookmarks_folders(corporation_id, [_token=None])
+   .. py:method:: get_corporations_corporation_id_bookmarks_folders(corporation_id=None, _token=None)
 
    List corporation bookmark folders
 
@@ -182,7 +182,7 @@ Calendar
 
 .. py:class:: Calendar
 
-   .. py:method:: get_characters_character_id_calendar(character_id, [from_event=None], [_token=None])
+   .. py:method:: get_characters_character_id_calendar(character_id=None, [from_event=None], _token=None)
 
    List calendar event summaries
 
@@ -193,7 +193,7 @@ Calendar
       :rtype: list
 
 
-   .. py:method:: get_characters_character_id_calendar_event_id(character_id, event_id, [_token=None])
+   .. py:method:: get_characters_character_id_calendar_event_id(character_id=None, event_id=None, _token=None)
 
    Get an event
 
@@ -204,7 +204,7 @@ Calendar
       :rtype: dict
 
 
-   .. py:method:: get_characters_character_id_calendar_event_id_attendees(character_id, event_id, [_token=None])
+   .. py:method:: get_characters_character_id_calendar_event_id_attendees(character_id=None, event_id=None, _token=None)
 
    Get attendees
 
@@ -215,7 +215,7 @@ Calendar
       :rtype: list
 
 
-   .. py:method:: put_characters_character_id_calendar_event_id(character_id, event_id, response, [_token=None])
+   .. py:method:: put_characters_character_id_calendar_event_id(character_id=None, event_id=None, response=None, _token=None)
 
    Respond to an event
 
@@ -234,7 +234,7 @@ Character
 
 .. py:class:: Character
 
-   .. py:method:: get_characters_character_id(character_id)
+   .. py:method:: get_characters_character_id(character_id=None)
 
    Get character's public information
 
@@ -243,7 +243,7 @@ Character
       :rtype: dict
 
 
-   .. py:method:: get_characters_character_id_agents_research(character_id, [_token=None])
+   .. py:method:: get_characters_character_id_agents_research(character_id=None, _token=None)
 
    Get agents research
 
@@ -253,7 +253,7 @@ Character
       :rtype: list
 
 
-   .. py:method:: get_characters_character_id_blueprints(character_id, [_token=None])
+   .. py:method:: get_characters_character_id_blueprints(character_id=None, _token=None)
 
    Get blueprints
 
@@ -263,7 +263,7 @@ Character
       :rtype: :class:`~esy.client.ESIPageGenerator` list
 
 
-   .. py:method:: get_characters_character_id_corporationhistory(character_id)
+   .. py:method:: get_characters_character_id_corporationhistory(character_id=None)
 
    Get corporation history
 
@@ -272,7 +272,7 @@ Character
       :rtype: list
 
 
-   .. py:method:: get_characters_character_id_fatigue(character_id, [_token=None])
+   .. py:method:: get_characters_character_id_fatigue(character_id=None, _token=None)
 
    Get jump fatigue
 
@@ -282,7 +282,7 @@ Character
       :rtype: dict
 
 
-   .. py:method:: get_characters_character_id_medals(character_id, [_token=None])
+   .. py:method:: get_characters_character_id_medals(character_id=None, _token=None)
 
    Get medals
 
@@ -292,7 +292,7 @@ Character
       :rtype: list
 
 
-   .. py:method:: get_characters_character_id_notifications(character_id, [_token=None])
+   .. py:method:: get_characters_character_id_notifications(character_id=None, _token=None)
 
    Get character notifications
 
@@ -302,7 +302,7 @@ Character
       :rtype: list
 
 
-   .. py:method:: get_characters_character_id_notifications_contacts(character_id, [_token=None])
+   .. py:method:: get_characters_character_id_notifications_contacts(character_id=None, _token=None)
 
    Get new contact notifications
 
@@ -312,7 +312,7 @@ Character
       :rtype: list
 
 
-   .. py:method:: get_characters_character_id_portrait(character_id)
+   .. py:method:: get_characters_character_id_portrait(character_id=None)
 
    Get character portraits
 
@@ -321,7 +321,7 @@ Character
       :rtype: dict
 
 
-   .. py:method:: get_characters_character_id_roles(character_id, [_token=None])
+   .. py:method:: get_characters_character_id_roles(character_id=None, _token=None)
 
    Get character corporation roles
 
@@ -331,7 +331,7 @@ Character
       :rtype: dict
 
 
-   .. py:method:: get_characters_character_id_standings(character_id, [_token=None])
+   .. py:method:: get_characters_character_id_standings(character_id=None, _token=None)
 
    Get standings
 
@@ -341,7 +341,7 @@ Character
       :rtype: list
 
 
-   .. py:method:: get_characters_character_id_stats(character_id, [_token=None])
+   .. py:method:: get_characters_character_id_stats(character_id=None, _token=None)
 
    Yearly aggregate stats
 
@@ -351,7 +351,7 @@ Character
       :rtype: list
 
 
-   .. py:method:: get_characters_character_id_titles(character_id, [_token=None])
+   .. py:method:: get_characters_character_id_titles(character_id=None, _token=None)
 
    Get character corporation titles
 
@@ -361,7 +361,7 @@ Character
       :rtype: list
 
 
-   .. py:method:: get_characters_names(character_ids)
+   .. py:method:: get_characters_names(character_ids=None)
 
    Get character names
 
@@ -370,7 +370,7 @@ Character
       :rtype: list
 
 
-   .. py:method:: post_characters_affiliation(characters)
+   .. py:method:: post_characters_affiliation(characters=None)
 
    Character affiliation
 
@@ -379,7 +379,7 @@ Character
       :rtype: list
 
 
-   .. py:method:: post_characters_character_id_cspa(character_id, characters, [_token=None])
+   .. py:method:: post_characters_character_id_cspa(character_id=None, characters=None, _token=None)
 
    Calculate a CSPA charge cost
 
@@ -397,7 +397,7 @@ Clones
 
 .. py:class:: Clones
 
-   .. py:method:: get_characters_character_id_clones(character_id, [_token=None])
+   .. py:method:: get_characters_character_id_clones(character_id=None, _token=None)
 
    Get clones
 
@@ -407,7 +407,7 @@ Clones
       :rtype: dict
 
 
-   .. py:method:: get_characters_character_id_implants(character_id, [_token=None])
+   .. py:method:: get_characters_character_id_implants(character_id=None, _token=None)
 
    Get active implants
 
@@ -424,7 +424,7 @@ Contacts
 
 .. py:class:: Contacts
 
-   .. py:method:: delete_characters_character_id_contacts(character_id, contact_ids, [_token=None])
+   .. py:method:: delete_characters_character_id_contacts(character_id=None, contact_ids=None, _token=None)
 
    Delete contacts
 
@@ -435,7 +435,7 @@ Contacts
       :rtype: None
 
 
-   .. py:method:: get_alliances_alliance_id_contacts(alliance_id, [_token=None])
+   .. py:method:: get_alliances_alliance_id_contacts(alliance_id=None, _token=None)
 
    Get alliance contacts
 
@@ -445,7 +445,7 @@ Contacts
       :rtype: :class:`~esy.client.ESIPageGenerator` list
 
 
-   .. py:method:: get_alliances_alliance_id_contacts_labels(alliance_id, [_token=None])
+   .. py:method:: get_alliances_alliance_id_contacts_labels(alliance_id=None, _token=None)
 
    Get alliance contact labels
 
@@ -455,7 +455,7 @@ Contacts
       :rtype: list
 
 
-   .. py:method:: get_characters_character_id_contacts(character_id, [_token=None])
+   .. py:method:: get_characters_character_id_contacts(character_id=None, _token=None)
 
    Get contacts
 
@@ -465,7 +465,7 @@ Contacts
       :rtype: :class:`~esy.client.ESIPageGenerator` list
 
 
-   .. py:method:: get_characters_character_id_contacts_labels(character_id, [_token=None])
+   .. py:method:: get_characters_character_id_contacts_labels(character_id=None, _token=None)
 
    Get contact labels
 
@@ -475,7 +475,7 @@ Contacts
       :rtype: list
 
 
-   .. py:method:: get_corporations_corporation_id_contacts(corporation_id, [_token=None])
+   .. py:method:: get_corporations_corporation_id_contacts(corporation_id=None, _token=None)
 
    Get corporation contacts
 
@@ -485,7 +485,7 @@ Contacts
       :rtype: :class:`~esy.client.ESIPageGenerator` list
 
 
-   .. py:method:: get_corporations_corporation_id_contacts_labels(corporation_id, [_token=None])
+   .. py:method:: get_corporations_corporation_id_contacts_labels(corporation_id=None, _token=None)
 
    Get corporation contact labels
 
@@ -495,7 +495,7 @@ Contacts
       :rtype: list
 
 
-   .. py:method:: post_characters_character_id_contacts(character_id, contact_ids, [label_id=0], standing, [watched=False], [_token=None])
+   .. py:method:: post_characters_character_id_contacts(character_id=None, contact_ids=None, [label_id=0], standing=None, [watched=False], _token=None)
 
    Add contacts
 
@@ -509,7 +509,7 @@ Contacts
       :rtype: None
 
 
-   .. py:method:: put_characters_character_id_contacts(character_id, contact_ids, [label_id=0], standing, [watched=False], [_token=None])
+   .. py:method:: put_characters_character_id_contacts(character_id=None, contact_ids=None, [label_id=0], standing=None, [watched=False], _token=None)
 
    Edit contacts
 
@@ -530,7 +530,7 @@ Contracts
 
 .. py:class:: Contracts
 
-   .. py:method:: get_characters_character_id_contracts(character_id, [_token=None])
+   .. py:method:: get_characters_character_id_contracts(character_id=None, _token=None)
 
    Get contracts
 
@@ -540,7 +540,7 @@ Contracts
       :rtype: :class:`~esy.client.ESIPageGenerator` list
 
 
-   .. py:method:: get_characters_character_id_contracts_contract_id_bids(character_id, contract_id, [_token=None])
+   .. py:method:: get_characters_character_id_contracts_contract_id_bids(character_id=None, contract_id=None, _token=None)
 
    Get contract bids
 
@@ -551,7 +551,7 @@ Contracts
       :rtype: list
 
 
-   .. py:method:: get_characters_character_id_contracts_contract_id_items(character_id, contract_id, [_token=None])
+   .. py:method:: get_characters_character_id_contracts_contract_id_items(character_id=None, contract_id=None, _token=None)
 
    Get contract items
 
@@ -562,7 +562,7 @@ Contracts
       :rtype: list
 
 
-   .. py:method:: get_corporations_corporation_id_contracts(corporation_id, [_token=None])
+   .. py:method:: get_corporations_corporation_id_contracts(corporation_id=None, _token=None)
 
    Get corporation contracts
 
@@ -572,7 +572,7 @@ Contracts
       :rtype: :class:`~esy.client.ESIPageGenerator` list
 
 
-   .. py:method:: get_corporations_corporation_id_contracts_contract_id_bids(contract_id, corporation_id, [_token=None])
+   .. py:method:: get_corporations_corporation_id_contracts_contract_id_bids(contract_id=None, corporation_id=None, _token=None)
 
    Get corporation contract bids
 
@@ -583,7 +583,7 @@ Contracts
       :rtype: :class:`~esy.client.ESIPageGenerator` list
 
 
-   .. py:method:: get_corporations_corporation_id_contracts_contract_id_items(contract_id, corporation_id, [_token=None])
+   .. py:method:: get_corporations_corporation_id_contracts_contract_id_items(contract_id=None, corporation_id=None, _token=None)
 
    Get corporation contract items
 
@@ -601,7 +601,7 @@ Corporation
 
 .. py:class:: Corporation
 
-   .. py:method:: get_corporations_corporation_id(corporation_id)
+   .. py:method:: get_corporations_corporation_id(corporation_id=None)
 
    Get corporation information
 
@@ -610,7 +610,7 @@ Corporation
       :rtype: dict
 
 
-   .. py:method:: get_corporations_corporation_id_alliancehistory(corporation_id)
+   .. py:method:: get_corporations_corporation_id_alliancehistory(corporation_id=None)
 
    Get alliance history
 
@@ -619,7 +619,7 @@ Corporation
       :rtype: list
 
 
-   .. py:method:: get_corporations_corporation_id_blueprints(corporation_id, [_token=None])
+   .. py:method:: get_corporations_corporation_id_blueprints(corporation_id=None, _token=None)
 
    Get corporation blueprints
 
@@ -629,7 +629,7 @@ Corporation
       :rtype: :class:`~esy.client.ESIPageGenerator` list
 
 
-   .. py:method:: get_corporations_corporation_id_containers_logs(corporation_id, [_token=None])
+   .. py:method:: get_corporations_corporation_id_containers_logs(corporation_id=None, _token=None)
 
    Get all corporation ALSC logs
 
@@ -639,7 +639,7 @@ Corporation
       :rtype: :class:`~esy.client.ESIPageGenerator` list
 
 
-   .. py:method:: get_corporations_corporation_id_divisions(corporation_id, [_token=None])
+   .. py:method:: get_corporations_corporation_id_divisions(corporation_id=None, _token=None)
 
    Get corporation divisions
 
@@ -649,7 +649,7 @@ Corporation
       :rtype: dict
 
 
-   .. py:method:: get_corporations_corporation_id_facilities(corporation_id, [_token=None])
+   .. py:method:: get_corporations_corporation_id_facilities(corporation_id=None, _token=None)
 
    Get corporation facilities
 
@@ -659,7 +659,7 @@ Corporation
       :rtype: list
 
 
-   .. py:method:: get_corporations_corporation_id_icons(corporation_id)
+   .. py:method:: get_corporations_corporation_id_icons(corporation_id=None)
 
    Get corporation icon
 
@@ -668,7 +668,7 @@ Corporation
       :rtype: dict
 
 
-   .. py:method:: get_corporations_corporation_id_medals(corporation_id, [_token=None])
+   .. py:method:: get_corporations_corporation_id_medals(corporation_id=None, _token=None)
 
    Get corporation medals
 
@@ -678,7 +678,7 @@ Corporation
       :rtype: :class:`~esy.client.ESIPageGenerator` list
 
 
-   .. py:method:: get_corporations_corporation_id_medals_issued(corporation_id, [_token=None])
+   .. py:method:: get_corporations_corporation_id_medals_issued(corporation_id=None, _token=None)
 
    Get corporation issued medals
 
@@ -688,7 +688,7 @@ Corporation
       :rtype: :class:`~esy.client.ESIPageGenerator` list
 
 
-   .. py:method:: get_corporations_corporation_id_members(corporation_id, [_token=None])
+   .. py:method:: get_corporations_corporation_id_members(corporation_id=None, _token=None)
 
    Get corporation members
 
@@ -698,7 +698,7 @@ Corporation
       :rtype: list
 
 
-   .. py:method:: get_corporations_corporation_id_members_limit(corporation_id, [_token=None])
+   .. py:method:: get_corporations_corporation_id_members_limit(corporation_id=None, _token=None)
 
    Get corporation member limit
 
@@ -708,7 +708,7 @@ Corporation
       :rtype: int
 
 
-   .. py:method:: get_corporations_corporation_id_members_titles(corporation_id, [_token=None])
+   .. py:method:: get_corporations_corporation_id_members_titles(corporation_id=None, _token=None)
 
    Get corporation's members' titles
 
@@ -718,7 +718,7 @@ Corporation
       :rtype: list
 
 
-   .. py:method:: get_corporations_corporation_id_membertracking(corporation_id, [_token=None])
+   .. py:method:: get_corporations_corporation_id_membertracking(corporation_id=None, _token=None)
 
    Track corporation members
 
@@ -728,7 +728,7 @@ Corporation
       :rtype: list
 
 
-   .. py:method:: get_corporations_corporation_id_outposts(corporation_id, [_token=None])
+   .. py:method:: get_corporations_corporation_id_outposts(corporation_id=None, _token=None)
 
    Get corporation outposts
 
@@ -738,7 +738,7 @@ Corporation
       :rtype: :class:`~esy.client.ESIPageGenerator` list
 
 
-   .. py:method:: get_corporations_corporation_id_outposts_outpost_id(corporation_id, outpost_id, [_token=None])
+   .. py:method:: get_corporations_corporation_id_outposts_outpost_id(corporation_id=None, outpost_id=None, _token=None)
 
    Get corporation outpost details
 
@@ -749,7 +749,7 @@ Corporation
       :rtype: dict
 
 
-   .. py:method:: get_corporations_corporation_id_roles(corporation_id, [_token=None])
+   .. py:method:: get_corporations_corporation_id_roles(corporation_id=None, _token=None)
 
    Get corporation member roles
 
@@ -759,7 +759,7 @@ Corporation
       :rtype: list
 
 
-   .. py:method:: get_corporations_corporation_id_roles_history(corporation_id, [_token=None])
+   .. py:method:: get_corporations_corporation_id_roles_history(corporation_id=None, _token=None)
 
    Get corporation member roles history
 
@@ -769,7 +769,7 @@ Corporation
       :rtype: :class:`~esy.client.ESIPageGenerator` list
 
 
-   .. py:method:: get_corporations_corporation_id_shareholders(corporation_id, [_token=None])
+   .. py:method:: get_corporations_corporation_id_shareholders(corporation_id=None, _token=None)
 
    Get corporation shareholders
 
@@ -779,7 +779,7 @@ Corporation
       :rtype: :class:`~esy.client.ESIPageGenerator` list
 
 
-   .. py:method:: get_corporations_corporation_id_standings(corporation_id, [_token=None])
+   .. py:method:: get_corporations_corporation_id_standings(corporation_id=None, _token=None)
 
    Get corporation standings
 
@@ -789,7 +789,7 @@ Corporation
       :rtype: :class:`~esy.client.ESIPageGenerator` list
 
 
-   .. py:method:: get_corporations_corporation_id_starbases(corporation_id, [_token=None])
+   .. py:method:: get_corporations_corporation_id_starbases(corporation_id=None, _token=None)
 
    Get corporation starbases (POSes)
 
@@ -799,7 +799,7 @@ Corporation
       :rtype: :class:`~esy.client.ESIPageGenerator` list
 
 
-   .. py:method:: get_corporations_corporation_id_starbases_starbase_id(corporation_id, starbase_id, system_id, [_token=None])
+   .. py:method:: get_corporations_corporation_id_starbases_starbase_id(corporation_id=None, starbase_id=None, system_id=None, _token=None)
 
    Get starbase (POS) detail
 
@@ -811,7 +811,7 @@ Corporation
       :rtype: dict
 
 
-   .. py:method:: get_corporations_corporation_id_structures([Accept_Language='en-us'], corporation_id, [language='en-us'], [_token=None])
+   .. py:method:: get_corporations_corporation_id_structures([Accept_Language='en-us'], corporation_id=None, [language='en-us'], _token=None)
 
    Get corporation structures
 
@@ -823,7 +823,7 @@ Corporation
       :rtype: :class:`~esy.client.ESIPageGenerator` list
 
 
-   .. py:method:: get_corporations_corporation_id_titles(corporation_id, [_token=None])
+   .. py:method:: get_corporations_corporation_id_titles(corporation_id=None, _token=None)
 
    Get corporation titles
 
@@ -833,7 +833,7 @@ Corporation
       :rtype: list
 
 
-   .. py:method:: get_corporations_names(corporation_ids)
+   .. py:method:: get_corporations_names(corporation_ids=None)
 
    Get corporation names
 
@@ -865,7 +865,7 @@ Dogma
       :rtype: list
 
 
-   .. py:method:: get_dogma_attributes_attribute_id(attribute_id)
+   .. py:method:: get_dogma_attributes_attribute_id(attribute_id=None)
 
    Get attribute information
 
@@ -874,7 +874,7 @@ Dogma
       :rtype: dict
 
 
-   .. py:method:: get_dogma_dynamic_items_type_id_item_id(item_id, type_id)
+   .. py:method:: get_dogma_dynamic_items_type_id_item_id(item_id=None, type_id=None)
 
    Get dynamic item information
 
@@ -892,7 +892,7 @@ Dogma
       :rtype: list
 
 
-   .. py:method:: get_dogma_effects_effect_id(effect_id)
+   .. py:method:: get_dogma_effects_effect_id(effect_id=None)
 
    Get effect information
 
@@ -908,7 +908,7 @@ Faction_Warfare
 
 .. py:class:: Faction_Warfare
 
-   .. py:method:: get_characters_character_id_fw_stats(character_id, [_token=None])
+   .. py:method:: get_characters_character_id_fw_stats(character_id=None, _token=None)
 
    Overview of a character involved in faction warfare
 
@@ -918,7 +918,7 @@ Faction_Warfare
       :rtype: dict
 
 
-   .. py:method:: get_corporations_corporation_id_fw_stats(corporation_id, [_token=None])
+   .. py:method:: get_corporations_corporation_id_fw_stats(corporation_id=None, _token=None)
 
    Overview of a corporation involved in faction warfare
 
@@ -983,7 +983,7 @@ Fittings
 
 .. py:class:: Fittings
 
-   .. py:method:: delete_characters_character_id_fittings_fitting_id(character_id, fitting_id, [_token=None])
+   .. py:method:: delete_characters_character_id_fittings_fitting_id(character_id=None, fitting_id=None, _token=None)
 
    Delete fitting
 
@@ -994,7 +994,7 @@ Fittings
       :rtype: None
 
 
-   .. py:method:: get_characters_character_id_fittings(character_id, [_token=None])
+   .. py:method:: get_characters_character_id_fittings(character_id=None, _token=None)
 
    Get fittings
 
@@ -1004,7 +1004,7 @@ Fittings
       :rtype: list
 
 
-   .. py:method:: post_characters_character_id_fittings(character_id, fitting, [_token=None])
+   .. py:method:: post_characters_character_id_fittings(character_id=None, fitting=None, _token=None)
 
    Create fitting
 
@@ -1022,7 +1022,7 @@ Fleets
 
 .. py:class:: Fleets
 
-   .. py:method:: delete_fleets_fleet_id_members_member_id(fleet_id, member_id, [_token=None])
+   .. py:method:: delete_fleets_fleet_id_members_member_id(fleet_id=None, member_id=None, _token=None)
 
    Kick fleet member
 
@@ -1033,7 +1033,7 @@ Fleets
       :rtype: None
 
 
-   .. py:method:: delete_fleets_fleet_id_squads_squad_id(fleet_id, squad_id, [_token=None])
+   .. py:method:: delete_fleets_fleet_id_squads_squad_id(fleet_id=None, squad_id=None, _token=None)
 
    Delete fleet squad
 
@@ -1044,7 +1044,7 @@ Fleets
       :rtype: None
 
 
-   .. py:method:: delete_fleets_fleet_id_wings_wing_id(fleet_id, wing_id, [_token=None])
+   .. py:method:: delete_fleets_fleet_id_wings_wing_id(fleet_id=None, wing_id=None, _token=None)
 
    Delete fleet wing
 
@@ -1055,7 +1055,7 @@ Fleets
       :rtype: None
 
 
-   .. py:method:: get_characters_character_id_fleet(character_id, [_token=None])
+   .. py:method:: get_characters_character_id_fleet(character_id=None, _token=None)
 
    Get character fleet info
 
@@ -1065,7 +1065,7 @@ Fleets
       :rtype: dict
 
 
-   .. py:method:: get_fleets_fleet_id(fleet_id, [_token=None])
+   .. py:method:: get_fleets_fleet_id(fleet_id=None, _token=None)
 
    Get fleet information
 
@@ -1075,7 +1075,7 @@ Fleets
       :rtype: dict
 
 
-   .. py:method:: get_fleets_fleet_id_members([Accept_Language='en-us'], fleet_id, [language='en-us'], [_token=None])
+   .. py:method:: get_fleets_fleet_id_members([Accept_Language='en-us'], fleet_id=None, [language='en-us'], _token=None)
 
    Get fleet members
 
@@ -1087,7 +1087,7 @@ Fleets
       :rtype: list
 
 
-   .. py:method:: get_fleets_fleet_id_wings([Accept_Language='en-us'], fleet_id, [language='en-us'], [_token=None])
+   .. py:method:: get_fleets_fleet_id_wings([Accept_Language='en-us'], fleet_id=None, [language='en-us'], _token=None)
 
    Get fleet wings
 
@@ -1099,7 +1099,7 @@ Fleets
       :rtype: list
 
 
-   .. py:method:: post_fleets_fleet_id_members(fleet_id, invitation, [_token=None])
+   .. py:method:: post_fleets_fleet_id_members(fleet_id=None, invitation=None, _token=None)
 
    Create fleet invitation
 
@@ -1110,7 +1110,7 @@ Fleets
       :rtype: None
 
 
-   .. py:method:: post_fleets_fleet_id_wings(fleet_id, [_token=None])
+   .. py:method:: post_fleets_fleet_id_wings(fleet_id=None, _token=None)
 
    Create fleet wing
 
@@ -1120,7 +1120,7 @@ Fleets
       :rtype: None
 
 
-   .. py:method:: post_fleets_fleet_id_wings_wing_id_squads(fleet_id, wing_id, [_token=None])
+   .. py:method:: post_fleets_fleet_id_wings_wing_id_squads(fleet_id=None, wing_id=None, _token=None)
 
    Create fleet squad
 
@@ -1131,7 +1131,7 @@ Fleets
       :rtype: None
 
 
-   .. py:method:: put_fleets_fleet_id(fleet_id, new_settings, [_token=None])
+   .. py:method:: put_fleets_fleet_id(fleet_id=None, new_settings=None, _token=None)
 
    Update fleet
 
@@ -1142,7 +1142,7 @@ Fleets
       :rtype: None
 
 
-   .. py:method:: put_fleets_fleet_id_members_member_id(fleet_id, member_id, movement, [_token=None])
+   .. py:method:: put_fleets_fleet_id_members_member_id(fleet_id=None, member_id=None, movement=None, _token=None)
 
    Move fleet member
 
@@ -1154,7 +1154,7 @@ Fleets
       :rtype: None
 
 
-   .. py:method:: put_fleets_fleet_id_squads_squad_id(fleet_id, naming, squad_id, [_token=None])
+   .. py:method:: put_fleets_fleet_id_squads_squad_id(fleet_id=None, naming=None, squad_id=None, _token=None)
 
    Rename fleet squad
 
@@ -1166,7 +1166,7 @@ Fleets
       :rtype: None
 
 
-   .. py:method:: put_fleets_fleet_id_wings_wing_id(fleet_id, naming, wing_id, [_token=None])
+   .. py:method:: put_fleets_fleet_id_wings_wing_id(fleet_id=None, naming=None, wing_id=None, _token=None)
 
    Rename fleet wing
 
@@ -1200,7 +1200,7 @@ Industry
 
 .. py:class:: Industry
 
-   .. py:method:: get_characters_character_id_industry_jobs(character_id, [include_completed=None], [_token=None])
+   .. py:method:: get_characters_character_id_industry_jobs(character_id=None, [include_completed=None], _token=None)
 
    List character industry jobs
 
@@ -1211,7 +1211,7 @@ Industry
       :rtype: list
 
 
-   .. py:method:: get_characters_character_id_mining(character_id, [_token=None])
+   .. py:method:: get_characters_character_id_mining(character_id=None, _token=None)
 
    Character mining ledger
 
@@ -1221,7 +1221,7 @@ Industry
       :rtype: :class:`~esy.client.ESIPageGenerator` list
 
 
-   .. py:method:: get_corporation_corporation_id_mining_extractions(corporation_id, [_token=None])
+   .. py:method:: get_corporation_corporation_id_mining_extractions(corporation_id=None, _token=None)
 
    Moon extraction timers
 
@@ -1231,7 +1231,7 @@ Industry
       :rtype: :class:`~esy.client.ESIPageGenerator` list
 
 
-   .. py:method:: get_corporation_corporation_id_mining_observers(corporation_id, [_token=None])
+   .. py:method:: get_corporation_corporation_id_mining_observers(corporation_id=None, _token=None)
 
    Corporation mining observers
 
@@ -1241,7 +1241,7 @@ Industry
       :rtype: :class:`~esy.client.ESIPageGenerator` list
 
 
-   .. py:method:: get_corporation_corporation_id_mining_observers_observer_id(corporation_id, observer_id, [_token=None])
+   .. py:method:: get_corporation_corporation_id_mining_observers_observer_id(corporation_id=None, observer_id=None, _token=None)
 
    Observed corporation mining
 
@@ -1252,7 +1252,7 @@ Industry
       :rtype: :class:`~esy.client.ESIPageGenerator` list
 
 
-   .. py:method:: get_corporations_corporation_id_industry_jobs(corporation_id, [include_completed=False], [_token=None])
+   .. py:method:: get_corporations_corporation_id_industry_jobs(corporation_id=None, [include_completed=False], _token=None)
 
    List corporation industry jobs
 
@@ -1303,7 +1303,7 @@ Killmails
 
 .. py:class:: Killmails
 
-   .. py:method:: get_characters_character_id_killmails_recent(character_id, [_token=None])
+   .. py:method:: get_characters_character_id_killmails_recent(character_id=None, _token=None)
 
    Get a character's recent kills and losses
 
@@ -1313,7 +1313,7 @@ Killmails
       :rtype: :class:`~esy.client.ESIPageGenerator` list
 
 
-   .. py:method:: get_corporations_corporation_id_killmails_recent(corporation_id, [_token=None])
+   .. py:method:: get_corporations_corporation_id_killmails_recent(corporation_id=None, _token=None)
 
    Get a corporation's recent kills and losses
 
@@ -1323,7 +1323,7 @@ Killmails
       :rtype: :class:`~esy.client.ESIPageGenerator` list
 
 
-   .. py:method:: get_killmails_killmail_id_killmail_hash(killmail_hash, killmail_id)
+   .. py:method:: get_killmails_killmail_id_killmail_hash(killmail_hash=None, killmail_id=None)
 
    Get a single killmail
 
@@ -1340,7 +1340,7 @@ Location
 
 .. py:class:: Location
 
-   .. py:method:: get_characters_character_id_location(character_id, [_token=None])
+   .. py:method:: get_characters_character_id_location(character_id=None, _token=None)
 
    Get character location
 
@@ -1350,7 +1350,7 @@ Location
       :rtype: dict
 
 
-   .. py:method:: get_characters_character_id_online(character_id, [_token=None])
+   .. py:method:: get_characters_character_id_online(character_id=None, _token=None)
 
    Get character online
 
@@ -1360,7 +1360,7 @@ Location
       :rtype: dict
 
 
-   .. py:method:: get_characters_character_id_ship(character_id, [_token=None])
+   .. py:method:: get_characters_character_id_ship(character_id=None, _token=None)
 
    Get current ship
 
@@ -1377,7 +1377,7 @@ Loyalty
 
 .. py:class:: Loyalty
 
-   .. py:method:: get_characters_character_id_loyalty_points(character_id, [_token=None])
+   .. py:method:: get_characters_character_id_loyalty_points(character_id=None, _token=None)
 
    Get loyalty points
 
@@ -1387,7 +1387,7 @@ Loyalty
       :rtype: list
 
 
-   .. py:method:: get_loyalty_stores_corporation_id_offers(corporation_id)
+   .. py:method:: get_loyalty_stores_corporation_id_offers(corporation_id=None)
 
    List loyalty store offers
 
@@ -1403,7 +1403,7 @@ Mail
 
 .. py:class:: Mail
 
-   .. py:method:: delete_characters_character_id_mail_labels_label_id(character_id, label_id, [_token=None])
+   .. py:method:: delete_characters_character_id_mail_labels_label_id(character_id=None, label_id=None, _token=None)
 
    Delete a mail label
 
@@ -1414,7 +1414,7 @@ Mail
       :rtype: None
 
 
-   .. py:method:: delete_characters_character_id_mail_mail_id(character_id, mail_id, [_token=None])
+   .. py:method:: delete_characters_character_id_mail_mail_id(character_id=None, mail_id=None, _token=None)
 
    Delete a mail
 
@@ -1425,7 +1425,7 @@ Mail
       :rtype: None
 
 
-   .. py:method:: get_characters_character_id_mail(character_id, [labels=None], [last_mail_id=None], [_token=None])
+   .. py:method:: get_characters_character_id_mail(character_id=None, [labels=None], [last_mail_id=None], _token=None)
 
    Return mail headers
 
@@ -1437,7 +1437,7 @@ Mail
       :rtype: list
 
 
-   .. py:method:: get_characters_character_id_mail_labels(character_id, [_token=None])
+   .. py:method:: get_characters_character_id_mail_labels(character_id=None, _token=None)
 
    Get mail labels and unread counts
 
@@ -1447,7 +1447,7 @@ Mail
       :rtype: dict
 
 
-   .. py:method:: get_characters_character_id_mail_lists(character_id, [_token=None])
+   .. py:method:: get_characters_character_id_mail_lists(character_id=None, _token=None)
 
    Return mailing list subscriptions
 
@@ -1457,7 +1457,7 @@ Mail
       :rtype: list
 
 
-   .. py:method:: get_characters_character_id_mail_mail_id(character_id, mail_id, [_token=None])
+   .. py:method:: get_characters_character_id_mail_mail_id(character_id=None, mail_id=None, _token=None)
 
    Return a mail
 
@@ -1468,7 +1468,7 @@ Mail
       :rtype: dict
 
 
-   .. py:method:: post_characters_character_id_mail(character_id, mail, [_token=None])
+   .. py:method:: post_characters_character_id_mail(character_id=None, mail=None, _token=None)
 
    Send a new mail
 
@@ -1479,7 +1479,7 @@ Mail
       :rtype: None
 
 
-   .. py:method:: post_characters_character_id_mail_labels(character_id, label, [_token=None])
+   .. py:method:: post_characters_character_id_mail_labels(character_id=None, label=None, _token=None)
 
    Create a mail label
 
@@ -1490,7 +1490,7 @@ Mail
       :rtype: None
 
 
-   .. py:method:: put_characters_character_id_mail_mail_id(character_id, contents, mail_id, [_token=None])
+   .. py:method:: put_characters_character_id_mail_mail_id(character_id=None, contents=None, mail_id=None, _token=None)
 
    Update metadata about a mail
 
@@ -1509,7 +1509,7 @@ Market
 
 .. py:class:: Market
 
-   .. py:method:: get_characters_character_id_orders(character_id, [_token=None])
+   .. py:method:: get_characters_character_id_orders(character_id=None, _token=None)
 
    List open orders from a character
 
@@ -1519,7 +1519,7 @@ Market
       :rtype: list
 
 
-   .. py:method:: get_characters_character_id_orders_history(character_id, [_token=None])
+   .. py:method:: get_characters_character_id_orders_history(character_id=None, _token=None)
 
    List historical orders by a character
 
@@ -1529,7 +1529,7 @@ Market
       :rtype: :class:`~esy.client.ESIPageGenerator` list
 
 
-   .. py:method:: get_corporations_corporation_id_orders(corporation_id, [_token=None])
+   .. py:method:: get_corporations_corporation_id_orders(corporation_id=None, _token=None)
 
    List open orders from a corporation
 
@@ -1539,7 +1539,7 @@ Market
       :rtype: :class:`~esy.client.ESIPageGenerator` list
 
 
-   .. py:method:: get_corporations_corporation_id_orders_history(corporation_id, [_token=None])
+   .. py:method:: get_corporations_corporation_id_orders_history(corporation_id=None, _token=None)
 
    List historical orders from a corporation
 
@@ -1557,7 +1557,7 @@ Market
       :rtype: list
 
 
-   .. py:method:: get_markets_groups_market_group_id([Accept_Language='en-us'], [language='en-us'], market_group_id)
+   .. py:method:: get_markets_groups_market_group_id([Accept_Language='en-us'], [language='en-us'], market_group_id=None)
 
    Get item group information
 
@@ -1576,7 +1576,7 @@ Market
       :rtype: list
 
 
-   .. py:method:: get_markets_region_id_history(region_id, type_id)
+   .. py:method:: get_markets_region_id_history(region_id=None, type_id=None)
 
    List historical market statistics in a region
 
@@ -1586,7 +1586,7 @@ Market
       :rtype: list
 
 
-   .. py:method:: get_markets_region_id_orders(order_type, region_id, [type_id=None])
+   .. py:method:: get_markets_region_id_orders(order_type=None, region_id=None, [type_id=None])
 
    List orders in a region
 
@@ -1597,7 +1597,7 @@ Market
       :rtype: :class:`~esy.client.ESIPageGenerator` list
 
 
-   .. py:method:: get_markets_region_id_types(region_id)
+   .. py:method:: get_markets_region_id_types(region_id=None)
 
    List type IDs relevant to a market
 
@@ -1606,7 +1606,7 @@ Market
       :rtype: :class:`~esy.client.ESIPageGenerator` list
 
 
-   .. py:method:: get_markets_structures_structure_id(structure_id, [_token=None])
+   .. py:method:: get_markets_structures_structure_id(structure_id=None, _token=None)
 
    List orders in a structure
 
@@ -1623,7 +1623,7 @@ Opportunities
 
 .. py:class:: Opportunities
 
-   .. py:method:: get_characters_character_id_opportunities(character_id, [_token=None])
+   .. py:method:: get_characters_character_id_opportunities(character_id=None, _token=None)
 
    Get a character's completed tasks
 
@@ -1641,7 +1641,7 @@ Opportunities
       :rtype: list
 
 
-   .. py:method:: get_opportunities_groups_group_id([Accept_Language='en-us'], group_id, [language='en-us'])
+   .. py:method:: get_opportunities_groups_group_id([Accept_Language='en-us'], group_id=None, [language='en-us'])
 
    Get opportunities group
 
@@ -1660,7 +1660,7 @@ Opportunities
       :rtype: list
 
 
-   .. py:method:: get_opportunities_tasks_task_id(task_id)
+   .. py:method:: get_opportunities_tasks_task_id(task_id=None)
 
    Get opportunities task
 
@@ -1676,7 +1676,7 @@ Planetary_Interaction
 
 .. py:class:: Planetary_Interaction
 
-   .. py:method:: get_characters_character_id_planets(character_id, [_token=None])
+   .. py:method:: get_characters_character_id_planets(character_id=None, _token=None)
 
    Get colonies
 
@@ -1686,7 +1686,7 @@ Planetary_Interaction
       :rtype: list
 
 
-   .. py:method:: get_characters_character_id_planets_planet_id(character_id, planet_id, [_token=None])
+   .. py:method:: get_characters_character_id_planets_planet_id(character_id=None, planet_id=None, _token=None)
 
    Get colony layout
 
@@ -1697,7 +1697,7 @@ Planetary_Interaction
       :rtype: dict
 
 
-   .. py:method:: get_corporations_corporation_id_customs_offices(corporation_id, [_token=None])
+   .. py:method:: get_corporations_corporation_id_customs_offices(corporation_id=None, _token=None)
 
    List corporation customs offices
 
@@ -1707,7 +1707,7 @@ Planetary_Interaction
       :rtype: :class:`~esy.client.ESIPageGenerator` list
 
 
-   .. py:method:: get_universe_schematics_schematic_id(schematic_id)
+   .. py:method:: get_universe_schematics_schematic_id(schematic_id=None)
 
    Get schematic information
 
@@ -1723,7 +1723,7 @@ Routes
 
 .. py:class:: Routes
 
-   .. py:method:: get_route_origin_destination([avoid=None], [connections=None], destination, [flag='shortest'], origin)
+   .. py:method:: get_route_origin_destination([avoid=None], [connections=None], destination=None, [flag='shortest'], origin=None)
 
    Get route
 
@@ -1743,7 +1743,7 @@ Search
 
 .. py:class:: Search
 
-   .. py:method:: get_characters_character_id_search([Accept_Language='en-us'], categories, character_id, [language='en-us'], search, [strict=False], [_token=None])
+   .. py:method:: get_characters_character_id_search([Accept_Language='en-us'], categories=None, character_id=None, [language='en-us'], search=None, [strict=False], _token=None)
 
    Search on a string
 
@@ -1758,7 +1758,7 @@ Search
       :rtype: dict
 
 
-   .. py:method:: get_search([Accept_Language='en-us'], categories, [language='en-us'], search, [strict=False])
+   .. py:method:: get_search([Accept_Language='en-us'], categories=None, [language='en-us'], search=None, [strict=False])
 
    Search on a string
 
@@ -1778,7 +1778,7 @@ Skills
 
 .. py:class:: Skills
 
-   .. py:method:: get_characters_character_id_attributes(character_id, [_token=None])
+   .. py:method:: get_characters_character_id_attributes(character_id=None, _token=None)
 
    Get character attributes
 
@@ -1788,7 +1788,7 @@ Skills
       :rtype: dict
 
 
-   .. py:method:: get_characters_character_id_skillqueue(character_id, [_token=None])
+   .. py:method:: get_characters_character_id_skillqueue(character_id=None, _token=None)
 
    Get character's skill queue
 
@@ -1798,7 +1798,7 @@ Skills
       :rtype: list
 
 
-   .. py:method:: get_characters_character_id_skills(character_id, [_token=None])
+   .. py:method:: get_characters_character_id_skills(character_id=None, _token=None)
 
    Get character skills
 
@@ -1871,7 +1871,7 @@ Universe
       :rtype: list
 
 
-   .. py:method:: get_universe_asteroid_belts_asteroid_belt_id(asteroid_belt_id)
+   .. py:method:: get_universe_asteroid_belts_asteroid_belt_id(asteroid_belt_id=None)
 
    Get asteroid belt information
 
@@ -1898,7 +1898,7 @@ Universe
       :rtype: list
 
 
-   .. py:method:: get_universe_categories_category_id([Accept_Language='en-us'], category_id, [language='en-us'])
+   .. py:method:: get_universe_categories_category_id([Accept_Language='en-us'], category_id=None, [language='en-us'])
 
    Get item category information
 
@@ -1917,7 +1917,7 @@ Universe
       :rtype: list
 
 
-   .. py:method:: get_universe_constellations_constellation_id([Accept_Language='en-us'], constellation_id, [language='en-us'])
+   .. py:method:: get_universe_constellations_constellation_id([Accept_Language='en-us'], constellation_id=None, [language='en-us'])
 
    Get constellation information
 
@@ -1946,7 +1946,7 @@ Universe
       :rtype: list
 
 
-   .. py:method:: get_universe_graphics_graphic_id(graphic_id)
+   .. py:method:: get_universe_graphics_graphic_id(graphic_id=None)
 
    Get graphic information
 
@@ -1963,7 +1963,7 @@ Universe
       :rtype: :class:`~esy.client.ESIPageGenerator` list
 
 
-   .. py:method:: get_universe_groups_group_id([Accept_Language='en-us'], group_id, [language='en-us'])
+   .. py:method:: get_universe_groups_group_id([Accept_Language='en-us'], group_id=None, [language='en-us'])
 
    Get item group information
 
@@ -1974,7 +1974,7 @@ Universe
       :rtype: dict
 
 
-   .. py:method:: get_universe_moons_moon_id(moon_id)
+   .. py:method:: get_universe_moons_moon_id(moon_id=None)
 
    Get moon information
 
@@ -1983,7 +1983,7 @@ Universe
       :rtype: dict
 
 
-   .. py:method:: get_universe_planets_planet_id(planet_id)
+   .. py:method:: get_universe_planets_planet_id(planet_id=None)
 
    Get planet information
 
@@ -2010,7 +2010,7 @@ Universe
       :rtype: list
 
 
-   .. py:method:: get_universe_regions_region_id([Accept_Language='en-us'], [language='en-us'], region_id)
+   .. py:method:: get_universe_regions_region_id([Accept_Language='en-us'], [language='en-us'], region_id=None)
 
    Get region information
 
@@ -2021,7 +2021,7 @@ Universe
       :rtype: dict
 
 
-   .. py:method:: get_universe_stargates_stargate_id(stargate_id)
+   .. py:method:: get_universe_stargates_stargate_id(stargate_id=None)
 
    Get stargate information
 
@@ -2030,7 +2030,7 @@ Universe
       :rtype: dict
 
 
-   .. py:method:: get_universe_stars_star_id(star_id)
+   .. py:method:: get_universe_stars_star_id(star_id=None)
 
    Get star information
 
@@ -2039,7 +2039,7 @@ Universe
       :rtype: dict
 
 
-   .. py:method:: get_universe_stations_station_id(station_id)
+   .. py:method:: get_universe_stations_station_id(station_id=None)
 
    Get station information
 
@@ -2056,7 +2056,7 @@ Universe
       :rtype: list
 
 
-   .. py:method:: get_universe_structures_structure_id(structure_id, [_token=None])
+   .. py:method:: get_universe_structures_structure_id(structure_id=None, _token=None)
 
    Get structure information
 
@@ -2090,7 +2090,7 @@ Universe
       :rtype: list
 
 
-   .. py:method:: get_universe_systems_system_id([Accept_Language='en-us'], [language='en-us'], system_id)
+   .. py:method:: get_universe_systems_system_id([Accept_Language='en-us'], [language='en-us'], system_id=None)
 
    Get solar system information
 
@@ -2109,7 +2109,7 @@ Universe
       :rtype: :class:`~esy.client.ESIPageGenerator` list
 
 
-   .. py:method:: get_universe_types_type_id([Accept_Language='en-us'], [language='en-us'], type_id)
+   .. py:method:: get_universe_types_type_id([Accept_Language='en-us'], [language='en-us'], type_id=None)
 
    Get type information
 
@@ -2120,7 +2120,7 @@ Universe
       :rtype: dict
 
 
-   .. py:method:: post_universe_ids([Accept_Language='en-us'], [language='en-us'], names)
+   .. py:method:: post_universe_ids([Accept_Language='en-us'], [language='en-us'], names=None)
 
    Bulk names to IDs
 
@@ -2131,7 +2131,7 @@ Universe
       :rtype: dict
 
 
-   .. py:method:: post_universe_names(ids)
+   .. py:method:: post_universe_names(ids=None)
 
    Get names and categories for a set of ID's
 
@@ -2147,7 +2147,7 @@ User_Interface
 
 .. py:class:: User_Interface
 
-   .. py:method:: post_ui_autopilot_waypoint(add_to_beginning, clear_other_waypoints, destination_id, [_token=None])
+   .. py:method:: post_ui_autopilot_waypoint(add_to_beginning=None, clear_other_waypoints=None, destination_id=None, _token=None)
 
    Set Autopilot Waypoint
 
@@ -2159,7 +2159,7 @@ User_Interface
       :rtype: None
 
 
-   .. py:method:: post_ui_openwindow_contract(contract_id, [_token=None])
+   .. py:method:: post_ui_openwindow_contract(contract_id=None, _token=None)
 
    Open Contract Window
 
@@ -2169,7 +2169,7 @@ User_Interface
       :rtype: None
 
 
-   .. py:method:: post_ui_openwindow_information(target_id, [_token=None])
+   .. py:method:: post_ui_openwindow_information(target_id=None, _token=None)
 
    Open Information Window
 
@@ -2179,7 +2179,7 @@ User_Interface
       :rtype: None
 
 
-   .. py:method:: post_ui_openwindow_marketdetails(type_id, [_token=None])
+   .. py:method:: post_ui_openwindow_marketdetails(type_id=None, _token=None)
 
    Open Market Details
 
@@ -2189,7 +2189,7 @@ User_Interface
       :rtype: None
 
 
-   .. py:method:: post_ui_openwindow_newmail(new_mail, [_token=None])
+   .. py:method:: post_ui_openwindow_newmail(new_mail=None, _token=None)
 
    Open New Mail Window
 
@@ -2206,7 +2206,7 @@ Wallet
 
 .. py:class:: Wallet
 
-   .. py:method:: get_characters_character_id_wallet(character_id, [_token=None])
+   .. py:method:: get_characters_character_id_wallet(character_id=None, _token=None)
 
    Get a character's wallet balance
 
@@ -2216,7 +2216,7 @@ Wallet
       :rtype: number
 
 
-   .. py:method:: get_characters_character_id_wallet_journal(character_id, [_token=None])
+   .. py:method:: get_characters_character_id_wallet_journal(character_id=None, _token=None)
 
    Get character wallet journal
 
@@ -2226,7 +2226,7 @@ Wallet
       :rtype: :class:`~esy.client.ESIPageGenerator` list
 
 
-   .. py:method:: get_characters_character_id_wallet_transactions(character_id, [from_id=None], [_token=None])
+   .. py:method:: get_characters_character_id_wallet_transactions(character_id=None, [from_id=None], _token=None)
 
    Get wallet transactions
 
@@ -2237,7 +2237,7 @@ Wallet
       :rtype: list
 
 
-   .. py:method:: get_corporations_corporation_id_wallets(corporation_id, [_token=None])
+   .. py:method:: get_corporations_corporation_id_wallets(corporation_id=None, _token=None)
 
    Returns a corporation's wallet balance
 
@@ -2247,7 +2247,7 @@ Wallet
       :rtype: list
 
 
-   .. py:method:: get_corporations_corporation_id_wallets_division_journal(corporation_id, division, [_token=None])
+   .. py:method:: get_corporations_corporation_id_wallets_division_journal(corporation_id=None, division=None, _token=None)
 
    Get corporation wallet journal
 
@@ -2258,7 +2258,7 @@ Wallet
       :rtype: :class:`~esy.client.ESIPageGenerator` list
 
 
-   .. py:method:: get_corporations_corporation_id_wallets_division_transactions(corporation_id, division, [from_id=None], [_token=None])
+   .. py:method:: get_corporations_corporation_id_wallets_division_transactions(corporation_id=None, division=None, [from_id=None], _token=None)
 
    Get corporation wallet transactions
 
@@ -2286,7 +2286,7 @@ Wars
       :rtype: list
 
 
-   .. py:method:: get_wars_war_id(war_id)
+   .. py:method:: get_wars_war_id(war_id=None)
 
    Get war information
 
@@ -2295,7 +2295,7 @@ Wars
       :rtype: dict
 
 
-   .. py:method:: get_wars_war_id_killmails(war_id)
+   .. py:method:: get_wars_war_id_killmails(war_id=None)
 
    List kills for a war
 
