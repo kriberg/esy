@@ -225,7 +225,7 @@ class ESIClient(SwaggerClient):
 
     @staticmethod
     def _generate_esi_endpoint(endpoint, datasource):
-        return f'{endpoint}?datasource={datasource}'
+        return '{}?datasource={}'.format(endpoint, datasource)
 
     @staticmethod
     def get_client(user_agent, use_models=False, spec=None,
@@ -276,10 +276,11 @@ class ESIClient(SwaggerClient):
                 resp = requests.get(endpoint)
                 resp.raise_for_status()
                 swagger_data = resp.text
-                log.debug(f'Swagger spec downloaded in {datetime.now()-start} '
-                          'seconds')
+                log.debug('Swagger spec downloaded in {} seconds'.format(
+                    datetime.now() - start
+                ))
             except Exception as ex:
-                error = f'Could not connect to ESI: {ex}'
+                error = 'Could not connect to ESI: {}'.format(ex)
                 log.error(error)
                 raise ESIError(error)
 
@@ -290,7 +291,7 @@ class ESIClient(SwaggerClient):
             spec = json.loads(swagger_data)
             return spec
         except Exception as ex:  # pragma: no cover
-            error = f'Could not parse ESI swagger specification: {ex}'
+            error = 'Could not parse ESI swagger specification: {}'.format(ex)
             log.error(error)
             raise ESIError(error)
 

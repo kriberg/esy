@@ -51,7 +51,9 @@ class ESIAuthenticator(object):
         :rtype: dict
         """
         with requests.Session() as session:
-            session.headers.update({'Authorization': f'Bearer {access_token}'})
+            session.headers.update({
+                'Authorization': 'Bearer {}'.format(access_token)
+            })
             resp = session.get(self.token_verify_endpoint)
             resp.raise_for_status()
             return resp.json()
