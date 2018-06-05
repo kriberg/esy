@@ -39,7 +39,7 @@ def generate_operation_doc(name, operation):
     signature = []
     for param_name, spec in operation.operation.params.items():
         if spec.required:
-            signature.append(param_name)
+            signature.append(f'{param_name}=None')
         else:
             if param_name in ('datasource', 'If_None_Match', 'page', 'token'):
                 continue
@@ -49,7 +49,7 @@ def generate_operation_doc(name, operation):
             signature.append(f'[{param_name}={default}]')
 
     if operation.require_authorization:
-        signature.append('[_token=None]')
+        signature.append('_token=None')
     yield t(f'.. py:method:: {name}({", ".join(signature)})\n\n', 3)
     yield t(f'{summary}\n\n', 3)
 
