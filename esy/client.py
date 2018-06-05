@@ -120,7 +120,10 @@ class ESIPageGenerator(object):
                 )
                 self.cache.set(key, (data, self.num_pages), expires)
         else:
-            data, response = self._send()
+            try:
+                data, response = self._send()
+            except HTTPForbidden:
+                raise ESIForbidden('Access denied')
             self.num_pages = int(response.headers.get('x-pages', '1'))
 
         return data
@@ -128,15 +131,15 @@ class ESIPageGenerator(object):
     def get(self):
         try:
             return self.result()
-        except (HTTPInternalServerError, HTTPBadRequest) as ex:
+        except (HTTPInternalServerError, HTTPBadRequest) as ex:  # pragma: no cover
             raise ESIError(str(ex))
-        except HTTPNotFound as ex:
+        except HTTPNotFound as ex:  # pragma: no cover
             try:
                 error_msg = json.loads(ex.response.text)
                 raise ESINotFound(error_msg.get('error', 'Not found'))
             except Exception as ex:
                 raise ESINotFound(str(ex))
-        except HTTPForbidden:
+        except HTTPForbidden:  # pragma: no cover
             raise ESIForbidden('Access denied')
 
     def __next__(self):
@@ -214,13 +217,15 @@ class ESIClient(SwaggerClient):
         return f'{endpoint}?datasource={datasource}'
 
     @staticmethod
-    def get_client(user_agent, use_models=False, endpoint=ESI_ENDPOINT,
-                   datasource=ESI_DATASOURCE, cache=None):
+    def get_client(user_agent, use_models=False, spec=None,
+                   endpoint=ESI_ENDPOINT, datasource=ESI_DATASOURCE,
+                   cache=None):
         """
         Generates a client interface for ESI.
 
         :param user_agent:
         :param use_models:
+        :param spec:
         :param endpoint:
         :param datasource:
         :param cache: A class which implements the cache interface
@@ -228,8 +233,9 @@ class ESIClient(SwaggerClient):
         :rtype: ESIClient
         """
         target = ESIClient._generate_esi_endpoint(endpoint, datasource)
-        spec = ESIClient.get_swagger_spec(endpoint=endpoint,
-                                          datasource=datasource)
+        if spec is None:
+            spec = ESIClient.get_swagger_spec(endpoint=endpoint,
+                                              datasource=datasource)
         return ESIClient(spec, target, user_agent, use_models, cache)
 
     @staticmethod

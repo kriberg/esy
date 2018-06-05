@@ -1,6 +1,10 @@
 import unittest
+import os
+import os.path
+import json
+import collections
 from esy.client import ESIClient, ESIPageGenerator
-from esy.exceptions import ESIError, ESIAuthorizationError
+from esy.exceptions import ESIError, ESIAuthorizationError, ESIForbidden
 
 VITTOROS = 941287462
 EVOLUTION = 144749962
@@ -31,11 +35,17 @@ class DummyCache(object):
 
 class TestESIClient(unittest.TestCase):
     def setUp(self):
-        self.client = ESIClient.get_client('test')
+        spec_path = os.path.join(os.path.dirname(os.path.realpath(__file__)),
+                                 'swagger.json')
+        with open(spec_path, 'r') as spec_file:
+            spec = json.load(spec_file)
+        self.client = ESIClient.get_client('test', spec=spec)
         self.cache = DummyCache()
 
     def test_get_client(self):
         self.assertIsInstance(self.client, ESIClient)
+        self.assertIsInstance(ESIClient.get_client('test'),
+                              ESIClient)
 
     def test_spec_parsing(self):
         spec = ESIClient.get_swagger_spec()
@@ -78,6 +88,8 @@ class TestESIClient(unittest.TestCase):
         with self.assertRaises(StopIteration):
             next(types_generator)
 
+        self.assertIsInstance(types_generator.__iter__(), ESIPageGenerator)
+
     def test_post(self):
         names = ('Vittoros',
                  'Evolution',
@@ -96,6 +108,12 @@ class TestESIClient(unittest.TestCase):
             self.client.Character.get_characters_character_id_blueprints(
                 character_id=VITTOROS
             )
+        with self.assertRaises(ESIForbidden):
+            gen = self.client.Character.get_characters_character_id_blueprints(
+                character_id=VITTOROS,
+                _token='hunter2'
+            )
+            next(gen)
 
     def test_caching(self):
         self.cache.clear()

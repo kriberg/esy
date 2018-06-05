@@ -1,5 +1,5 @@
-ESY API
-=======
+ESY Swagger Interface
+=====================
 
 .. toctree::
    :maxdepth: 4

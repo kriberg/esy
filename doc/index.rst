@@ -3,7 +3,7 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-ESY API Documentation
+ESY Documentation
 ===============================
 
 .. mdinclude:: ../README.md
@@ -15,6 +15,7 @@ ESY API Documentation
 
    readme.rst
    source/modules.rst
+   source/esi.rst
 
 
 Indices and tables
