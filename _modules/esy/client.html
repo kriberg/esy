@@ -1,0 +1,535 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>esy.client &mdash; ESY 1.0.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> ESY
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../readme.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../source/modules.html">ESY Swagger Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../source/esi.html">ESI API</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">ESY</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+        
+      <li>esy.client</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for esy.client</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">requests</span>
+<span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">import</span> <span class="nn">pytz</span>
+<span class="kn">from</span> <span class="nn">datetime</span> <span class="k">import</span> <span class="n">datetime</span>
+<span class="kn">from</span> <span class="nn">email.utils</span> <span class="k">import</span> <span class="n">parsedate</span>
+<span class="kn">from</span> <span class="nn">bravado.client</span> <span class="k">import</span> <span class="n">SwaggerClient</span><span class="p">,</span> <span class="n">ResourceDecorator</span><span class="p">,</span> \
+    <span class="n">CallableOperation</span><span class="p">,</span> <span class="n">warn_for_deprecated_op</span><span class="p">,</span> <span class="n">construct_request</span><span class="p">,</span> \
+    <span class="n">REQUEST_OPTIONS_DEFAULTS</span>
+<span class="kn">from</span> <span class="nn">bravado.http_future</span> <span class="k">import</span> <span class="n">HttpFuture</span>
+<span class="kn">from</span> <span class="nn">bravado.requests_client</span> <span class="k">import</span> <span class="n">RequestsClient</span><span class="p">,</span> <span class="n">RequestsFutureAdapter</span><span class="p">,</span> \
+    <span class="n">RequestsResponseAdapter</span>
+<span class="kn">from</span> <span class="nn">bravado_core.spec</span> <span class="k">import</span> <span class="n">Spec</span>
+<span class="kn">from</span> <span class="nn">bravado.exception</span> <span class="k">import</span> <span class="n">HTTPInternalServerError</span><span class="p">,</span> <span class="n">HTTPNotFound</span><span class="p">,</span> \
+    <span class="n">HTTPBadRequest</span><span class="p">,</span> <span class="n">HTTPForbidden</span>
+<span class="kn">from</span> <span class="nn">.exceptions</span> <span class="k">import</span> <span class="n">ESIError</span><span class="p">,</span> <span class="n">ESINotFound</span><span class="p">,</span> <span class="n">ESIForbidden</span><span class="p">,</span> \
+    <span class="n">ESIAuthorizationError</span>
+<span class="kn">from</span> <span class="nn">.constants</span> <span class="k">import</span> <span class="n">ESI_ENDPOINT</span><span class="p">,</span> <span class="n">ESI_DATASOURCE</span><span class="p">,</span> <span class="n">ESI_SWAGGER_CACHE_TIMER</span>
+
+
+<span class="n">log</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="ESICallableOperation"><a class="viewcode-back" href="../../source/modules.html#esy.client.ESICallableOperation">[docs]</a><span class="k">class</span> <span class="nc">ESICallableOperation</span><span class="p">(</span><span class="n">CallableOperation</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Wraps bravado&#39;s CallableOpeartion to handle pagination</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">operation</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">operation</span> <span class="o">=</span> <span class="n">operation</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">require_authorization</span> <span class="o">=</span> <span class="nb">any</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">spec</span><span class="p">:</span> <span class="s1">&#39;evesso&#39;</span> <span class="ow">in</span> <span class="n">spec</span><span class="p">,</span>
+                                             <span class="bp">self</span><span class="o">.</span><span class="n">operation</span><span class="o">.</span><span class="n">security_specs</span><span class="p">))</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">ESICallableOperation</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">operation</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">paginated</span> <span class="o">=</span> <span class="s1">&#39;page&#39;</span> <span class="ow">in</span> <span class="n">operation</span><span class="o">.</span><span class="n">params</span>
+
+    <span class="k">def</span> <span class="nf">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">_token</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">op_kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Invoke the actual HTTP request and return a future.</span>
+
+<span class="sd">        :rtype: :class:`bravado.http_future.HTTPFuture`</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">warn_for_deprecated_op</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">operation</span><span class="p">)</span>
+
+        <span class="c1"># Apply request_options defaults</span>
+        <span class="n">request_options</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span>
+            <span class="n">REQUEST_OPTIONS_DEFAULTS</span><span class="p">,</span>
+            <span class="o">**</span><span class="p">(</span><span class="n">op_kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;_request_options&#39;</span><span class="p">,</span> <span class="p">{})))</span>
+
+        <span class="n">request_params</span> <span class="o">=</span> <span class="n">construct_request</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">operation</span><span class="p">,</span> <span class="n">request_options</span><span class="p">,</span> <span class="o">**</span><span class="n">op_kwargs</span><span class="p">)</span>
+
+        <span class="c1"># config = self.operation.swagger_spec.config</span>
+        <span class="n">http_client</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">operation</span><span class="o">.</span><span class="n">swagger_spec</span><span class="o">.</span><span class="n">http_client</span>
+
+        <span class="c1"># Per-request config overrides client wide config</span>
+        <span class="c1"># also_return_response = request_options.get(</span>
+        <span class="c1">#     &#39;also_return_response&#39;,</span>
+        <span class="c1">#     config[&#39;also_return_response&#39;])</span>
+
+        <span class="c1"># Check if we need an authorization token and if so set it up</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">require_authorization</span> <span class="ow">and</span> <span class="n">_token</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">ESIAuthorizationError</span><span class="p">(</span><span class="s1">&#39;Missing required authorization token&#39;</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">http_client</span><span class="o">.</span><span class="n">request</span><span class="p">(</span>
+            <span class="n">request_params</span><span class="p">,</span>
+            <span class="n">operation</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">operation</span><span class="p">,</span>
+            <span class="n">response_callbacks</span><span class="o">=</span><span class="n">request_options</span><span class="p">[</span><span class="s1">&#39;response_callbacks&#39;</span><span class="p">],</span>
+            <span class="n">authorization_token</span><span class="o">=</span><span class="n">_token</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="ESIPageGenerator"><a class="viewcode-back" href="../../source/modules.html#esy.client.ESIPageGenerator">[docs]</a><span class="k">class</span> <span class="nc">ESIPageGenerator</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Generator for ESI API calls.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">requests_future</span><span class="p">,</span> <span class="n">requestsresponse_adapter</span><span class="p">,</span> <span class="n">operation</span><span class="p">,</span>
+                 <span class="n">response_callbacks</span><span class="p">,</span> <span class="n">cache</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">requests_future</span> <span class="o">=</span> <span class="n">requests_future</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">requestsresponse_adapter</span> <span class="o">=</span> <span class="n">requestsresponse_adapter</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">operation</span> <span class="o">=</span> <span class="n">operation</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">response_callbacks</span> <span class="o">=</span> <span class="n">response_callbacks</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">page</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">num_pages</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">stop</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cache</span> <span class="o">=</span> <span class="n">cache</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">cache</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">assert</span> <span class="n">callable</span><span class="p">(</span><span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cache</span><span class="p">,</span> <span class="s1">&#39;get&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">))</span>
+            <span class="k">assert</span> <span class="n">callable</span><span class="p">(</span><span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cache</span><span class="p">,</span> <span class="s1">&#39;set&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">))</span>
+            <span class="k">assert</span> <span class="n">callable</span><span class="p">(</span><span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cache</span><span class="p">,</span> <span class="s1">&#39;__contains__&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="nf">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span> <span class="nf">_get_cache_key</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">hash</span><span class="p">((</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">requests_future</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">url</span><span class="p">,</span>
+            <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">requests_future</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">params</span><span class="p">),</span>
+            <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">requests_future</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">auth</span><span class="p">),</span>
+            <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">requests_future</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">headers</span><span class="p">),</span>
+            <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">requests_future</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">method</span><span class="p">),</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">page</span>
+        <span class="p">))</span>
+
+    <span class="k">def</span> <span class="nf">_send</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">HttpFuture</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">requests_future</span><span class="p">,</span>
+                          <span class="bp">self</span><span class="o">.</span><span class="n">requestsresponse_adapter</span><span class="p">,</span>
+                          <span class="bp">self</span><span class="o">.</span><span class="n">operation</span><span class="p">,</span>
+                          <span class="bp">self</span><span class="o">.</span><span class="n">response_callbacks</span><span class="p">,</span>
+                          <span class="n">also_return_response</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">result</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">result</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">cache</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">key</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_cache_key</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">cache</span><span class="p">:</span>
+                <span class="n">data</span><span class="p">,</span> <span class="n">num_pages</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cache</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">num_pages</span> <span class="o">=</span> <span class="n">num_pages</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">data</span><span class="p">,</span> <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_send</span><span class="p">()</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">num_pages</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">headers</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;x-pages&#39;</span><span class="p">,</span> <span class="s1">&#39;1&#39;</span><span class="p">))</span>
+                <span class="n">expires</span> <span class="o">=</span> <span class="n">datetime</span><span class="p">(</span>
+                    <span class="o">*</span><span class="n">parsedate</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">headers</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;expires&#39;</span><span class="p">))[:</span><span class="mi">7</span><span class="p">],</span> <span class="n">pytz</span><span class="o">.</span><span class="n">UTC</span>
+                <span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">cache</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_pages</span><span class="p">),</span> <span class="n">expires</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">data</span><span class="p">,</span> <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_send</span><span class="p">()</span>
+            <span class="k">except</span> <span class="n">HTTPForbidden</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">ESIForbidden</span><span class="p">(</span><span class="s1">&#39;Access denied&#39;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">num_pages</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">headers</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;x-pages&#39;</span><span class="p">,</span> <span class="s1">&#39;1&#39;</span><span class="p">))</span>
+
+        <span class="k">return</span> <span class="n">data</span>
+
+    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">result</span><span class="p">()</span>
+        <span class="k">except</span> <span class="p">(</span><span class="n">HTTPInternalServerError</span><span class="p">,</span>
+                <span class="n">HTTPBadRequest</span><span class="p">)</span> <span class="k">as</span> <span class="n">ex</span><span class="p">:</span>  <span class="c1"># pragma: no cover</span>
+            <span class="k">raise</span> <span class="n">ESIError</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">ex</span><span class="p">))</span>
+        <span class="k">except</span> <span class="n">HTTPNotFound</span> <span class="k">as</span> <span class="n">ex</span><span class="p">:</span>  <span class="c1"># pragma: no cover</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">error_msg</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">ex</span><span class="o">.</span><span class="n">response</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+                <span class="k">raise</span> <span class="n">ESINotFound</span><span class="p">(</span><span class="n">error_msg</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;error&#39;</span><span class="p">,</span> <span class="s1">&#39;Not found&#39;</span><span class="p">))</span>
+            <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">ex</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">ESINotFound</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">ex</span><span class="p">))</span>
+        <span class="k">except</span> <span class="n">HTTPForbidden</span><span class="p">:</span>  <span class="c1"># pragma: no cover</span>
+            <span class="k">raise</span> <span class="n">ESIForbidden</span><span class="p">(</span><span class="s1">&#39;Access denied&#39;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__next__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">stop</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">StopIteration</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">requests_future</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="s1">&#39;page&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">page</span>
+            <span class="n">swagger_result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">result</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">page</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">page</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_pages</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">stop</span> <span class="o">=</span> <span class="kc">True</span>
+            <span class="k">return</span> <span class="n">swagger_result</span></div>
+
+
+<div class="viewcode-block" id="ESIRequestsClient"><a class="viewcode-back" href="../../source/modules.html#esy.client.ESIRequestsClient">[docs]</a><span class="k">class</span> <span class="nc">ESIRequestsClient</span><span class="p">(</span><span class="n">RequestsClient</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Extends the bravado RequestsClient to handle pagination, user agent and</span>
+<span class="sd">    per-request authorizations.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">user_agent</span><span class="p">,</span> <span class="n">cache</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">user_agent</span> <span class="o">=</span> <span class="n">user_agent</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cache</span> <span class="o">=</span> <span class="n">cache</span>
+
+<div class="viewcode-block" id="ESIRequestsClient.request"><a class="viewcode-back" href="../../source/modules.html#esy.client.ESIRequestsClient.request">[docs]</a>    <span class="k">def</span> <span class="nf">request</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request_params</span><span class="p">,</span> <span class="n">operation</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">response_callbacks</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                <span class="n">authorization_token</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="n">sanitized_params</span><span class="p">,</span> <span class="n">misc_options</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">separate_params</span><span class="p">(</span><span class="n">request_params</span><span class="p">)</span>
+        <span class="n">session</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">Session</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">authorization_token</span><span class="p">:</span>
+            <span class="n">session</span><span class="o">.</span><span class="n">headers</span><span class="o">.</span><span class="n">update</span><span class="p">({</span>
+                <span class="s1">&#39;Authorization&#39;</span><span class="p">:</span> <span class="s1">&#39;Bearer </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">authorization_token</span><span class="p">)</span>
+            <span class="p">})</span>
+        <span class="n">session</span><span class="o">.</span><span class="n">headers</span><span class="o">.</span><span class="n">update</span><span class="p">({</span>
+            <span class="s1">&#39;User-Agent&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">user_agent</span>
+        <span class="p">})</span>
+
+        <span class="n">requests_future</span> <span class="o">=</span> <span class="n">RequestsFutureAdapter</span><span class="p">(</span>
+            <span class="n">session</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">authenticated_request</span><span class="p">(</span><span class="n">sanitized_params</span><span class="p">),</span>
+            <span class="n">misc_options</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">operation</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="s1">&#39;page&#39;</span> <span class="ow">in</span> <span class="n">operation</span><span class="o">.</span><span class="n">params</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">ESIPageGenerator</span><span class="p">(</span><span class="n">requests_future</span><span class="p">,</span>
+                                    <span class="n">RequestsResponseAdapter</span><span class="p">,</span>
+                                    <span class="n">operation</span><span class="p">,</span>
+                                    <span class="n">response_callbacks</span><span class="p">,</span>
+                                    <span class="n">cache</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">cache</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">ESIPageGenerator</span><span class="p">(</span><span class="n">requests_future</span><span class="p">,</span>
+                                    <span class="n">RequestsResponseAdapter</span><span class="p">,</span>
+                                    <span class="n">operation</span><span class="p">,</span>
+                                    <span class="n">response_callbacks</span><span class="p">,</span>
+                                    <span class="n">cache</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">cache</span><span class="p">)</span><span class="o">.</span><span class="n">get</span><span class="p">()</span></div></div>
+
+
+<div class="viewcode-block" id="ESIClient"><a class="viewcode-back" href="../../source/modules.html#esy.client.ESIClient">[docs]</a><span class="k">class</span> <span class="nc">ESIClient</span><span class="p">(</span><span class="n">SwaggerClient</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Swagger client interface adapted to use with the ESI.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">swagger_spec</span><span class="p">,</span> <span class="n">esi_endpoint</span><span class="p">,</span> <span class="n">user_agent</span><span class="p">,</span> <span class="n">use_models</span><span class="p">,</span>
+                 <span class="n">cache</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Internal constructor for ESIClient. Use get_client instead of</span>
+<span class="sd">        instancing ESIClient directly.</span>
+
+<span class="sd">        :param swagger_spec:</span>
+<span class="sd">        :param esi_endpoint:</span>
+<span class="sd">        :param user_agent:</span>
+<span class="sd">        :param use_models:</span>
+<span class="sd">        :param cache:</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">http_client</span> <span class="o">=</span> <span class="n">ESIRequestsClient</span><span class="p">(</span><span class="n">user_agent</span><span class="p">,</span> <span class="n">cache</span><span class="o">=</span><span class="n">cache</span><span class="p">)</span>
+        <span class="n">swagger_spec</span> <span class="o">=</span> <span class="n">Spec</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">swagger_spec</span><span class="p">,</span>
+                                      <span class="n">esi_endpoint</span><span class="p">,</span>
+                                      <span class="bp">self</span><span class="o">.</span><span class="n">http_client</span><span class="p">,</span>
+                                      <span class="n">config</span><span class="o">=</span><span class="p">{</span>
+                                          <span class="s1">&#39;use_models&#39;</span><span class="p">:</span> <span class="n">use_models</span>
+                                      <span class="p">})</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">ESIClient</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">swagger_spec</span><span class="p">)</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">_generate_esi_endpoint</span><span class="p">(</span><span class="n">endpoint</span><span class="p">,</span> <span class="n">datasource</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s1">&#39;</span><span class="si">{}</span><span class="s1">?datasource=</span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">endpoint</span><span class="p">,</span> <span class="n">datasource</span><span class="p">)</span>
+
+<div class="viewcode-block" id="ESIClient.get_client"><a class="viewcode-back" href="../../source/modules.html#esy.client.ESIClient.get_client">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">get_client</span><span class="p">(</span><span class="n">user_agent</span><span class="p">,</span> <span class="n">use_models</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">spec</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                   <span class="n">endpoint</span><span class="o">=</span><span class="n">ESI_ENDPOINT</span><span class="p">,</span> <span class="n">datasource</span><span class="o">=</span><span class="n">ESI_DATASOURCE</span><span class="p">,</span>
+                   <span class="n">cache</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Generates a client interface for ESI.</span>
+
+<span class="sd">        :param user_agent:</span>
+<span class="sd">        :type user_agent: str</span>
+<span class="sd">        :param use_models:</span>
+<span class="sd">        :param spec:</span>
+<span class="sd">        :param endpoint:</span>
+<span class="sd">        :type endpoint: str</span>
+<span class="sd">        :param datasource:</span>
+<span class="sd">        :type datasource: str</span>
+<span class="sd">        :param cache: A class which implements the cache interface</span>
+<span class="sd">        :return: An initalized client</span>
+<span class="sd">        :rtype: ESIClient</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">target</span> <span class="o">=</span> <span class="n">ESIClient</span><span class="o">.</span><span class="n">_generate_esi_endpoint</span><span class="p">(</span><span class="n">endpoint</span><span class="p">,</span> <span class="n">datasource</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">spec</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">spec</span> <span class="o">=</span> <span class="n">ESIClient</span><span class="o">.</span><span class="n">get_swagger_spec</span><span class="p">(</span><span class="n">endpoint</span><span class="o">=</span><span class="n">endpoint</span><span class="p">,</span>
+                                              <span class="n">datasource</span><span class="o">=</span><span class="n">datasource</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">ESIClient</span><span class="p">(</span><span class="n">spec</span><span class="p">,</span> <span class="n">target</span><span class="p">,</span> <span class="n">user_agent</span><span class="p">,</span> <span class="n">use_models</span><span class="p">,</span> <span class="n">cache</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="ESIClient.get_swagger_spec"><a class="viewcode-back" href="../../source/modules.html#esy.client.ESIClient.get_swagger_spec">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">get_swagger_spec</span><span class="p">(</span><span class="n">endpoint</span><span class="o">=</span><span class="n">ESI_ENDPOINT</span><span class="p">,</span> <span class="n">datasource</span><span class="o">=</span><span class="n">ESI_DATASOURCE</span><span class="p">,</span>
+                         <span class="n">cache</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Downloads and parses the swagger specification from the ESI endpoint.</span>
+
+<span class="sd">        :param endpoint: URL to the ESI endpoint. Defaults to latest.</span>
+<span class="sd">        :type endpoint: str</span>
+<span class="sd">        :param datasource: ESI datasource to use. Defaults to Tranquility.</span>
+<span class="sd">        :type datasource: str</span>
+<span class="sd">        :param cache: Optional cache</span>
+<span class="sd">        :return: Swagger specification</span>
+<span class="sd">        :rtype: dict</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">endpoint</span> <span class="o">=</span> <span class="n">ESIClient</span><span class="o">.</span><span class="n">_generate_esi_endpoint</span><span class="p">(</span><span class="n">endpoint</span><span class="p">,</span> <span class="n">datasource</span><span class="p">)</span>
+        <span class="n">key</span> <span class="o">=</span> <span class="nb">hash</span><span class="p">((</span><span class="n">endpoint</span><span class="p">,</span> <span class="s1">&#39;spec&#39;</span><span class="p">))</span>
+        <span class="k">if</span> <span class="n">cache</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">cache</span><span class="p">:</span>
+            <span class="n">swagger_data</span> <span class="o">=</span> <span class="n">cache</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">start</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>
+                <span class="n">resp</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">endpoint</span><span class="p">)</span>
+                <span class="n">resp</span><span class="o">.</span><span class="n">raise_for_status</span><span class="p">()</span>
+                <span class="n">swagger_data</span> <span class="o">=</span> <span class="n">resp</span><span class="o">.</span><span class="n">text</span>
+                <span class="n">log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;Swagger spec downloaded in </span><span class="si">{}</span><span class="s1"> seconds&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                    <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span> <span class="o">-</span> <span class="n">start</span>
+                <span class="p">))</span>
+            <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">ex</span><span class="p">:</span>
+                <span class="n">error</span> <span class="o">=</span> <span class="s1">&#39;Could not connect to ESI: </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">ex</span><span class="p">)</span>
+                <span class="n">log</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="n">error</span><span class="p">)</span>
+                <span class="k">raise</span> <span class="n">ESIError</span><span class="p">(</span><span class="n">error</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">cache</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">key</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">cache</span><span class="p">:</span>
+            <span class="n">cache</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">swagger_data</span><span class="p">,</span> <span class="n">ESI_SWAGGER_CACHE_TIMER</span><span class="p">)</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">spec</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">swagger_data</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">spec</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">ex</span><span class="p">:</span>  <span class="c1"># pragma: no cover</span>
+            <span class="n">error</span> <span class="o">=</span> <span class="s1">&#39;Could not parse ESI swagger specification: </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">ex</span><span class="p">)</span>
+            <span class="n">log</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="n">error</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="n">ESIError</span><span class="p">(</span><span class="n">error</span><span class="p">)</span></div>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">cache</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">http_client</span><span class="o">.</span><span class="n">cache</span>
+
+    <span class="nd">@cache</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">cache</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cache</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">http_client</span><span class="o">.</span><span class="n">cache</span> <span class="o">=</span> <span class="n">cache</span>
+
+    <span class="k">def</span> <span class="nf">__getattr__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item</span><span class="p">):</span>
+        <span class="n">resource</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">swagger_spec</span><span class="o">.</span><span class="n">resources</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">resource</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">AttributeError</span><span class="p">(</span><span class="s1">&#39;Resource </span><span class="si">{0}</span><span class="s1"> not found. Available &#39;</span>
+                                 <span class="s1">&#39;resources: </span><span class="si">{1}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">item</span><span class="p">,</span>
+                                                         <span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">dir</span><span class="p">(</span><span class="bp">self</span><span class="p">))))</span>
+
+        <span class="c1"># Wrap bravado-core&#39;s Resource and Operation objects in order to</span>
+        <span class="c1"># execute a service call via the http_client.</span>
+        <span class="k">return</span> <span class="n">ESIResourceDecorator</span><span class="p">(</span><span class="n">resource</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="ESIResourceDecorator"><a class="viewcode-back" href="../../source/modules.html#esy.client.ESIResourceDecorator">[docs]</a><span class="k">class</span> <span class="nc">ESIResourceDecorator</span><span class="p">(</span><span class="n">ResourceDecorator</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Extends ResourceDecorator to wrap operations with ESICallableOperation</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__getattr__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :rtype: :class:`CallableOperation`</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">ESICallableOperation</span><span class="p">(</span><span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">resource</span><span class="p">,</span> <span class="n">name</span><span class="p">))</span></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Kristian Berg.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'1.0.0',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

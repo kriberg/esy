@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>ESY Documentation &mdash; ESY 1.0.0 documentation</title>
+  <title>Introduction &mdash; ESY 1.0.0 documentation</title>
   
 
   
@@ -29,7 +29,8 @@
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Introduction" href="readme.html" /> 
+    <link rel="next" title="ESY Swagger Interface" href="source/modules.html" />
+    <link rel="prev" title="ESY Documentation" href="index.html" /> 
 
   
   <script src="_static/js/modernizr.min.js"></script>
@@ -48,7 +49,7 @@
           
 
           
-            <a href="#" class="icon icon-home"> ESY
+            <a href="index.html" class="icon icon-home"> ESY
           
 
           
@@ -79,8 +80,14 @@
             
             
               <p class="caption"><span class="caption-text">Contents:</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="readme.html">Introduction</a></li>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Introduction</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#installation">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#documentation">Documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#usage">Usage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#development">Development</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="source/modules.html">ESY Swagger Interface</a></li>
 <li class="toctree-l1"><a class="reference internal" href="source/esi.html">ESI API</a></li>
 </ul>
@@ -97,7 +104,7 @@
       <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="#">ESY</a>
+          <a href="index.html">ESY</a>
         
       </nav>
 
@@ -126,15 +133,15 @@
 
   <ul class="wy-breadcrumbs">
     
-      <li><a href="#">Docs</a> &raquo;</li>
+      <li><a href="index.html">Docs</a> &raquo;</li>
         
-      <li>ESY Documentation</li>
+      <li>Introduction</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
             
-            <a href="_sources/index.rst.txt" rel="nofollow"> View page source</a>
+            <a href="_sources/readme.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -147,10 +154,7 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="esy-documentation">
-<h1>ESY Documentation<a class="headerlink" href="#esy-documentation" title="Permalink to this headline">¶</a></h1>
-</div>
-<div class="section" id="introduction">
+  <div class="section" id="introduction">
 <h1>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h1>
 <hr class="docutils" />
 <a class="reference external image-reference" href="https://travis-ci.org/kriberg/esy"><img alt="Build Status" src="https://travis-ci.org/kriberg/esy.svg?branch=master" /></a>
@@ -241,65 +245,7 @@ an usable interface. The purpose of creating a custom wrapper of Bravado for ESI
 user friendly. Pagination is handled automatically by returning generators for any route which accepts a page
 parameter, while non-paginated data is handled in their native data type. Tokens can be set per-call, instead of
 per-client, allowing for using headers and still getting data for many tokens without the ned to reinitialize the client.</p>
-<div class="toctree-wrapper compound">
-<p class="caption"><span class="caption-text">Contents:</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="readme.html">Introduction</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="readme.html#installation">Installation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="readme.html#documentation">Documentation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="readme.html#usage">Usage</a></li>
-<li class="toctree-l2"><a class="reference internal" href="readme.html#development">Development</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="source/modules.html">ESY Swagger Interface</a><ul class="simple">
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="source/esi.html">ESI API</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="source/esi.html#alliance">Alliance</a></li>
-<li class="toctree-l2"><a class="reference internal" href="source/esi.html#assets">Assets</a></li>
-<li class="toctree-l2"><a class="reference internal" href="source/esi.html#bookmarks">Bookmarks</a></li>
-<li class="toctree-l2"><a class="reference internal" href="source/esi.html#calendar">Calendar</a></li>
-<li class="toctree-l2"><a class="reference internal" href="source/esi.html#character">Character</a></li>
-<li class="toctree-l2"><a class="reference internal" href="source/esi.html#clones">Clones</a></li>
-<li class="toctree-l2"><a class="reference internal" href="source/esi.html#contacts">Contacts</a></li>
-<li class="toctree-l2"><a class="reference internal" href="source/esi.html#contracts">Contracts</a></li>
-<li class="toctree-l2"><a class="reference internal" href="source/esi.html#corporation">Corporation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="source/esi.html#dogma">Dogma</a></li>
-<li class="toctree-l2"><a class="reference internal" href="source/esi.html#faction-warfare">Faction_Warfare</a></li>
-<li class="toctree-l2"><a class="reference internal" href="source/esi.html#fittings">Fittings</a></li>
-<li class="toctree-l2"><a class="reference internal" href="source/esi.html#fleets">Fleets</a></li>
-<li class="toctree-l2"><a class="reference internal" href="source/esi.html#incursions">Incursions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="source/esi.html#industry">Industry</a></li>
-<li class="toctree-l2"><a class="reference internal" href="source/esi.html#insurance">Insurance</a></li>
-<li class="toctree-l2"><a class="reference internal" href="source/esi.html#killmails">Killmails</a></li>
-<li class="toctree-l2"><a class="reference internal" href="source/esi.html#location">Location</a></li>
-<li class="toctree-l2"><a class="reference internal" href="source/esi.html#loyalty">Loyalty</a></li>
-<li class="toctree-l2"><a class="reference internal" href="source/esi.html#mail">Mail</a></li>
-<li class="toctree-l2"><a class="reference internal" href="source/esi.html#market">Market</a></li>
-<li class="toctree-l2"><a class="reference internal" href="source/esi.html#opportunities">Opportunities</a></li>
-<li class="toctree-l2"><a class="reference internal" href="source/esi.html#planetary-interaction">Planetary_Interaction</a></li>
-<li class="toctree-l2"><a class="reference internal" href="source/esi.html#routes">Routes</a></li>
-<li class="toctree-l2"><a class="reference internal" href="source/esi.html#search">Search</a></li>
-<li class="toctree-l2"><a class="reference internal" href="source/esi.html#skills">Skills</a></li>
-<li class="toctree-l2"><a class="reference internal" href="source/esi.html#sovereignty">Sovereignty</a></li>
-<li class="toctree-l2"><a class="reference internal" href="source/esi.html#status">Status</a></li>
-<li class="toctree-l2"><a class="reference internal" href="source/esi.html#universe">Universe</a></li>
-<li class="toctree-l2"><a class="reference internal" href="source/esi.html#user-interface">User_Interface</a></li>
-<li class="toctree-l2"><a class="reference internal" href="source/esi.html#wallet">Wallet</a></li>
-<li class="toctree-l2"><a class="reference internal" href="source/esi.html#wars">Wars</a></li>
-</ul>
-</li>
-</ul>
 </div>
-</div>
-</div>
-<div class="section" id="indices-and-tables">
-<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h1>
-<ul class="simple">
-<li><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></li>
-<li><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></li>
-<li><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></li>
-</ul>
 </div>
 
 
@@ -310,8 +256,10 @@ per-client, allowing for using headers and still getting data for many tokens wi
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="readme.html" class="btn btn-neutral float-right" title="Introduction" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="source/modules.html" class="btn btn-neutral float-right" title="ESY Swagger Interface" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
+      
+        <a href="index.html" class="btn btn-neutral" title="ESY Documentation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

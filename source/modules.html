@@ -1,0 +1,452 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>ESY Swagger Interface &mdash; ESY 1.0.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="ESI API" href="esi.html" />
+    <link rel="prev" title="Introduction" href="../readme.html" /> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> ESY
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../readme.html">Introduction</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">ESY Swagger Interface</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="esi.html">ESI API</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">ESY</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>ESY Swagger Interface</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/source/modules.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="esy-swagger-interface">
+<h1>ESY Swagger Interface<a class="headerlink" href="#esy-swagger-interface" title="Permalink to this headline">¶</a></h1>
+<div class="toctree-wrapper compound">
+</div>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+</tbody>
+</table>
+<span class="target" id="module-esy"></span><span class="target" id="module-esy.client"></span><dl class="class">
+<dt id="esy.client.ESICallableOperation">
+<em class="property">class </em><code class="descclassname">esy.client.</code><code class="descname">ESICallableOperation</code><span class="sig-paren">(</span><em>operation</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/esy/client.html#ESICallableOperation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#esy.client.ESICallableOperation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Wraps bravado’s CallableOpeartion to handle pagination</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="esy.client.ESIClient">
+<em class="property">class </em><code class="descclassname">esy.client.</code><code class="descname">ESIClient</code><span class="sig-paren">(</span><em>swagger_spec</em>, <em>esi_endpoint</em>, <em>user_agent</em>, <em>use_models</em>, <em>cache</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/esy/client.html#ESIClient"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#esy.client.ESIClient" title="Permalink to this definition">¶</a></dt>
+<dd><p>Swagger client interface adapted to use with the ESI.</p>
+<dl class="staticmethod">
+<dt id="esy.client.ESIClient.get_client">
+<em class="property">static </em><code class="descname">get_client</code><span class="sig-paren">(</span><em>user_agent</em>, <em>use_models=False</em>, <em>spec=None</em>, <em>endpoint='https://esi.evetech.net/latest/swagger.json'</em>, <em>datasource='tranquility'</em>, <em>cache=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/esy/client.html#ESIClient.get_client"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#esy.client.ESIClient.get_client" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generates a client interface for ESI.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>user_agent</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.6)"><em>str</em></a>) – </li>
+<li><strong>use_models</strong> – </li>
+<li><strong>spec</strong> – </li>
+<li><strong>endpoint</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.6)"><em>str</em></a>) – </li>
+<li><strong>datasource</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.6)"><em>str</em></a>) – </li>
+<li><strong>cache</strong> – A class which implements the cache interface</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">An initalized client</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference internal" href="#esy.client.ESIClient" title="esy.client.ESIClient">ESIClient</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="esy.client.ESIClient.get_swagger_spec">
+<em class="property">static </em><code class="descname">get_swagger_spec</code><span class="sig-paren">(</span><em>endpoint='https://esi.evetech.net/latest/swagger.json'</em>, <em>datasource='tranquility'</em>, <em>cache=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/esy/client.html#ESIClient.get_swagger_spec"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#esy.client.ESIClient.get_swagger_spec" title="Permalink to this definition">¶</a></dt>
+<dd><p>Downloads and parses the swagger specification from the ESI endpoint.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>endpoint</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.6)"><em>str</em></a>) – URL to the ESI endpoint. Defaults to latest.</li>
+<li><strong>datasource</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.6)"><em>str</em></a>) – ESI datasource to use. Defaults to Tranquility.</li>
+<li><strong>cache</strong> – Optional cache</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Swagger specification</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.6)">dict</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="esy.client.ESIPageGenerator">
+<em class="property">class </em><code class="descclassname">esy.client.</code><code class="descname">ESIPageGenerator</code><span class="sig-paren">(</span><em>requests_future</em>, <em>requestsresponse_adapter</em>, <em>operation</em>, <em>response_callbacks</em>, <em>cache=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/esy/client.html#ESIPageGenerator"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#esy.client.ESIPageGenerator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generator for ESI API calls.</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="esy.client.ESIRequestsClient">
+<em class="property">class </em><code class="descclassname">esy.client.</code><code class="descname">ESIRequestsClient</code><span class="sig-paren">(</span><em>user_agent</em>, <em>cache=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/esy/client.html#ESIRequestsClient"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#esy.client.ESIRequestsClient" title="Permalink to this definition">¶</a></dt>
+<dd><p>Extends the bravado RequestsClient to handle pagination, user agent and
+per-request authorizations.</p>
+<dl class="method">
+<dt id="esy.client.ESIRequestsClient.request">
+<code class="descname">request</code><span class="sig-paren">(</span><em>request_params</em>, <em>operation=None</em>, <em>response_callbacks=None</em>, <em>authorization_token=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/esy/client.html#ESIRequestsClient.request"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#esy.client.ESIRequestsClient.request" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>request_params</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.6)"><em>dict</em></a>) – complete request data.</li>
+<li><strong>operation</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">bravado_core.operation.Operation</span></code>) – operation that this http request is for. Defaults
+to None - in which case, we’re obviously just retrieving a Swagger
+Spec.</li>
+<li><strong>response_callbacks</strong> – List of callables to post-process the
+incoming response. Expects args incoming_response and operation.</li>
+<li><strong>also_return_response</strong> – Consult the constructor documentation for
+<code class="xref py py-class docutils literal notranslate"><span class="pre">bravado.http_future.HttpFuture</span></code>.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">HTTP Future object</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">class:</th><td class="field-body"><cite>bravado_core.http_future.HttpFuture</cite></td>
+</tr>
+</tbody>
+</table>
+</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="esy.client.ESIResourceDecorator">
+<em class="property">class </em><code class="descclassname">esy.client.</code><code class="descname">ESIResourceDecorator</code><span class="sig-paren">(</span><em>resource</em>, <em>also_return_response=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/esy/client.html#ESIResourceDecorator"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#esy.client.ESIResourceDecorator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Extends ResourceDecorator to wrap operations with ESICallableOperation</p>
+</dd></dl>
+
+<span class="target" id="module-esy.exceptions"></span><dl class="exception">
+<dt id="esy.exceptions.ESIAuthorizationError">
+<em class="property">exception </em><code class="descclassname">esy.exceptions.</code><code class="descname">ESIAuthorizationError</code><a class="reference internal" href="../_modules/esy/exceptions.html#ESIAuthorizationError"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#esy.exceptions.ESIAuthorizationError" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="exception">
+<dt id="esy.exceptions.ESIError">
+<em class="property">exception </em><code class="descclassname">esy.exceptions.</code><code class="descname">ESIError</code><a class="reference internal" href="../_modules/esy/exceptions.html#ESIError"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#esy.exceptions.ESIError" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="exception">
+<dt id="esy.exceptions.ESIForbidden">
+<em class="property">exception </em><code class="descclassname">esy.exceptions.</code><code class="descname">ESIForbidden</code><a class="reference internal" href="../_modules/esy/exceptions.html#ESIForbidden"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#esy.exceptions.ESIForbidden" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="exception">
+<dt id="esy.exceptions.ESINotFound">
+<em class="property">exception </em><code class="descclassname">esy.exceptions.</code><code class="descname">ESINotFound</code><a class="reference internal" href="../_modules/esy/exceptions.html#ESINotFound"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#esy.exceptions.ESINotFound" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<span class="target" id="module-esy.constants"></span><span class="target" id="module-esy.auth"></span><dl class="class">
+<dt id="esy.auth.ESIAuthenticator">
+<em class="property">class </em><code class="descclassname">esy.auth.</code><code class="descname">ESIAuthenticator</code><span class="sig-paren">(</span><em>access_token_endpoint='https://login.eveonline.com/oauth/token'</em>, <em>token_verify_endpoint='https://login.eveonline.com/oauth/verify'</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/esy/auth.html#ESIAuthenticator"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#esy.auth.ESIAuthenticator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Handles ESI token authentication and verification.</p>
+<dl class="method">
+<dt id="esy.auth.ESIAuthenticator.get_access_token">
+<code class="descname">get_access_token</code><span class="sig-paren">(</span><em>authorization_code</em>, <em>client_id</em>, <em>secret</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/esy/auth.html#ESIAuthenticator.get_access_token"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#esy.auth.ESIAuthenticator.get_access_token" title="Permalink to this definition">¶</a></dt>
+<dd><p>Trades an authorization code for an access token from ESI</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>authorization_code</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.6)"><em>str</em></a>) – The authorization code returned from ESI</li>
+<li><strong>client_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.6)"><em>str</em></a>) – The ESI ClientID</li>
+<li><strong>secret</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.6)"><em>str</em></a>) – The ESI Secret key</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">ESI access token</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.6)">str</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="esy.auth.ESIAuthenticator.refresh_access_token">
+<code class="descname">refresh_access_token</code><span class="sig-paren">(</span><em>refresh_token</em>, <em>client_id</em>, <em>secret</em>, <em>session=None</em>, <em>auth=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/esy/auth.html#ESIAuthenticator.refresh_access_token"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#esy.auth.ESIAuthenticator.refresh_access_token" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>refresh_token</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.6)"><em>str</em></a>) – Current token</li>
+<li><strong>client_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.6)"><em>str</em></a>) – The ESI ClientID</li>
+<li><strong>secret</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.6)"><em>str</em></a>) – The ESI Secret key</li>
+<li><strong>session</strong> (<em>OAuth2Session</em>) – Existing session for reuse</li>
+<li><strong>auth</strong> (<em>HTTPBasicAuth</em>) – Existing authentication handler for reuse</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">New access token</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.6)">str</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="esy.auth.ESIAuthenticator.verify_access_token">
+<code class="descname">verify_access_token</code><span class="sig-paren">(</span><em>access_token</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/esy/auth.html#ESIAuthenticator.verify_access_token"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#esy.auth.ESIAuthenticator.verify_access_token" title="Permalink to this definition">¶</a></dt>
+<dd><p>Verifies the access token with the ESI and retrieves character
+information.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>access_token</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.6)"><em>str</em></a>) – ESI access token</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">dict with CharacterID, CharacterName and CharacterOwnerHash</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.6)">dict</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="esi.html" class="btn btn-neutral float-right" title="ESI API" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../readme.html" class="btn btn-neutral" title="Introduction" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Kristian Berg.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'1.0.0',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
