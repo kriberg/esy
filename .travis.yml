@@ -6,5 +6,6 @@ install:
   - pip install coveralls
 script:
   - py.test --doctest-modules esy -v --cov esy --cov-report term-missing tests
+  - cd docs; make html linkcheck
 after_success:
   - coveralls

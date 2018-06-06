@@ -4,4 +4,8 @@ bravado
 swagger-spec-validator
 bravado-core
 pytz
+pytest-cov
+coverage
+sphinx
+sphinx_rtd_theme
 m2r
