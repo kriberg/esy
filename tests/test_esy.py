@@ -142,6 +142,8 @@ class TestESIClient(unittest.TestCase):
         self.assertEqual(status1, status2)
 
 
+@unittest.skipIf('TRAVIS' in os.environ,
+                 'Skipping auth flow tests on travis-ci')
 class TestDevel(unittest.TestCase):
     def setUp(self):
         self.test_username = os.getenv('ESY_TEST_USERNAME')
