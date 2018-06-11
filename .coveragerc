@@ -1,6 +1,5 @@
 [run]
 source = esy
-omit = esy/auth.py
 
 [report]
 exclude_lines =

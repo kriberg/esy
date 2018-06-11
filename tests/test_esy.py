@@ -4,7 +4,7 @@ import os.path
 import json
 from esy.client import ESIClient, ESIPageGenerator
 from esy.exceptions import ESIError, ESIAuthorizationError, ESIForbidden
-
+import esy.devel
 
 VITTOROS = 941287462
 EVOLUTION = 144749962
@@ -140,3 +140,58 @@ class TestESIClient(unittest.TestCase):
         status2 = self.client.Status.get_status()
         self.assertTrue(self.cache.hits == 1)
         self.assertEqual(status1, status2)
+
+
+class TestDevel(unittest.TestCase):
+    def setUp(self):
+        self.test_username = os.getenv('ESY_TEST_USERNAME')
+        self.test_password = os.getenv('ESY_TEST_PASSWORD')  # hunter2
+        self.test_character_id = os.getenv('ESY_CHARACTER_ID')
+        self.client_id = os.getenv('ESY_CLIENT_ID')
+        self.secret_key = os.getenv('ESY_SECRET_KEY')
+        self.scopes = os.getenv('ESY_SCOPES')
+
+    def test_authorization_flow(self):
+        if not all((self.test_username, self.test_password, self.client_id,
+                    self.scopes, self.test_character_id)):
+            self.skipTest('Missing authorization parameters.')
+        authorization_code = esy.devel.get_authorization_code(
+            cli_login=True,
+            client_id=self.client_id,
+            scopes=self.scopes,
+            character_id=self.test_character_id,
+            username=self.test_username,
+            password=self.test_password)
+        self.assertIsInstance(authorization_code, str)
+        self.assertTrue(len(authorization_code) == 65)
+
+        refresh_token, access_token = esy.devel.verify_authorization_code(
+            authorization_code, client_id=self.client_id,
+            secret_key=self.secret_key)
+
+        self.assertIsInstance(refresh_token, str)
+        self.assertTrue(len(refresh_token) == 65)
+        self.assertIsInstance(access_token, str)
+        self.assertTrue(len(access_token) == 87)
+
+        char_info = esy.devel.verify_access_token(access_token)
+        self.assertIsInstance(char_info, dict)
+        self.assertIn('CharacterID', char_info)
+        self.assertIn('CharacterName', char_info)
+        self.assertIn('CharacterOwnerHash', char_info)
+        self.assertEqual(str(char_info.get('CharacterID')),
+                         self.test_character_id)
+
+        new_access_token = esy.devel.get_access_token(
+            refresh_token, client_id=self.client_id, secret_key=self.secret_key)
+        self.assertIsInstance(new_access_token, str)
+        self.assertTrue(len(new_access_token) == 87)
+
+        for token, token_type in ((new_access_token, 'access_token'),
+                                  (access_token, 'access_token'),
+                                  (refresh_token, 'refresh_token')):
+            status = esy.devel.revoke_token(token,
+                                            token_type=token_type,
+                                            client_id=self.client_id,
+                                            secret_key=self.secret_key)
+            self.assertTrue(status)

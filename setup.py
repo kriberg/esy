@@ -8,6 +8,7 @@ import io
 import os
 import sys
 from shutil import rmtree
+import markdown
 
 from setuptools import setup, Command, find_packages
 
@@ -27,7 +28,7 @@ here = os.path.abspath(os.path.dirname(__file__))
 # Import the README and use it as the long-description.
 # Note: this will only work if 'README.md' is present in your MANIFEST.in file!
 with io.open(os.path.join(here, 'README.md'), encoding='utf-8') as f:
-    long_description = '\n' + f.read()
+    long_description = '\n' + markdown.markdown(f.read())
 
 # Load the package's __version__.py module as a dictionary.
 about = {'__version__': __version__}
@@ -35,6 +36,7 @@ about = {'__version__': __version__}
 REQUIRED = [
     'requests',
     'requests-oauthlib',
+    'requests-html'
     'bravado',
     'swagger-spec-validator',
     'bravado-core',

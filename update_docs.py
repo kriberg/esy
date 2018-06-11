@@ -98,7 +98,7 @@ def update_docs():
         spec = json.load(spec_file)
         client = ESIClient.get_client('esy tests', spec=spec)
 
-    doc_path = os.path.join(basedir, 'doc', 'source', 'esi.rst')
+    doc_path = os.path.join(basedir, 'docs', 'source', 'esi.rst')
 
     with open(doc_path, 'w') as index:
         index.write(INDEX_HEADER)

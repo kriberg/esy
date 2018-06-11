@@ -495,13 +495,13 @@ Contacts
       :rtype: list
 
 
-   .. py:method:: post_characters_character_id_contacts(character_id=None, contact_ids=None, [label_id=0], standing=None, [watched=False], _token=None)
+   .. py:method:: post_characters_character_id_contacts(character_id=None, contact_ids=None, [label_ids=None], standing=None, [watched=False], _token=None)
 
    Add contacts
 
       :param int character_id: An EVE character ID
       :param None contact_ids: A list of contacts
-      :param int label_id: Add a custom label to the new contact
+      :param list label_ids: Add custom labels to the new contact
       :param number standing: Standing for the contact
       :param boolean watched: Whether the contact should be watched, note this is only effective on characters
       :param str _token: ESI authorization token
@@ -509,13 +509,13 @@ Contacts
       :rtype: None
 
 
-   .. py:method:: put_characters_character_id_contacts(character_id=None, contact_ids=None, [label_id=0], standing=None, [watched=False], _token=None)
+   .. py:method:: put_characters_character_id_contacts(character_id=None, contact_ids=None, [label_ids=None], standing=None, [watched=False], _token=None)
 
    Edit contacts
 
       :param int character_id: An EVE character ID
       :param None contact_ids: A list of contacts
-      :param int label_id: Add a custom label to the contact, use 0 for clearing label
+      :param list label_ids: Add custom labels to the contact
       :param number standing: Standing for the contact
       :param boolean watched: Whether the contact should be watched, note this is only effective on characters
       :param str _token: ESI authorization token
