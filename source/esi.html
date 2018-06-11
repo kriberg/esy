@@ -24,12 +24,12 @@
 
   
 
-  
-    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="prev" title="ESY Swagger Interface" href="modules.html" /> 
+    <link rel="next" title="modules" href="modules.html" />
+    <link rel="prev" title="Introduction" href="../readme.html" /> 
 
   
   <script src="../_static/js/modernizr.min.js"></script>
@@ -81,7 +81,6 @@
               <p class="caption"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../readme.html">Introduction</a></li>
-<li class="toctree-l1"><a class="reference internal" href="modules.html">ESY Swagger Interface</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">ESI API</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#alliance">Alliance</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#assets">Assets</a></li>
@@ -117,6 +116,7 @@
 <li class="toctree-l2"><a class="reference internal" href="#wars">Wars</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="modules.html">modules</a></li>
 </ul>
 
             
@@ -1304,7 +1304,7 @@
 </div></blockquote>
 <dl class="method">
 <dt id="Contacts.post_characters_character_id_contacts">
-<code class="descname">post_characters_character_id_contacts</code><span class="sig-paren">(</span><em>character_id=None</em>, <em>contact_ids=None</em>, <span class="optional">[</span><em>label_id=0</em>, <span class="optional">]</span><em>standing=None</em>, <span class="optional">[</span><em>watched=False</em>, <span class="optional">]</span><em>_token=None</em><span class="sig-paren">)</span><a class="headerlink" href="#Contacts.post_characters_character_id_contacts" title="Permalink to this definition">¶</a></dt>
+<code class="descname">post_characters_character_id_contacts</code><span class="sig-paren">(</span><em>character_id=None</em>, <em>contact_ids=None</em>, <span class="optional">[</span><em>label_ids=None</em>, <span class="optional">]</span><em>standing=None</em>, <span class="optional">[</span><em>watched=False</em>, <span class="optional">]</span><em>_token=None</em><span class="sig-paren">)</span><a class="headerlink" href="#Contacts.post_characters_character_id_contacts" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <p>Add contacts</p>
@@ -1319,8 +1319,8 @@
 <tr class="field-even field"><th class="field-name" colspan="2">param None contact_ids:</th></tr>
 <tr class="field-even field"><td>&#160;</td><td class="field-body">A list of contacts</td>
 </tr>
-<tr class="field-odd field"><th class="field-name" colspan="2">param int label_id:</th></tr>
-<tr class="field-odd field"><td>&#160;</td><td class="field-body">Add a custom label to the new contact</td>
+<tr class="field-odd field"><th class="field-name" colspan="2">param list label_ids:</th></tr>
+<tr class="field-odd field"><td>&#160;</td><td class="field-body">Add custom labels to the new contact</td>
 </tr>
 <tr class="field-even field"><th class="field-name" colspan="2">param number standing:</th></tr>
 <tr class="field-even field"><td>&#160;</td><td class="field-body">Standing for the contact</td>
@@ -1340,7 +1340,7 @@
 </div></blockquote>
 <dl class="method">
 <dt id="Contacts.put_characters_character_id_contacts">
-<code class="descname">put_characters_character_id_contacts</code><span class="sig-paren">(</span><em>character_id=None</em>, <em>contact_ids=None</em>, <span class="optional">[</span><em>label_id=0</em>, <span class="optional">]</span><em>standing=None</em>, <span class="optional">[</span><em>watched=False</em>, <span class="optional">]</span><em>_token=None</em><span class="sig-paren">)</span><a class="headerlink" href="#Contacts.put_characters_character_id_contacts" title="Permalink to this definition">¶</a></dt>
+<code class="descname">put_characters_character_id_contacts</code><span class="sig-paren">(</span><em>character_id=None</em>, <em>contact_ids=None</em>, <span class="optional">[</span><em>label_ids=None</em>, <span class="optional">]</span><em>standing=None</em>, <span class="optional">[</span><em>watched=False</em>, <span class="optional">]</span><em>_token=None</em><span class="sig-paren">)</span><a class="headerlink" href="#Contacts.put_characters_character_id_contacts" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <p>Edit contacts</p>
@@ -1355,8 +1355,8 @@
 <tr class="field-even field"><th class="field-name" colspan="2">param None contact_ids:</th></tr>
 <tr class="field-even field"><td>&#160;</td><td class="field-body">A list of contacts</td>
 </tr>
-<tr class="field-odd field"><th class="field-name" colspan="2">param int label_id:</th></tr>
-<tr class="field-odd field"><td>&#160;</td><td class="field-body">Add a custom label to the contact, use 0 for clearing label</td>
+<tr class="field-odd field"><th class="field-name" colspan="2">param list label_ids:</th></tr>
+<tr class="field-odd field"><td>&#160;</td><td class="field-body">Add custom labels to the contact</td>
 </tr>
 <tr class="field-even field"><th class="field-name" colspan="2">param number standing:</th></tr>
 <tr class="field-even field"><td>&#160;</td><td class="field-body">Standing for the contact</td>
@@ -5431,8 +5431,10 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
+        <a href="modules.html" class="btn btn-neutral float-right" title="modules" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
-        <a href="modules.html" class="btn btn-neutral" title="ESY Swagger Interface" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+        <a href="../readme.html" class="btn btn-neutral" title="Introduction" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -5477,10 +5479,7 @@
 
   
 
-  
-  
-    <script type="text/javascript" src="../_static/js/theme.js"></script>
-  
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
 
   <script type="text/javascript">
       jQuery(function () {

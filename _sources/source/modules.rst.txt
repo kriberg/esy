@@ -1,5 +1,5 @@
-ESY Swagger Interface
-=====================
+modules
+=======
 
 .. toctree::
    :maxdepth: 4
@@ -22,4 +22,7 @@ ESY Swagger Interface
    :members:
 
 .. automodule:: esy.auth
+   :members:
+
+.. automodule:: esy.devel
    :members:

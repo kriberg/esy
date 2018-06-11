@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>ESY Swagger Interface &mdash; ESY 1.0.0 documentation</title>
+  <title>modules &mdash; ESY 1.0.0 documentation</title>
   
 
   
@@ -24,13 +24,11 @@
 
   
 
-  
-    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="ESI API" href="esi.html" />
-    <link rel="prev" title="Introduction" href="../readme.html" /> 
+    <link rel="prev" title="ESI API" href="esi.html" /> 
 
   
   <script src="../_static/js/modernizr.min.js"></script>
@@ -82,10 +80,10 @@
               <p class="caption"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../readme.html">Introduction</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">ESY Swagger Interface</a><ul class="simple">
+<li class="toctree-l1"><a class="reference internal" href="esi.html">ESI API</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">modules</a><ul class="simple">
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="esi.html">ESI API</a></li>
 </ul>
 
             
@@ -131,7 +129,7 @@
     
       <li><a href="../index.html">Docs</a> &raquo;</li>
         
-      <li>ESY Swagger Interface</li>
+      <li>modules</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -150,8 +148,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="esy-swagger-interface">
-<h1>ESY Swagger Interface<a class="headerlink" href="#esy-swagger-interface" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="modules">
+<h1>modules<a class="headerlink" href="#modules" title="Permalink to this headline">¶</a></h1>
 <div class="toctree-wrapper compound">
 </div>
 <table border="1" class="longtable docutils">
@@ -305,42 +303,18 @@ incoming response. Expects args incoming_response and operation.</li>
 
 <span class="target" id="module-esy.constants"></span><span class="target" id="module-esy.auth"></span><dl class="class">
 <dt id="esy.auth.ESIAuthenticator">
-<em class="property">class </em><code class="descclassname">esy.auth.</code><code class="descname">ESIAuthenticator</code><span class="sig-paren">(</span><em>access_token_endpoint='https://login.eveonline.com/oauth/token'</em>, <em>token_verify_endpoint='https://login.eveonline.com/oauth/verify'</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/esy/auth.html#ESIAuthenticator"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#esy.auth.ESIAuthenticator" title="Permalink to this definition">¶</a></dt>
-<dd><p>Handles ESI token authentication and verification.</p>
+<em class="property">class </em><code class="descclassname">esy.auth.</code><code class="descname">ESIAuthenticator</code><span class="sig-paren">(</span><em>access_token_endpoint='https://login.eveonline.com/oauth/token'</em>, <em>token_verify_endpoint='https://login.eveonline.com/oauth/verify'</em>, <em>revoke_token_endpoint='https://login.eveonline.com/oauth/revoke'</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/esy/auth.html#ESIAuthenticator"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#esy.auth.ESIAuthenticator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Handles ESI token authentication and verification process.</p>
 <dl class="method">
 <dt id="esy.auth.ESIAuthenticator.get_access_token">
-<code class="descname">get_access_token</code><span class="sig-paren">(</span><em>authorization_code</em>, <em>client_id</em>, <em>secret</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/esy/auth.html#ESIAuthenticator.get_access_token"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#esy.auth.ESIAuthenticator.get_access_token" title="Permalink to this definition">¶</a></dt>
-<dd><p>Trades an authorization code for an access token from ESI</p>
+<code class="descname">get_access_token</code><span class="sig-paren">(</span><em>refresh_token</em>, <em>client_id</em>, <em>secret</em>, <em>session=None</em>, <em>auth=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/esy/auth.html#ESIAuthenticator.get_access_token"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#esy.auth.ESIAuthenticator.get_access_token" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get a new access token using a refresh token</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>authorization_code</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.6)"><em>str</em></a>) – The authorization code returned from ESI</li>
-<li><strong>client_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.6)"><em>str</em></a>) – The ESI ClientID</li>
-<li><strong>secret</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.6)"><em>str</em></a>) – The ESI Secret key</li>
-</ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">ESI access token</p>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.6)">str</a></p>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="method">
-<dt id="esy.auth.ESIAuthenticator.refresh_access_token">
-<code class="descname">refresh_access_token</code><span class="sig-paren">(</span><em>refresh_token</em>, <em>client_id</em>, <em>secret</em>, <em>session=None</em>, <em>auth=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/esy/auth.html#ESIAuthenticator.refresh_access_token"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#esy.auth.ESIAuthenticator.refresh_access_token" title="Permalink to this definition">¶</a></dt>
-<dd><table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>refresh_token</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.6)"><em>str</em></a>) – Current token</li>
+<li><strong>refresh_token</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.6)"><em>str</em></a>) – The refresh token</li>
 <li><strong>client_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.6)"><em>str</em></a>) – The ESI ClientID</li>
 <li><strong>secret</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.6)"><em>str</em></a>) – The ESI Secret key</li>
 <li><strong>session</strong> (<em>OAuth2Session</em>) – Existing session for reuse</li>
@@ -359,9 +333,36 @@ incoming response. Expects args incoming_response and operation.</li>
 </dd></dl>
 
 <dl class="method">
+<dt id="esy.auth.ESIAuthenticator.revoke_token">
+<code class="descname">revoke_token</code><span class="sig-paren">(</span><em>token</em>, <em>client_id</em>, <em>secret</em>, <em>token_type='refresh_token'</em>, <em>session=None</em>, <em>auth=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/esy/auth.html#ESIAuthenticator.revoke_token"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#esy.auth.ESIAuthenticator.revoke_token" title="Permalink to this definition">¶</a></dt>
+<dd><p>Revoke refresh or access tokens.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>token</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.6)"><em>str</em></a>) – The token to revoke</li>
+<li><strong>client_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.6)"><em>str</em></a>) – The ESI ClientID</li>
+<li><strong>secret</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.6)"><em>str</em></a>) – The ESI Secret key</li>
+<li><strong>session</strong> (<em>OAuth2Session</em>) – Existing session for reuse</li>
+<li><strong>auth</strong> (<em>HTTPBasicAuth</em>) – Existing authentication handler for reuse</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Token revocation status</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.6)">bool</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
 <dt id="esy.auth.ESIAuthenticator.verify_access_token">
 <code class="descname">verify_access_token</code><span class="sig-paren">(</span><em>access_token</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/esy/auth.html#ESIAuthenticator.verify_access_token"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#esy.auth.ESIAuthenticator.verify_access_token" title="Permalink to this definition">¶</a></dt>
-<dd><p>Verifies the access token with the ESI and retrieves character
+<dd><p>Verifies the refresh token with the ESI and retrieves character
 information.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -377,6 +378,87 @@ information.</p>
 </table>
 </dd></dl>
 
+<dl class="method">
+<dt id="esy.auth.ESIAuthenticator.verify_authorization_code">
+<code class="descname">verify_authorization_code</code><span class="sig-paren">(</span><em>authorization_code</em>, <em>client_id</em>, <em>secret</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/esy/auth.html#ESIAuthenticator.verify_authorization_code"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#esy.auth.ESIAuthenticator.verify_authorization_code" title="Permalink to this definition">¶</a></dt>
+<dd><p>Trades an authorization code for a refresh and an access tokens from ESI</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>authorization_code</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.6)"><em>str</em></a>) – The authorization code returned from ESI</li>
+<li><strong>client_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.6)"><em>str</em></a>) – The ESI ClientID</li>
+<li><strong>secret</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.6)"><em>str</em></a>) – The ESI Secret key</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">(refresh_token, access_token)</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.6)">tuple</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<span class="target" id="module-esy.devel"></span><dl class="class">
+<dt id="esy.devel.AuthenticationHandler">
+<em class="property">class </em><code class="descclassname">esy.devel.</code><code class="descname">AuthenticationHandler</code><span class="sig-paren">(</span><em>request</em>, <em>client_address</em>, <em>server</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/esy/devel.html#AuthenticationHandler"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#esy.devel.AuthenticationHandler" title="Permalink to this definition">¶</a></dt>
+<dd><p>HTTP Request handler that pilfers the state and authorization code from an
+incoming request.</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="esy.devel.DevServer">
+<em class="property">class </em><code class="descclassname">esy.devel.</code><code class="descname">DevServer</code><span class="sig-paren">(</span><em>server_address</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/esy/devel.html#DevServer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#esy.devel.DevServer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Tiny HTTP Server used to listen for incoming redirects from ESI, so we can
+snatch the authorization code.</p>
+<dl class="method">
+<dt id="esy.devel.DevServer.run">
+<code class="descname">run</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/esy/devel.html#DevServer.run"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#esy.devel.DevServer.run" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method representing the thread’s activity.</p>
+<p>You may override this method in a subclass. The standard run() method
+invokes the callable object passed to the object’s constructor as the
+target argument, if any, with sequential and keyword arguments taken
+from the args and kwargs arguments, respectively.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="esy.devel.get_authorization_code">
+<code class="descclassname">esy.devel.</code><code class="descname">get_authorization_code</code><span class="sig-paren">(</span><em>cli_login=False</em>, <em>server_address='localhost'</em>, <em>server_port='8000'</em>, <em>client_id=None</em>, <em>callback_url='http://localhost:8000'</em>, <em>scopes=None</em>, <em>character_id=None</em>, <em>username=None</em>, <em>password=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/esy/devel.html#get_authorization_code"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#esy.devel.get_authorization_code" title="Permalink to this definition">¶</a></dt>
+<dd><p>Starts an SSO session with ESI and retrieves the authorization code.
+Optionally prompts for username and password input, and character selection.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>cli_login</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.6)"><em>bool</em></a>) – Start CLI-based authentication or just print the SSO URL.</li>
+<li><strong>server_address</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.6)"><em>str</em></a>) – The address <a class="reference internal" href="#esy.devel.DevServer" title="esy.devel.DevServer"><code class="xref py py-class docutils literal notranslate"><span class="pre">DevServer</span></code></a> is binding to.</li>
+<li><strong>server_port</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.6)"><em>str</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a>) – The port <a class="reference internal" href="#esy.devel.DevServer" title="esy.devel.DevServer"><code class="xref py py-class docutils literal notranslate"><span class="pre">DevServer</span></code></a> is listening on.</li>
+<li><strong>client_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.6)"><em>str</em></a>) – The ESI ClientID</li>
+<li><strong>callback_url</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.6)"><em>str</em></a>) – The ESI CallbackURL</li>
+<li><strong>scopes</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.6)"><em>str</em></a>) – The selected ESI scopes, as space-delimited string.</li>
+<li><strong>character_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.6)"><em>str</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a>) – Pre-selected CharacterId to authorize</li>
+<li><strong>username</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.6)"><em>str</em></a>) – EVE Online SSO username</li>
+<li><strong>password</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.6)"><em>str</em></a>) – EVE Online SSO password</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">authorization code</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.6)">str</a></p>
+</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 </div>
@@ -389,10 +471,8 @@ information.</p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="esi.html" class="btn btn-neutral float-right" title="ESI API" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
-      
-        <a href="../readme.html" class="btn btn-neutral" title="Introduction" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="esi.html" class="btn btn-neutral" title="ESI API" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -437,10 +517,7 @@ information.</p>
 
   
 
-  
-  
-    <script type="text/javascript" src="../_static/js/theme.js"></script>
-  
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
 
   <script type="text/javascript">
       jQuery(function () {

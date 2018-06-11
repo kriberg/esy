@@ -25,8 +25,7 @@
 
   
 
-  
-    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="#" />
     <link rel="search" title="Search" href="search.html" /> 
@@ -81,8 +80,8 @@
               <p class="caption"><span class="caption-text">Contents:</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="readme.html">Introduction</a></li>
-<li class="toctree-l1"><a class="reference internal" href="source/modules.html">ESY Swagger Interface</a></li>
 <li class="toctree-l1"><a class="reference internal" href="source/esi.html">ESI API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="source/modules.html">modules</a></li>
 </ul>
 
             
@@ -178,6 +177,8 @@
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="source/esi.html#Assets">Assets (built-in class)</a>
 </li>
+      <li><a href="source/modules.html#esy.devel.AuthenticationHandler">AuthenticationHandler (class in esy.devel)</a>
+</li>
   </ul></td>
 </tr></table>
 
@@ -228,6 +229,8 @@
 </li>
       <li><a href="source/esi.html#Fleets.delete_fleets_fleet_id_wings_wing_id">delete_fleets_fleet_id_wings_wing_id() (Fleets method)</a>
 </li>
+      <li><a href="source/modules.html#esy.devel.DevServer">DevServer (class in esy.devel)</a>
+</li>
       <li><a href="source/esi.html#Dogma">Dogma (built-in class)</a>
 </li>
   </ul></td>
@@ -250,10 +253,10 @@
 </li>
       <li><a href="source/modules.html#esy.exceptions.ESINotFound">ESINotFound</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="source/modules.html#esy.client.ESIPageGenerator">ESIPageGenerator (class in esy.client)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="source/modules.html#esy.client.ESIRequestsClient">ESIRequestsClient (class in esy.client)</a>
 </li>
       <li><a href="source/modules.html#esy.client.ESIResourceDecorator">ESIResourceDecorator (class in esy.client)</a>
@@ -265,6 +268,8 @@
       <li><a href="source/modules.html#module-esy.client">esy.client (module)</a>
 </li>
       <li><a href="source/modules.html#module-esy.constants">esy.constants (module)</a>
+</li>
+      <li><a href="source/modules.html#module-esy.devel">esy.devel (module)</a>
 </li>
       <li><a href="source/modules.html#module-esy.exceptions">esy.exceptions (module)</a>
 </li>
@@ -303,6 +308,8 @@
       <li><a href="source/esi.html#Alliance.get_alliances_alliance_id_icons">get_alliances_alliance_id_icons() (Alliance method)</a>
 </li>
       <li><a href="source/esi.html#Alliance.get_alliances_names">get_alliances_names() (Alliance method)</a>
+</li>
+      <li><a href="source/modules.html#esy.devel.get_authorization_code">get_authorization_code() (in module esy.devel)</a>
 </li>
       <li><a href="source/esi.html#Character.get_characters_character_id">get_characters_character_id() (Character method)</a>
 </li>
@@ -768,13 +775,15 @@
 <h2 id="R">R</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="source/modules.html#esy.auth.ESIAuthenticator.refresh_access_token">refresh_access_token() (esy.auth.ESIAuthenticator method)</a>
+      <li><a href="source/modules.html#esy.client.ESIRequestsClient.request">request() (esy.client.ESIRequestsClient method)</a>
+</li>
+      <li><a href="source/modules.html#esy.auth.ESIAuthenticator.revoke_token">revoke_token() (esy.auth.ESIAuthenticator method)</a>
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="source/modules.html#esy.client.ESIRequestsClient.request">request() (esy.client.ESIRequestsClient method)</a>
-</li>
       <li><a href="source/esi.html#Routes">Routes (built-in class)</a>
+</li>
+      <li><a href="source/modules.html#esy.devel.DevServer.run">run() (esy.devel.DevServer method)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -811,6 +820,10 @@
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="source/modules.html#esy.auth.ESIAuthenticator.verify_access_token">verify_access_token() (esy.auth.ESIAuthenticator method)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="source/modules.html#esy.auth.ESIAuthenticator.verify_authorization_code">verify_authorization_code() (esy.auth.ESIAuthenticator method)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -875,10 +888,7 @@
 
   
 
-  
-  
-    <script type="text/javascript" src="_static/js/theme.js"></script>
-  
+  <script type="text/javascript" src="_static/js/theme.js"></script>
 
   <script type="text/javascript">
       jQuery(function () {

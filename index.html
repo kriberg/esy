@@ -24,8 +24,7 @@
 
   
 
-  
-    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -81,8 +80,8 @@
               <p class="caption"><span class="caption-text">Contents:</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="readme.html">Introduction</a></li>
-<li class="toctree-l1"><a class="reference internal" href="source/modules.html">ESY Swagger Interface</a></li>
 <li class="toctree-l1"><a class="reference internal" href="source/esi.html">ESI API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="source/modules.html">modules</a></li>
 </ul>
 
             
@@ -152,13 +151,12 @@
 </div>
 <div class="section" id="introduction">
 <h1>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h1>
-<hr class="docutils" />
 <a class="reference external image-reference" href="https://travis-ci.org/kriberg/esy"><img alt="Build Status" src="https://travis-ci.org/kriberg/esy.svg?branch=master" /></a>
 <a class="reference external image-reference" href="https://coveralls.io/github/kriberg/esy?branch=master"><img alt="Coverage Status" src="https://coveralls.io/repos/github/kriberg/esy/badge.svg?branch=master" /></a>
 <a class="reference external image-reference" href="https://esy.readthedocs.io/en/latest/?badge=latest"><img alt="Documentation Status" src="https://readthedocs.org/projects/esy/badge/?version=latest" /></a>
 <p>There are many options for consuming the ESI web services. ESY aims to be an easy-to-use library with the nuts and
-bolts of dealing with an OpenAPI interface abstracted away. ESY was created to have an interface reminscient of Entity’s
-gloriously pythonic <a class="reference external" href="https://github.com/ntt/eveapi/">eveapi</a> library and to</p>
+bolts of dealing with an OpenAPI interface abstracted away.</p>
+<p>ESY is inspired by Entity’s gloriously pythonic <a class="reference external" href="https://github.com/ntt/eveapi/">eveapi</a> library.</p>
 <div class="section" id="installation">
 <h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
 <p>The latest stable version of ESY is available from PyPI:</p>
@@ -195,6 +193,8 @@ up, you can download the specification locally:</p>
 </pre></div>
 </div>
 <p>For production instances, keeping the spec in <a class="reference external" href="https://redis.io">Redis</a> or some other cache is highly recommended.</p>
+<div class="section" id="calling-esi-routes">
+<h3>Calling ESI routes<a class="headerlink" href="#calling-esi-routes" title="Permalink to this headline">¶</a></h3>
 <p>Once your client is initialized, you can fetch data:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">esy.client</span> <span class="kn">import</span> <span class="n">ESIClient</span>
 <span class="n">client</span> <span class="o">=</span> <span class="n">ESIClient</span><span class="o">.</span><span class="n">get_client</span><span class="p">(</span><span class="s1">&#39;my-user-agent&#39;</span><span class="p">)</span>
@@ -219,19 +219,164 @@ up, you can download the specification locally:</p>
  <span class="s1">&#39;ticker&#39;</span><span class="p">:</span> <span class="s1">&#39;EVOL&#39;</span><span class="p">,</span>
  <span class="s1">&#39;url&#39;</span><span class="p">:</span> <span class="s1">&#39;http://www.eve-evol.com&#39;</span><span class="p">,</span>
  <span class="s1">&#39;faction_id&#39;</span><span class="p">:</span> <span class="bp">None</span><span class="p">}</span>
-
-
-<span class="c1"># Get paginated asset list</span>
+</pre></div>
+</div>
+<p>For ESI routes which are paginated, ESY will return a <a class="reference external" href="source/modules.html#esy.client.ESIPageGenerator">ESIPageGenerator</a> which is a generator yielding the
+native data type of the route.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get paginated asset list</span>
 <span class="n">swag</span> <span class="o">=</span>  <span class="n">client</span><span class="o">.</span><span class="n">Corporation</span><span class="o">.</span><span class="n">get_corporations_corporation_id_assets</span><span class="p">(</span><span class="n">corporation_id</span><span class="o">=</span><span class="mi">144749962</span><span class="p">,</span>
                                                                   <span class="n">_token</span><span class="o">=</span><span class="s1">&#39;esi token&#39;</span><span class="p">)</span>
-<span class="c1"># Loop through the asset pages</span>
-<span class="k">for</span> <span class="n">page</span> <span class="ow">in</span> <span class="n">swag</span><span class="p">:</span>
-    <span class="k">for</span> <span class="n">asset</span> <span class="ow">in</span> <span class="n">page</span><span class="p">:</span>
+<span class="c1"># swag is an ESIPageGenerator, implementing the generator interface</span>
+<span class="c1"># Loop through it to get the asset pages</span>
+<span class="k">for</span> <span class="n">page</span> <span class="ow">in</span> <span class="n">swag</span><span class="p">:</span>  <span class="c1"># Returns a list of assets</span>
+    <span class="k">for</span> <span class="n">asset</span> <span class="ow">in</span> <span class="n">page</span><span class="p">:</span>  <span class="c1"># Asset dict</span>
        <span class="k">print</span><span class="p">(</span><span class="n">asset</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;type_id&#39;</span><span class="p">),</span>
              <span class="n">asset</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;location_id&#39;</span><span class="p">))</span>
        <span class="c1"># 22457</span>
        <span class="c1"># 16074150552</span>
 </pre></div>
+</div>
+</div>
+<div class="section" id="caching">
+<h3>Caching<a class="headerlink" href="#caching" title="Permalink to this headline">¶</a></h3>
+<p>ESY does not implement caching itself, but supports using a cache through a cache proxy object. The proxy needs
+to implement the following interface:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Cache</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">object</span><span class="p">:</span>
+        <span class="k">pass</span>
+
+    <span class="k">def</span> <span class="nf">set</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="nb">object</span><span class="p">,</span> <span class="n">cached_until</span><span class="p">:</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">):</span>
+        <span class="k">pass</span>
+
+    <span class="k">def</span> <span class="fm">__contains__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item</span><span class="p">:</span> <span class="nb">object</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="k">pass</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="authentication-and-devel-mode">
+<h3>Authentication and devel mode<a class="headerlink" href="#authentication-and-devel-mode" title="Permalink to this headline">¶</a></h3>
+<p>ESY can handle the authentication flow for you:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">esy.auth</span> <span class="kn">import</span> <span class="n">ESIAuthenticator</span>
+
+<span class="n">auth</span> <span class="o">=</span> <span class="n">ESIAuthenticator</span><span class="p">()</span>
+<span class="n">refresh_token</span><span class="p">,</span> <span class="n">access_token</span> <span class="o">=</span> <span class="n">auth</span><span class="o">.</span><span class="n">verify_authorization_code</span><span class="p">(</span><span class="s1">&#39;authorization code from esi&#39;</span><span class="p">,</span>
+                                                             <span class="s1">&#39;your client ID&#39;</span><span class="p">,</span>
+                                                             <span class="s1">&#39;your secret key&#39;</span><span class="p">)</span>
+
+<span class="n">auth</span><span class="o">.</span><span class="n">verify_access_token</span><span class="p">(</span><span class="n">access_token</span><span class="p">)</span>
+<span class="p">{</span><span class="s1">&#39;CharacterID&#39;</span><span class="p">:</span> <span class="mi">941287462</span><span class="p">,</span>
+ <span class="s1">&#39;CharacterName&#39;</span><span class="p">:</span> <span class="s1">&#39;Vittoros&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;ExpiresOn&#39;</span><span class="p">:</span> <span class="s1">&#39;2018-06-11T19:01:15.182864Z&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;Scopes&#39;</span><span class="p">:</span> <span class="s1">&#39; &#39;</span><span class="p">,</span>
+ <span class="s1">&#39;TokenType&#39;</span><span class="p">:</span> <span class="s1">&#39;Character&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;CharacterOwnerHash&#39;</span><span class="p">:</span> <span class="s1">&#39;**********&#39;</span><span class="p">}</span>
+
+<span class="n">new_access_token</span> <span class="o">=</span> <span class="n">auth</span><span class="o">.</span><span class="n">get_access_token</span><span class="p">(</span><span class="n">refresh_token</span><span class="p">,</span>
+                                         <span class="s1">&#39;your client ID&#39;</span><span class="p">,</span>
+                                         <span class="s1">&#39;your secret key&#39;</span><span class="p">)</span>
+
+<span class="n">auth</span><span class="o">.</span><span class="n">revoke_token</span><span class="p">(</span><span class="n">refresh_token</span><span class="p">,</span>
+                  <span class="s1">&#39;your client ID&#39;</span><span class="p">,</span>
+                  <span class="s1">&#39;your secret key&#39;</span><span class="p">)</span>
+
+<span class="n">auth</span><span class="o">.</span><span class="n">revoke_token</span><span class="p">(</span><span class="n">access_token</span><span class="p">,</span>
+                  <span class="s1">&#39;your client ID&#39;</span><span class="p">,</span>
+                  <span class="s1">&#39;your secret key&#39;</span><span class="p">,</span>
+                  <span class="n">token_type</span><span class="o">=</span><span class="s1">&#39;access_token&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>To help developers getting started without having to implement the entire authentication
+workflow, ESY also implements an ad-hoc web server to get you refresh tokens. You can use
+it directly in the python prompt to do some API exploration or you can use it in your tests
+to produce refresh or access tokens for testing your ESI calls.</p>
+<p>First, create a new application at <a class="reference external" href="https://developers.eveonline.com/">https://developers.eveonline.com/</a>
+with callback URL set to <a class="reference external" href="http://localhost:8000">http://localhost:8000</a> or whichever address and port you’ll be
+running the devel server.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">esy.devel</span>
+
+<span class="c1"># get_authorization_code has many parameters, but for basic usage:</span>
+
+<span class="n">auth_code</span> <span class="o">=</span> <span class="n">esy</span><span class="o">.</span><span class="n">devel</span><span class="o">.</span><span class="n">get_authorization_code</span><span class="p">(</span><span class="n">client_id</span><span class="o">=</span><span class="s1">&#39;your client ID&#39;</span><span class="p">,</span>
+                                             <span class="n">callback_url</span><span class="o">=</span><span class="s1">&#39;your callback URL&#39;</span><span class="p">,</span>
+                                             <span class="n">scopes</span><span class="o">=</span><span class="s1">&#39;your space-delimited scopes&#39;</span><span class="p">)</span>
+
+<span class="c1"># This will start the web server in the background (per-default listening on localhost:8000)</span>
+<span class="c1"># and print the login URL on stdout. After authenticating in your browser, the web server</span>
+<span class="c1"># will get redirect from the SSO with the authorization code, then return that.</span>
+
+<span class="c1"># For situations where you are not able to reach the network where you are running ESY,</span>
+<span class="c1"># you can also use CLI login:</span>
+
+<span class="n">auth_code</span> <span class="o">=</span> <span class="n">esy</span><span class="o">.</span><span class="n">devel</span><span class="o">.</span><span class="n">get_authorization_code</span><span class="p">(</span><span class="n">cli_login</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+                                             <span class="n">client_id</span><span class="o">=</span><span class="s1">&#39;your client ID&#39;</span><span class="p">,</span>
+                                             <span class="n">callback_url</span><span class="o">=</span><span class="s1">&#39;your callback URL&#39;</span><span class="p">,</span>
+                                             <span class="n">scopes</span><span class="o">=</span><span class="s1">&#39;your space-delimited scopes&#39;</span><span class="p">)</span>
+
+<span class="c1"># This will prompt for username and password, then let you pick a character.</span>
+<span class="c1"># If you are running tests, you can also supply username, password and character_id as</span>
+<span class="c1"># keyword arguments to get_authorization_code, in addition to cli_login=True. This will</span>
+<span class="c1"># automate the entire flow. Remember to revoke your tokens afterwards and for bob&#39;s sake;</span>
+<span class="c1"># don&#39;t display your username and/or password!</span>
+
+<span class="c1"># After getting the authorization code, you can get the tokens:</span>
+
+<span class="n">refresh_token</span><span class="p">,</span> <span class="n">access_token</span> <span class="o">=</span> <span class="n">esy</span><span class="o">.</span><span class="n">devel</span><span class="o">.</span><span class="n">verify_authorization_code</span><span class="p">(</span><span class="n">auth_code</span><span class="p">,</span>
+                                                                  <span class="n">client_id</span><span class="o">=</span><span class="s1">&#39;your client ID&#39;</span><span class="p">,</span>
+                                                                  <span class="n">secret_key</span><span class="o">=</span><span class="s1">&#39;your secret key&#39;</span><span class="p">)</span>
+<span class="c1"># Character info</span>
+
+<span class="n">char_info</span> <span class="o">=</span> <span class="n">esy</span><span class="o">.</span><span class="n">devel</span><span class="o">.</span><span class="n">verify_access_token</span><span class="p">(</span><span class="n">access_token</span><span class="p">)</span>
+
+<span class="c1"># Get your swag</span>
+<span class="kn">from</span> <span class="nn">esy.client</span> <span class="kn">import</span> <span class="n">ESIClient</span>
+<span class="n">client</span> <span class="o">=</span> <span class="n">ESIClient</span><span class="o">.</span><span class="n">get_client</span><span class="p">(</span><span class="s1">&#39;your-user-agent&#39;</span><span class="p">)</span>
+<span class="n">assets</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">Assets</span><span class="o">.</span><span class="n">get_characters_character_id_assets</span><span class="p">(</span>
+    <span class="n">character_id</span><span class="o">=</span><span class="n">char_info</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;CharacterId&#39;</span><span class="p">),</span> <span class="n">_token</span><span class="o">=</span><span class="n">access_token</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">page</span> <span class="ow">in</span> <span class="n">assets</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">page</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The devel mode will use parameters from environment settings, if present:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="33%" />
+<col width="33%" />
+<col width="33%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Parameter</th>
+<th class="head">Environment setting</th>
+<th class="head">Default</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>CLIENT_ID</td>
+<td>ESY_CLIENT_ID</td>
+<td>None</td>
+</tr>
+<tr class="row-odd"><td>SECRET_KEY</td>
+<td>ESY_SECRET_KEY</td>
+<td>None</td>
+</tr>
+<tr class="row-even"><td>SCOPES</td>
+<td>ESY_SCOPES</td>
+<td>None</td>
+</tr>
+<tr class="row-odd"><td>CALLBACK_URL</td>
+<td>ESY_CALLBACK_URL</td>
+<td><a class="reference external" href="http://localhost:8000">http://localhost:8000</a></td>
+</tr>
+<tr class="row-even"><td>SERVER_ADDRESS</td>
+<td>ESY_SERVER_ADDRESS</td>
+<td>localhost</td>
+</tr>
+<tr class="row-odd"><td>SERVER_PORT</td>
+<td>ESY_SERVER_PORT</td>
+<td>8000</td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 <div class="section" id="development">
@@ -241,17 +386,20 @@ an usable interface. The purpose of creating a custom wrapper of Bravado for ESI
 user friendly. Pagination is handled automatically by returning generators for any route which accepts a page
 parameter, while non-paginated data is handled in their native data type. Tokens can be set per-call, instead of
 per-client, allowing for using headers and still getting data for many tokens without the ned to reinitialize the client.</p>
+<p>The authentication flow uses <a class="reference external" href="https://github.com/requests/requests-oauthlib">requests-oauthlib</a>.</p>
 <div class="toctree-wrapper compound">
 <p class="caption"><span class="caption-text">Contents:</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="readme.html">Introduction</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="readme.html#installation">Installation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readme.html#documentation">Documentation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="readme.html#usage">Usage</a></li>
-<li class="toctree-l2"><a class="reference internal" href="readme.html#development">Development</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readme.html#usage">Usage</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="readme.html#calling-esi-routes">Calling ESI routes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="readme.html#caching">Caching</a></li>
+<li class="toctree-l3"><a class="reference internal" href="readme.html#authentication-and-devel-mode">Authentication and devel mode</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="source/modules.html">ESY Swagger Interface</a><ul class="simple">
+<li class="toctree-l2"><a class="reference internal" href="readme.html#development">Development</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="source/esi.html">ESI API</a><ul>
@@ -287,6 +435,9 @@ per-client, allowing for using headers and still getting data for many tokens wi
 <li class="toctree-l2"><a class="reference internal" href="source/esi.html#user-interface">User_Interface</a></li>
 <li class="toctree-l2"><a class="reference internal" href="source/esi.html#wallet">Wallet</a></li>
 <li class="toctree-l2"><a class="reference internal" href="source/esi.html#wars">Wars</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="source/modules.html">modules</a><ul class="simple">
 </ul>
 </li>
 </ul>
@@ -356,10 +507,7 @@ per-client, allowing for using headers and still getting data for many tokens wi
 
   
 
-  
-  
-    <script type="text/javascript" src="_static/js/theme.js"></script>
-  
+  <script type="text/javascript" src="_static/js/theme.js"></script>
 
   <script type="text/javascript">
       jQuery(function () {

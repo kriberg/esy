@@ -1,0 +1,410 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>esy.devel &mdash; ESY 1.0.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> ESY
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../readme.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../source/esi.html">ESI API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../source/modules.html">modules</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">ESY</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+        
+      <li>esy.devel</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for esy.devel</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">http.server</span> <span class="k">import</span> <span class="n">HTTPServer</span><span class="p">,</span> <span class="n">BaseHTTPRequestHandler</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">threading</span>
+<span class="kn">from</span> <span class="nn">requests_html</span> <span class="k">import</span> <span class="n">HTMLSession</span>
+<span class="kn">from</span> <span class="nn">requests</span> <span class="k">import</span> <span class="n">Request</span>
+<span class="kn">import</span> <span class="nn">random</span>
+<span class="kn">import</span> <span class="nn">string</span>
+<span class="kn">import</span> <span class="nn">getpass</span>
+<span class="kn">from</span> <span class="nn">esy.auth</span> <span class="k">import</span> <span class="n">ESIAuthenticator</span>
+<span class="kn">from</span> <span class="nn">esy.constants</span> <span class="k">import</span> <span class="n">ESI_AUTHORIZE_ENDPOINT</span>
+
+<span class="n">CLIENT_ID</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s1">&#39;ESY_CLIENT_ID&#39;</span><span class="p">)</span>
+<span class="n">SECRET_KEY</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s1">&#39;ESY_SECRET_KEY&#39;</span><span class="p">)</span>
+<span class="n">CALLBACK_URL</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s1">&#39;ESY_CALLBACK_URL&#39;</span><span class="p">,</span> <span class="s1">&#39;http://localhost:8000&#39;</span><span class="p">)</span>
+<span class="n">SERVER_ADDRESS</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s1">&#39;ESY_SERVER_ADDRESS&#39;</span><span class="p">,</span> <span class="s1">&#39;localhost&#39;</span><span class="p">)</span>
+<span class="n">SERVER_PORT</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s1">&#39;ESY_SERVER_PORT&#39;</span><span class="p">,</span> <span class="s1">&#39;8000&#39;</span><span class="p">)</span>
+<span class="n">SCOPES</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s1">&#39;ESY_SCOPES&#39;</span><span class="p">)</span>
+<span class="n">SESSION</span> <span class="o">=</span> <span class="p">{}</span>
+
+
+<div class="viewcode-block" id="AuthenticationHandler"><a class="viewcode-back" href="../../source/modules.html#esy.devel.AuthenticationHandler">[docs]</a><span class="k">class</span> <span class="nc">AuthenticationHandler</span><span class="p">(</span><span class="n">BaseHTTPRequestHandler</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    HTTP Request handler that pilfers the state and authorization code from an</span>
+<span class="sd">    incoming request.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">DEVSERVER_HTML</span> <span class="o">=</span> <span class="nb">bytes</span><span class="p">(</span><span class="s1">&#39;&lt;!DOCTYPE html&gt;&#39;</span>
+                           <span class="s1">&#39;&lt;html&gt;&#39;</span>
+                           <span class="s1">&#39;&lt;body&gt;&#39;</span>
+                           <span class="s1">&#39;&lt;p&gt;Authentication complete, you can close this &#39;</span>
+                           <span class="s1">&#39;window now.&lt;/p&gt;&#39;</span>
+                           <span class="s1">&#39;&lt;/body&gt;&#39;</span>
+                           <span class="s1">&#39;&lt;/html&gt;&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">do_GET</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># First split for the last /, then strip &#39;?&#39;, then split by &#39;&amp;&#39;</span>
+        <span class="n">params</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">:]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;&amp;&#39;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">param</span> <span class="ow">in</span> <span class="n">params</span><span class="p">:</span>
+            <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="o">=</span> <span class="n">param</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;=&#39;</span><span class="p">)</span>
+            <span class="n">SESSION</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">send_response</span><span class="p">(</span><span class="mi">200</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">end_headers</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">DEVSERVER_HTML</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="DevServer"><a class="viewcode-back" href="../../source/modules.html#esy.devel.DevServer">[docs]</a><span class="k">class</span> <span class="nc">DevServer</span><span class="p">(</span><span class="n">HTTPServer</span><span class="p">,</span> <span class="n">threading</span><span class="o">.</span><span class="n">Thread</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Tiny HTTP Server used to listen for incoming redirects from ESI, so we can</span>
+<span class="sd">    snatch the authorization code.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">server_address</span><span class="p">):</span>
+        <span class="n">HTTPServer</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">server_address</span><span class="p">,</span> <span class="n">AuthenticationHandler</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+        <span class="n">threading</span><span class="o">.</span><span class="n">Thread</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+
+<div class="viewcode-block" id="DevServer.run"><a class="viewcode-back" href="../../source/modules.html#esy.devel.DevServer.run">[docs]</a>    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">handle_request</span><span class="p">()</span></div></div>
+
+
+<div class="viewcode-block" id="get_authorization_code"><a class="viewcode-back" href="../../source/modules.html#esy.devel.get_authorization_code">[docs]</a><span class="k">def</span> <span class="nf">get_authorization_code</span><span class="p">(</span><span class="n">cli_login</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">server_address</span><span class="o">=</span><span class="n">SERVER_ADDRESS</span><span class="p">,</span>
+                           <span class="n">server_port</span><span class="o">=</span><span class="n">SERVER_PORT</span><span class="p">,</span> <span class="n">client_id</span><span class="o">=</span><span class="n">CLIENT_ID</span><span class="p">,</span>
+                           <span class="n">callback_url</span><span class="o">=</span><span class="n">CALLBACK_URL</span><span class="p">,</span> <span class="n">scopes</span><span class="o">=</span><span class="n">SCOPES</span><span class="p">,</span>
+                           <span class="n">character_id</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">username</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">password</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Starts an SSO session with ESI and retrieves the authorization code.</span>
+<span class="sd">    Optionally prompts for username and password input, and character selection.</span>
+
+<span class="sd">    :param cli_login: Start CLI-based authentication or just print the SSO URL.</span>
+<span class="sd">    :type cli_login: bool</span>
+<span class="sd">    :param server_address: The address :class:`DevServer` is binding to.</span>
+<span class="sd">    :type server_address: str</span>
+<span class="sd">    :param server_port: The port :class:`DevServer` is listening on.</span>
+<span class="sd">    :type server_port: str or int</span>
+<span class="sd">    :param client_id: The ESI ClientID</span>
+<span class="sd">    :type client_id: str</span>
+<span class="sd">    :param callback_url: The ESI CallbackURL</span>
+<span class="sd">    :type callback_url: str</span>
+<span class="sd">    :param scopes: The selected ESI scopes, as space-delimited string.</span>
+<span class="sd">    :type scopes: str</span>
+<span class="sd">    :param character_id: Pre-selected CharacterId to authorize</span>
+<span class="sd">    :type character_id: str or int</span>
+<span class="sd">    :param username: EVE Online SSO username</span>
+<span class="sd">    :type username: str</span>
+<span class="sd">    :param password: EVE Online SSO password</span>
+<span class="sd">    :type password: str</span>
+<span class="sd">    :return: authorization code</span>
+<span class="sd">    :rtype: str</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">state</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">choices</span><span class="p">(</span><span class="n">string</span><span class="o">.</span><span class="n">ascii_lowercase</span> <span class="o">+</span> <span class="n">string</span><span class="o">.</span><span class="n">digits</span><span class="p">,</span>
+                                   <span class="n">k</span><span class="o">=</span><span class="mi">16</span><span class="p">))</span>
+    <span class="n">dev_server</span> <span class="o">=</span> <span class="n">DevServer</span><span class="p">((</span><span class="n">server_address</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">server_port</span><span class="p">)))</span>
+    <span class="n">dev_server</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">cli_login</span><span class="p">:</span>
+        <span class="n">_do_cli_login</span><span class="p">(</span><span class="n">callback_url</span><span class="p">,</span> <span class="n">client_id</span><span class="p">,</span> <span class="n">scopes</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">username</span><span class="p">,</span>
+                      <span class="n">password</span><span class="p">,</span> <span class="n">character_id</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">request</span> <span class="o">=</span> <span class="n">Request</span><span class="p">(</span><span class="s1">&#39;GET&#39;</span><span class="p">,</span> <span class="n">ESI_AUTHORIZE_ENDPOINT</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+            <span class="s1">&#39;response_type&#39;</span><span class="p">:</span> <span class="s1">&#39;code&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;redirect_uri&#39;</span><span class="p">:</span> <span class="n">callback_url</span><span class="p">,</span>
+            <span class="s1">&#39;client_id&#39;</span><span class="p">:</span> <span class="n">client_id</span><span class="p">,</span>
+            <span class="s1">&#39;scope&#39;</span><span class="p">:</span> <span class="n">scopes</span><span class="p">,</span>
+            <span class="s1">&#39;state&#39;</span><span class="p">:</span> <span class="n">state</span>
+        <span class="p">})</span><span class="o">.</span><span class="n">prepare</span><span class="p">()</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Please complete the EVE SSO authentication: </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+            <span class="n">request</span><span class="o">.</span><span class="n">url</span><span class="p">))</span>
+
+    <span class="n">dev_server</span><span class="o">.</span><span class="n">join</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">SESSION</span><span class="p">[</span><span class="s1">&#39;state&#39;</span><span class="p">]</span> <span class="o">!=</span> <span class="n">state</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;State &quot;</span><span class="si">{}</span><span class="s1">&quot; does not match our original state &quot;</span><span class="si">{}</span><span class="s1">&quot;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+            <span class="n">SESSION</span><span class="p">[</span><span class="s1">&#39;state&#39;</span><span class="p">],</span>
+            <span class="n">state</span><span class="p">))</span>
+        <span class="k">return</span> <span class="kc">None</span>
+
+    <span class="k">return</span> <span class="n">SESSION</span><span class="p">[</span><span class="s1">&#39;code&#39;</span><span class="p">]</span></div>
+
+
+<span class="k">def</span> <span class="nf">_do_cli_login</span><span class="p">(</span><span class="n">callback_url</span><span class="p">,</span> <span class="n">client_id</span><span class="p">,</span> <span class="n">scopes</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">username</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                  <span class="n">password</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">character_id</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    My Little Browser.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">session</span> <span class="o">=</span> <span class="n">HTMLSession</span><span class="p">()</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">ESI_AUTHORIZE_ENDPOINT</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+        <span class="s1">&#39;response_type&#39;</span><span class="p">:</span> <span class="s1">&#39;code&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;redirect_uri&#39;</span><span class="p">:</span> <span class="n">callback_url</span><span class="p">,</span>
+        <span class="s1">&#39;client_id&#39;</span><span class="p">:</span> <span class="n">client_id</span><span class="p">,</span>
+        <span class="s1">&#39;scope&#39;</span><span class="p">:</span> <span class="n">scopes</span><span class="p">,</span>
+        <span class="s1">&#39;state&#39;</span><span class="p">:</span> <span class="n">state</span>
+    <span class="p">})</span>
+    <span class="n">response</span><span class="o">.</span><span class="n">raise_for_status</span><span class="p">()</span>
+    <span class="n">post_url</span> <span class="o">=</span> <span class="s1">&#39;/&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">ESI_AUTHORIZE_ENDPOINT</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)[:</span><span class="mi">3</span><span class="p">]</span> <span class="o">+</span>
+                        <span class="p">[</span><span class="n">response</span><span class="o">.</span><span class="n">html</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;form&#39;</span><span class="p">,</span>
+                                            <span class="n">first</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">attrs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;action&#39;</span><span class="p">)])</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">all</span><span class="p">((</span><span class="n">username</span><span class="p">,</span> <span class="n">password</span><span class="p">)):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Logging in to EVE Online&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">username</span><span class="p">:</span>
+        <span class="n">username</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s1">&#39;Username: &#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">password</span><span class="p">:</span>
+        <span class="n">password</span> <span class="o">=</span> <span class="n">getpass</span><span class="o">.</span><span class="n">getpass</span><span class="p">(</span><span class="s1">&#39;Password: &#39;</span><span class="p">)</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">post_url</span><span class="p">,</span>
+                                     <span class="n">data</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;UserName&#39;</span><span class="p">:</span> <span class="n">username</span><span class="p">,</span>
+                                           <span class="s1">&#39;Password&#39;</span><span class="p">:</span> <span class="n">password</span><span class="p">})</span>
+    <span class="n">response</span><span class="o">.</span><span class="n">raise_for_status</span><span class="p">()</span>
+    <span class="c1"># Fetch the input values from the response and put them into the data we</span>
+    <span class="c1"># will send back. Most of these are identical, but never know what funk</span>
+    <span class="c1"># will ensue.</span>
+    <span class="n">post_data</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">input_name</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">&#39;ClientIdentifier&#39;</span><span class="p">,</span> <span class="s1">&#39;RedirectUri&#39;</span><span class="p">,</span> <span class="s1">&#39;State&#39;</span><span class="p">,</span> <span class="s1">&#39;Scope&#39;</span><span class="p">,</span>
+                       <span class="s1">&#39;ResponseType&#39;</span><span class="p">,</span> <span class="s1">&#39;__RequestVerificationToken&#39;</span><span class="p">):</span>
+        <span class="n">element</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">html</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;input[name=&quot;</span><span class="si">{}</span><span class="s1">&quot;]&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">input_name</span><span class="p">),</span>
+                                     <span class="n">first</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">post_data</span><span class="p">[</span><span class="n">input_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">element</span><span class="o">.</span><span class="n">attrs</span><span class="p">[</span><span class="s1">&#39;value&#39;</span><span class="p">]</span>
+
+    <span class="c1"># Get the list of characters from the selection box and get the user to</span>
+    <span class="c1"># choose</span>
+    <span class="n">selection</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">html</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;select[name=&quot;CharacterId&quot;] option&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">character_id</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">post_data</span><span class="p">[</span><span class="s1">&#39;CharacterId&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">character_id</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>  <span class="c1"># pragma: nocover</span>
+        <span class="n">choices</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">option</span> <span class="ow">in</span> <span class="n">selection</span><span class="p">:</span>
+            <span class="n">value</span> <span class="o">=</span> <span class="n">option</span><span class="o">.</span><span class="n">attrs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;value&#39;</span><span class="p">)</span>
+            <span class="n">choices</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{}</span><span class="s1">. </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">choices</span><span class="p">),</span> <span class="n">option</span><span class="o">.</span><span class="n">text</span><span class="p">))</span>
+
+        <span class="k">while</span> <span class="s1">&#39;CharacterId&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">post_data</span><span class="p">:</span>
+            <span class="n">choice</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s1">&#39;Chose character: &#39;</span><span class="p">)</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">post_data</span><span class="p">[</span><span class="s1">&#39;CharacterId&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">choices</span><span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">choice</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span>
+                <span class="k">break</span>
+            <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Invalid choice&#39;</span><span class="p">)</span>
+            <span class="k">except</span> <span class="ne">IndexError</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Invalid choice&#39;</span><span class="p">)</span>
+
+    <span class="c1"># Send the request and wait for the redirect to our local http server</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">ESI_AUTHORIZE_ENDPOINT</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">post_data</span><span class="p">)</span>
+    <span class="n">response</span><span class="o">.</span><span class="n">raise_for_status</span><span class="p">()</span>
+
+
+<span class="k">def</span> <span class="nf">verify_authorization_code</span><span class="p">(</span><span class="n">authorization_code</span><span class="p">,</span> <span class="n">client_id</span><span class="o">=</span><span class="n">CLIENT_ID</span><span class="p">,</span>
+                              <span class="n">secret_key</span><span class="o">=</span><span class="n">SECRET_KEY</span><span class="p">):</span>
+    <span class="n">authenticator</span> <span class="o">=</span> <span class="n">ESIAuthenticator</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">authenticator</span><span class="o">.</span><span class="n">verify_authorization_code</span><span class="p">(</span><span class="n">authorization_code</span><span class="p">,</span>
+                                                   <span class="n">client_id</span><span class="p">,</span>
+                                                   <span class="n">secret_key</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">verify_access_token</span><span class="p">(</span><span class="n">access_token</span><span class="p">):</span>
+    <span class="n">authenticator</span> <span class="o">=</span> <span class="n">ESIAuthenticator</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">authenticator</span><span class="o">.</span><span class="n">verify_access_token</span><span class="p">(</span><span class="n">access_token</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">get_access_token</span><span class="p">(</span><span class="n">refresh_token</span><span class="p">,</span> <span class="n">client_id</span><span class="o">=</span><span class="n">CLIENT_ID</span><span class="p">,</span>
+                     <span class="n">secret_key</span><span class="o">=</span><span class="n">SECRET_KEY</span><span class="p">):</span>
+    <span class="n">authenticator</span> <span class="o">=</span> <span class="n">ESIAuthenticator</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">authenticator</span><span class="o">.</span><span class="n">get_access_token</span><span class="p">(</span><span class="n">refresh_token</span><span class="p">,</span>
+                                          <span class="n">client_id</span><span class="p">,</span>
+                                          <span class="n">secret_key</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">revoke_token</span><span class="p">(</span><span class="n">token</span><span class="p">,</span> <span class="n">token_type</span><span class="p">,</span> <span class="n">client_id</span><span class="o">=</span><span class="n">CLIENT_ID</span><span class="p">,</span> <span class="n">secret_key</span><span class="o">=</span><span class="n">SECRET_KEY</span><span class="p">):</span>
+    <span class="n">authenticator</span> <span class="o">=</span> <span class="n">ESIAuthenticator</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">authenticator</span><span class="o">.</span><span class="n">revoke_token</span><span class="p">(</span><span class="n">token</span><span class="p">,</span> <span class="n">token_type</span><span class="o">=</span><span class="n">token_type</span><span class="p">,</span>
+                                      <span class="n">client_id</span><span class="o">=</span><span class="n">client_id</span><span class="p">,</span> <span class="n">secret</span><span class="o">=</span><span class="n">secret_key</span><span class="p">)</span>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Kristian Berg.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'1.0.0',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+
+  
+
+  <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

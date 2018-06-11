@@ -24,8 +24,7 @@
 
   
 
-  
-    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" /> 
@@ -80,8 +79,8 @@
               <p class="caption"><span class="caption-text">Contents:</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../readme.html">Introduction</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../source/modules.html">ESY Swagger Interface</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../source/esi.html">ESI API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../source/modules.html">modules</a></li>
 </ul>
 
             
@@ -148,27 +147,35 @@
 <span></span><span class="kn">import</span> <span class="nn">requests</span>
 <span class="kn">from</span> <span class="nn">requests.auth</span> <span class="k">import</span> <span class="n">HTTPBasicAuth</span>
 <span class="kn">from</span> <span class="nn">requests_oauthlib</span> <span class="k">import</span> <span class="n">OAuth2Session</span>
-<span class="kn">from</span> <span class="nn">.constants</span> <span class="k">import</span> <span class="n">ESI_ACCESS_TOKEN_ENDPOINT</span><span class="p">,</span> <span class="n">ESI_TOKEN_VERIFY_ENDPOINT</span>
+<span class="kn">from</span> <span class="nn">.constants</span> <span class="k">import</span> <span class="n">ESI_ACCESS_TOKEN_ENDPOINT</span><span class="p">,</span> <span class="n">ESI_TOKEN_VERIFY_ENDPOINT</span><span class="p">,</span> \
+    <span class="n">ESI_REVOKE_TOKEN_ENDPOINT</span>
 
 
 <div class="viewcode-block" id="ESIAuthenticator"><a class="viewcode-back" href="../../source/modules.html#esy.auth.ESIAuthenticator">[docs]</a><span class="k">class</span> <span class="nc">ESIAuthenticator</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Handles ESI token authentication and verification.</span>
+<span class="sd">    Handles ESI token authentication and verification process.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">access_token_endpoint</span><span class="o">=</span><span class="n">ESI_ACCESS_TOKEN_ENDPOINT</span><span class="p">,</span>
-                 <span class="n">token_verify_endpoint</span><span class="o">=</span><span class="n">ESI_TOKEN_VERIFY_ENDPOINT</span><span class="p">):</span>
+                 <span class="n">token_verify_endpoint</span><span class="o">=</span><span class="n">ESI_TOKEN_VERIFY_ENDPOINT</span><span class="p">,</span>
+                 <span class="n">revoke_token_endpoint</span><span class="o">=</span><span class="n">ESI_REVOKE_TOKEN_ENDPOINT</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Creates a handler for ESI authentication and verification.</span>
 
-<span class="sd">        :param access_token_endpoint:</span>
-<span class="sd">        :param token_verify_endpoint:</span>
+<span class="sd">        :param access_token_endpoint: URL to the ESI access token endpoint.</span>
+<span class="sd">        :type access_token_endpoint: str</span>
+<span class="sd">        :param token_verify_endpoint: URL to the ESI token verify endpoint.</span>
+<span class="sd">        :type token_verify_endpoint: str</span>
+<span class="sd">        :param revoke_token_endpoint: URL to the ESI revoke token endpoint.</span>
+<span class="sd">        :type revoke_token_endpoint: str</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">access_token_endpoint</span> <span class="o">=</span> <span class="n">access_token_endpoint</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">token_verify_endpoint</span> <span class="o">=</span> <span class="n">token_verify_endpoint</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">revoke_token_endpoint</span> <span class="o">=</span> <span class="n">revoke_token_endpoint</span>
 
-<div class="viewcode-block" id="ESIAuthenticator.get_access_token"><a class="viewcode-back" href="../../source/modules.html#esy.auth.ESIAuthenticator.get_access_token">[docs]</a>    <span class="k">def</span> <span class="nf">get_access_token</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">authorization_code</span><span class="p">,</span> <span class="n">client_id</span><span class="p">,</span> <span class="n">secret</span><span class="p">):</span>
+<div class="viewcode-block" id="ESIAuthenticator.verify_authorization_code"><a class="viewcode-back" href="../../source/modules.html#esy.auth.ESIAuthenticator.verify_authorization_code">[docs]</a>    <span class="k">def</span> <span class="nf">verify_authorization_code</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">authorization_code</span><span class="p">,</span> <span class="n">client_id</span><span class="p">,</span> <span class="n">secret</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Trades an authorization code for an access token from ESI</span>
+<span class="sd">        Trades an authorization code for a refresh and an access tokens from ESI</span>
 
 <span class="sd">        :param authorization_code: The authorization code returned from ESI</span>
 <span class="sd">        :type authorization_code: str</span>
@@ -176,8 +183,8 @@
 <span class="sd">        :type client_id: str</span>
 <span class="sd">        :param secret: The ESI Secret key</span>
 <span class="sd">        :type secret: str</span>
-<span class="sd">        :return: ESI access token</span>
-<span class="sd">        :rtype: str</span>
+<span class="sd">        :return: (refresh_token, access_token)</span>
+<span class="sd">        :rtype: tuple</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">session</span> <span class="o">=</span> <span class="n">OAuth2Session</span><span class="p">(</span><span class="n">client_id</span><span class="p">)</span>
         <span class="n">auth</span> <span class="o">=</span> <span class="n">HTTPBasicAuth</span><span class="p">(</span><span class="n">client_id</span><span class="p">,</span>
@@ -185,11 +192,11 @@
         <span class="n">resp</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">fetch_token</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">access_token_endpoint</span><span class="p">,</span>
                                    <span class="n">code</span><span class="o">=</span><span class="n">authorization_code</span><span class="p">,</span>
                                    <span class="n">auth</span><span class="o">=</span><span class="n">auth</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">resp</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;access_token&#39;</span><span class="p">)</span></div>
+        <span class="k">return</span> <span class="n">resp</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;refresh_token&#39;</span><span class="p">),</span> <span class="n">resp</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;access_token&#39;</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="ESIAuthenticator.verify_access_token"><a class="viewcode-back" href="../../source/modules.html#esy.auth.ESIAuthenticator.verify_access_token">[docs]</a>    <span class="k">def</span> <span class="nf">verify_access_token</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">access_token</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Verifies the access token with the ESI and retrieves character</span>
+<span class="sd">        Verifies the refresh token with the ESI and retrieves character</span>
 <span class="sd">        information.</span>
 
 <span class="sd">        :param access_token: ESI access token</span>
@@ -205,11 +212,12 @@
             <span class="n">resp</span><span class="o">.</span><span class="n">raise_for_status</span><span class="p">()</span>
             <span class="k">return</span> <span class="n">resp</span><span class="o">.</span><span class="n">json</span><span class="p">()</span></div>
 
-<div class="viewcode-block" id="ESIAuthenticator.refresh_access_token"><a class="viewcode-back" href="../../source/modules.html#esy.auth.ESIAuthenticator.refresh_access_token">[docs]</a>    <span class="k">def</span> <span class="nf">refresh_access_token</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">refresh_token</span><span class="p">,</span> <span class="n">client_id</span><span class="p">,</span> <span class="n">secret</span><span class="p">,</span>
-                             <span class="n">session</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">auth</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="ESIAuthenticator.get_access_token"><a class="viewcode-back" href="../../source/modules.html#esy.auth.ESIAuthenticator.get_access_token">[docs]</a>    <span class="k">def</span> <span class="nf">get_access_token</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">refresh_token</span><span class="p">,</span> <span class="n">client_id</span><span class="p">,</span> <span class="n">secret</span><span class="p">,</span>
+                         <span class="n">session</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">auth</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get a new access token using a refresh token</span>
 
-<span class="sd">        :param refresh_token: Current token</span>
+<span class="sd">        :param refresh_token: The refresh token</span>
 <span class="sd">        :type refresh_token: str</span>
 <span class="sd">        :param client_id: The ESI ClientID</span>
 <span class="sd">        :type client_id: str</span>
@@ -230,7 +238,38 @@
         <span class="n">resp</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">refresh_token</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">access_token_endpoint</span><span class="p">,</span>
                                      <span class="n">refresh_token</span><span class="o">=</span><span class="n">refresh_token</span><span class="p">,</span>
                                      <span class="n">auth</span><span class="o">=</span><span class="n">auth</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">resp</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;access_token&#39;</span><span class="p">)</span></div></div>
+        <span class="k">return</span> <span class="n">resp</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;access_token&#39;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="ESIAuthenticator.revoke_token"><a class="viewcode-back" href="../../source/modules.html#esy.auth.ESIAuthenticator.revoke_token">[docs]</a>    <span class="k">def</span> <span class="nf">revoke_token</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">token</span><span class="p">,</span> <span class="n">client_id</span><span class="p">,</span> <span class="n">secret</span><span class="p">,</span>
+                     <span class="n">token_type</span><span class="o">=</span><span class="s1">&#39;refresh_token&#39;</span><span class="p">,</span> <span class="n">session</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">auth</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Revoke refresh or access tokens.</span>
+
+<span class="sd">        :param token: The token to revoke</span>
+<span class="sd">        :type token: str</span>
+<span class="sd">        :param client_id: The ESI ClientID</span>
+<span class="sd">        :type client_id: str</span>
+<span class="sd">        :param secret: The ESI Secret key</span>
+<span class="sd">        :type secret: str</span>
+<span class="sd">        :param session: Existing session for reuse</span>
+<span class="sd">        :type session: OAuth2Session</span>
+<span class="sd">        :param auth: Existing authentication handler for reuse</span>
+<span class="sd">        :type auth: HTTPBasicAuth</span>
+<span class="sd">        :return: Token revocation status</span>
+<span class="sd">        :rtype: bool</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">session</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">session</span> <span class="o">=</span> <span class="n">OAuth2Session</span><span class="p">(</span><span class="n">client_id</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">auth</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">auth</span> <span class="o">=</span> <span class="n">HTTPBasicAuth</span><span class="p">(</span><span class="n">client_id</span><span class="p">,</span>
+                                 <span class="n">secret</span><span class="p">)</span>
+        <span class="n">resp</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">revoke_token_endpoint</span><span class="p">,</span>
+                            <span class="n">data</span><span class="o">=</span><span class="p">{</span>
+                                <span class="s1">&#39;token_type&#39;</span><span class="p">:</span> <span class="n">token_type</span><span class="p">,</span>
+                                <span class="s1">&#39;token&#39;</span><span class="p">:</span> <span class="n">token</span>
+                            <span class="p">},</span>
+                            <span class="n">auth</span><span class="o">=</span><span class="n">auth</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">resp</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">200</span></div></div>
 </pre></div>
 
            </div>
@@ -279,10 +318,7 @@
 
   
 
-  
-  
-    <script type="text/javascript" src="../../_static/js/theme.js"></script>
-  
+  <script type="text/javascript" src="../../_static/js/theme.js"></script>
 
   <script type="text/javascript">
       jQuery(function () {
