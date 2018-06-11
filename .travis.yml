@@ -6,7 +6,7 @@ install:
   - pip install coveralls
 script:
   - py.test --doctest-modules esy -v --cov esy --cov-report term-missing tests --cov-config=.coveragerc-travis
-  - cd docs; make html linkcheck
+  - cd docs; make html
 after_success:
   - coveralls
 deploy:
