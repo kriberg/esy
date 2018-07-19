@@ -36,7 +36,7 @@ about = {'__version__': __version__}
 REQUIRED = [
     'requests',
     'requests-oauthlib',
-    'requests-html'
+    'requests-html',
     'bravado',
     'swagger-spec-validator',
     'bravado-core',
