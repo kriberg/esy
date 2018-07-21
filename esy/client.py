@@ -4,9 +4,9 @@ import logging
 import pytz
 from datetime import datetime
 from email.utils import parsedate
+from bravado.config import RequestConfig
 from bravado.client import SwaggerClient, ResourceDecorator, \
-    CallableOperation, warn_for_deprecated_op, construct_request, \
-    REQUEST_OPTIONS_DEFAULTS
+    CallableOperation, warn_for_deprecated_op, construct_request
 from bravado.http_future import HttpFuture
 from bravado.requests_client import RequestsClient, RequestsFutureAdapter, \
     RequestsResponseAdapter
@@ -41,9 +41,9 @@ class ESICallableOperation(CallableOperation):
         warn_for_deprecated_op(self.operation)
 
         # Apply request_options defaults
-        request_options = dict(
-            REQUEST_OPTIONS_DEFAULTS,
-            **(op_kwargs.pop('_request_options', {})))
+        request_options = op_kwargs.pop('_request_options', {})
+        request_config = RequestConfig(request_options,
+                                       also_return_response_default=True)
 
         request_params = construct_request(
             self.operation, request_options, **op_kwargs)
@@ -63,7 +63,7 @@ class ESICallableOperation(CallableOperation):
         return http_client.request(
             request_params,
             operation=self.operation,
-            response_callbacks=request_options['response_callbacks'],
+            request_config=request_config,
             authorization_token=_token)
 
 
@@ -72,11 +72,12 @@ class ESIPageGenerator(object):
     Generator for ESI API calls.
     """
     def __init__(self, requests_future, requestsresponse_adapter, operation,
-                 response_callbacks, cache=None):
+                 response_callbacks, request_config, cache=None):
         self.requests_future = requests_future
         self.requestsresponse_adapter = requestsresponse_adapter
         self.operation = operation
         self.response_callbacks = response_callbacks
+        self.request_config = request_config
         self.page = 1
         self.num_pages = 1
         self.stop = False
@@ -102,9 +103,8 @@ class ESIPageGenerator(object):
     def _send(self):
         return HttpFuture(self.requests_future,
                           self.requestsresponse_adapter,
-                          self.operation,
-                          self.response_callbacks,
-                          also_return_response=True).result()
+                          operation=self.operation,
+                          request_config=self.request_config).result()
 
     def result(self):
         if self.cache is not None:
@@ -166,7 +166,7 @@ class ESIRequestsClient(RequestsClient):
         self.cache = cache
 
     def request(self, request_params, operation=None, response_callbacks=None,
-                authorization_token=None):
+                request_config=None, authorization_token=None):
         sanitized_params, misc_options = self.separate_params(request_params)
         session = requests.Session()
         if authorization_token:
@@ -188,12 +188,14 @@ class ESIRequestsClient(RequestsClient):
                                     RequestsResponseAdapter,
                                     operation,
                                     response_callbacks,
+                                    request_config=request_config,
                                     cache=self.cache)
         else:
             return ESIPageGenerator(requests_future,
                                     RequestsResponseAdapter,
                                     operation,
                                     response_callbacks,
+                                    request_config=request_config,
                                     cache=self.cache).get()
 
 

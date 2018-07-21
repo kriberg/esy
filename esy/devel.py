@@ -138,9 +138,13 @@ def _do_cli_login(callback_url, client_id, scopes, state, username=None,
         username = input('Username: ')
     if not password:
         password = getpass.getpass('Password: ')
+    req_token = response.html.find('input[name="__RequestVerificationToken"]',
+                                   first=True).attrs.get('value')
     response = response.session.post(post_url,
                                      data={'UserName': username,
-                                           'Password': password})
+                                           'Password': password,
+                                           '__RequestVerificationToken':
+                                               req_token})
     response.raise_for_status()
     # Fetch the input values from the response and put them into the data we
     # will send back. Most of these are identical, but never know what funk
