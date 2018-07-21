@@ -279,27 +279,6 @@
 </tbody>
 </table>
 </div></blockquote>
-<dl class="method">
-<dt id="Alliance.get_alliances_names">
-<code class="descname">get_alliances_names</code><span class="sig-paren">(</span><em>alliance_ids=None</em><span class="sig-paren">)</span><a class="headerlink" href="#Alliance.get_alliances_names" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<p>Get alliance names</p>
-<blockquote>
-<div><table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name" colspan="2">param list alliance_ids:</th></tr>
-<tr class="field-odd field"><td>&#160;</td><td class="field-body">A comma separated list of alliance IDs</td>
-</tr>
-<tr class="field-even field"><th class="field-name">return:</th><td class="field-body">List of id/name associations</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">rtype:</th><td class="field-body">list</td>
-</tr>
-</tbody>
-</table>
-</div></blockquote>
 </dd></dl>
 
 </div>
@@ -994,27 +973,6 @@
 <tr class="field-odd field"><th class="field-name">return:</th><td class="field-body">A list of titles</td>
 </tr>
 <tr class="field-even field"><th class="field-name">rtype:</th><td class="field-body">list</td>
-</tr>
-</tbody>
-</table>
-</div></blockquote>
-<dl class="method">
-<dt id="Character.get_characters_names">
-<code class="descname">get_characters_names</code><span class="sig-paren">(</span><em>character_ids=None</em><span class="sig-paren">)</span><a class="headerlink" href="#Character.get_characters_names" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<p>Get character names</p>
-<blockquote>
-<div><table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name" colspan="2">param list character_ids:</th></tr>
-<tr class="field-odd field"><td>&#160;</td><td class="field-body">A comma separated list of character IDs</td>
-</tr>
-<tr class="field-even field"><th class="field-name">return:</th><td class="field-body">List of id/name associations</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">rtype:</th><td class="field-body">list</td>
 </tr>
 </tbody>
 </table>
@@ -1850,57 +1808,6 @@
 </table>
 </div></blockquote>
 <dl class="method">
-<dt id="Corporation.get_corporations_corporation_id_outposts">
-<code class="descname">get_corporations_corporation_id_outposts</code><span class="sig-paren">(</span><em>corporation_id=None</em>, <em>_token=None</em><span class="sig-paren">)</span><a class="headerlink" href="#Corporation.get_corporations_corporation_id_outposts" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<p>Get corporation outposts</p>
-<blockquote>
-<div><table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name" colspan="2">param int corporation_id:</th></tr>
-<tr class="field-odd field"><td>&#160;</td><td class="field-body">An EVE corporation ID</td>
-</tr>
-<tr class="field-even field"><th class="field-name" colspan="2">param str _token:</th></tr>
-<tr class="field-even field"><td>&#160;</td><td class="field-body">ESI authorization token</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">return:</th><td class="field-body">List of corporation outpost IDs</td>
-</tr>
-<tr class="field-even field"><th class="field-name">rtype:</th><td class="field-body"><a class="reference internal" href="modules.html#esy.client.ESIPageGenerator" title="esy.client.ESIPageGenerator"><code class="xref py py-class docutils literal notranslate"><span class="pre">ESIPageGenerator</span></code></a> list</td>
-</tr>
-</tbody>
-</table>
-</div></blockquote>
-<dl class="method">
-<dt id="Corporation.get_corporations_corporation_id_outposts_outpost_id">
-<code class="descname">get_corporations_corporation_id_outposts_outpost_id</code><span class="sig-paren">(</span><em>corporation_id=None</em>, <em>outpost_id=None</em>, <em>_token=None</em><span class="sig-paren">)</span><a class="headerlink" href="#Corporation.get_corporations_corporation_id_outposts_outpost_id" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<p>Get corporation outpost details</p>
-<blockquote>
-<div><table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name" colspan="2">param int corporation_id:</th></tr>
-<tr class="field-odd field"><td>&#160;</td><td class="field-body">An EVE corporation ID</td>
-</tr>
-<tr class="field-even field"><th class="field-name" colspan="2">param int outpost_id:</th></tr>
-<tr class="field-even field"><td>&#160;</td><td class="field-body">A station (outpost) ID</td>
-</tr>
-<tr class="field-odd field"><th class="field-name" colspan="2">param str _token:</th></tr>
-<tr class="field-odd field"><td>&#160;</td><td class="field-body">ESI authorization token</td>
-</tr>
-<tr class="field-even field"><th class="field-name">return:</th><td class="field-body">Details about the given outpost</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">rtype:</th><td class="field-body">dict</td>
-</tr>
-</tbody>
-</table>
-</div></blockquote>
-<dl class="method">
 <dt id="Corporation.get_corporations_corporation_id_roles">
 <code class="descname">get_corporations_corporation_id_roles</code><span class="sig-paren">(</span><em>corporation_id=None</em>, <em>_token=None</em><span class="sig-paren">)</span><a class="headerlink" href="#Corporation.get_corporations_corporation_id_roles" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
@@ -2100,27 +2007,6 @@
 <tr class="field-odd field"><th class="field-name">return:</th><td class="field-body">A list of titles</td>
 </tr>
 <tr class="field-even field"><th class="field-name">rtype:</th><td class="field-body">list</td>
-</tr>
-</tbody>
-</table>
-</div></blockquote>
-<dl class="method">
-<dt id="Corporation.get_corporations_names">
-<code class="descname">get_corporations_names</code><span class="sig-paren">(</span><em>corporation_ids=None</em><span class="sig-paren">)</span><a class="headerlink" href="#Corporation.get_corporations_names" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<p>Get corporation names</p>
-<blockquote>
-<div><table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name" colspan="2">param list corporation_ids:</th></tr>
-<tr class="field-odd field"><td>&#160;</td><td class="field-body">A comma separated list of corporation IDs</td>
-</tr>
-<tr class="field-even field"><th class="field-name">return:</th><td class="field-body">List of id/name associations</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">rtype:</th><td class="field-body">list</td>
 </tr>
 </tbody>
 </table>

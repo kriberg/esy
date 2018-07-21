@@ -150,9 +150,9 @@
 <span class="kn">import</span> <span class="nn">pytz</span>
 <span class="kn">from</span> <span class="nn">datetime</span> <span class="k">import</span> <span class="n">datetime</span>
 <span class="kn">from</span> <span class="nn">email.utils</span> <span class="k">import</span> <span class="n">parsedate</span>
+<span class="kn">from</span> <span class="nn">bravado.config</span> <span class="k">import</span> <span class="n">RequestConfig</span>
 <span class="kn">from</span> <span class="nn">bravado.client</span> <span class="k">import</span> <span class="n">SwaggerClient</span><span class="p">,</span> <span class="n">ResourceDecorator</span><span class="p">,</span> \
-    <span class="n">CallableOperation</span><span class="p">,</span> <span class="n">warn_for_deprecated_op</span><span class="p">,</span> <span class="n">construct_request</span><span class="p">,</span> \
-    <span class="n">REQUEST_OPTIONS_DEFAULTS</span>
+    <span class="n">CallableOperation</span><span class="p">,</span> <span class="n">warn_for_deprecated_op</span><span class="p">,</span> <span class="n">construct_request</span>
 <span class="kn">from</span> <span class="nn">bravado.http_future</span> <span class="k">import</span> <span class="n">HttpFuture</span>
 <span class="kn">from</span> <span class="nn">bravado.requests_client</span> <span class="k">import</span> <span class="n">RequestsClient</span><span class="p">,</span> <span class="n">RequestsFutureAdapter</span><span class="p">,</span> \
     <span class="n">RequestsResponseAdapter</span>
@@ -187,9 +187,9 @@
         <span class="n">warn_for_deprecated_op</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">operation</span><span class="p">)</span>
 
         <span class="c1"># Apply request_options defaults</span>
-        <span class="n">request_options</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span>
-            <span class="n">REQUEST_OPTIONS_DEFAULTS</span><span class="p">,</span>
-            <span class="o">**</span><span class="p">(</span><span class="n">op_kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;_request_options&#39;</span><span class="p">,</span> <span class="p">{})))</span>
+        <span class="n">request_options</span> <span class="o">=</span> <span class="n">op_kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;_request_options&#39;</span><span class="p">,</span> <span class="p">{})</span>
+        <span class="n">request_config</span> <span class="o">=</span> <span class="n">RequestConfig</span><span class="p">(</span><span class="n">request_options</span><span class="p">,</span>
+                                       <span class="n">also_return_response_default</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
         <span class="n">request_params</span> <span class="o">=</span> <span class="n">construct_request</span><span class="p">(</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">operation</span><span class="p">,</span> <span class="n">request_options</span><span class="p">,</span> <span class="o">**</span><span class="n">op_kwargs</span><span class="p">)</span>
@@ -209,7 +209,7 @@
         <span class="k">return</span> <span class="n">http_client</span><span class="o">.</span><span class="n">request</span><span class="p">(</span>
             <span class="n">request_params</span><span class="p">,</span>
             <span class="n">operation</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">operation</span><span class="p">,</span>
-            <span class="n">response_callbacks</span><span class="o">=</span><span class="n">request_options</span><span class="p">[</span><span class="s1">&#39;response_callbacks&#39;</span><span class="p">],</span>
+            <span class="n">request_config</span><span class="o">=</span><span class="n">request_config</span><span class="p">,</span>
             <span class="n">authorization_token</span><span class="o">=</span><span class="n">_token</span><span class="p">)</span></div>
 
 
@@ -218,11 +218,12 @@
 <span class="sd">    Generator for ESI API calls.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">requests_future</span><span class="p">,</span> <span class="n">requestsresponse_adapter</span><span class="p">,</span> <span class="n">operation</span><span class="p">,</span>
-                 <span class="n">response_callbacks</span><span class="p">,</span> <span class="n">cache</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+                 <span class="n">response_callbacks</span><span class="p">,</span> <span class="n">request_config</span><span class="p">,</span> <span class="n">cache</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">requests_future</span> <span class="o">=</span> <span class="n">requests_future</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">requestsresponse_adapter</span> <span class="o">=</span> <span class="n">requestsresponse_adapter</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">operation</span> <span class="o">=</span> <span class="n">operation</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">response_callbacks</span> <span class="o">=</span> <span class="n">response_callbacks</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">request_config</span> <span class="o">=</span> <span class="n">request_config</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">page</span> <span class="o">=</span> <span class="mi">1</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">num_pages</span> <span class="o">=</span> <span class="mi">1</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">stop</span> <span class="o">=</span> <span class="kc">False</span>
@@ -248,9 +249,8 @@
     <span class="k">def</span> <span class="nf">_send</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">HttpFuture</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">requests_future</span><span class="p">,</span>
                           <span class="bp">self</span><span class="o">.</span><span class="n">requestsresponse_adapter</span><span class="p">,</span>
-                          <span class="bp">self</span><span class="o">.</span><span class="n">operation</span><span class="p">,</span>
-                          <span class="bp">self</span><span class="o">.</span><span class="n">response_callbacks</span><span class="p">,</span>
-                          <span class="n">also_return_response</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">result</span><span class="p">()</span>
+                          <span class="n">operation</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">operation</span><span class="p">,</span>
+                          <span class="n">request_config</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">request_config</span><span class="p">)</span><span class="o">.</span><span class="n">result</span><span class="p">()</span>
 
     <span class="k">def</span> <span class="nf">result</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">cache</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
@@ -312,7 +312,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">cache</span> <span class="o">=</span> <span class="n">cache</span>
 
 <div class="viewcode-block" id="ESIRequestsClient.request"><a class="viewcode-back" href="../../source/modules.html#esy.client.ESIRequestsClient.request">[docs]</a>    <span class="k">def</span> <span class="nf">request</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request_params</span><span class="p">,</span> <span class="n">operation</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">response_callbacks</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-                <span class="n">authorization_token</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+                <span class="n">request_config</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">authorization_token</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="n">sanitized_params</span><span class="p">,</span> <span class="n">misc_options</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">separate_params</span><span class="p">(</span><span class="n">request_params</span><span class="p">)</span>
         <span class="n">session</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">Session</span><span class="p">()</span>
         <span class="k">if</span> <span class="n">authorization_token</span><span class="p">:</span>
@@ -334,12 +334,14 @@
                                     <span class="n">RequestsResponseAdapter</span><span class="p">,</span>
                                     <span class="n">operation</span><span class="p">,</span>
                                     <span class="n">response_callbacks</span><span class="p">,</span>
+                                    <span class="n">request_config</span><span class="o">=</span><span class="n">request_config</span><span class="p">,</span>
                                     <span class="n">cache</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">cache</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">ESIPageGenerator</span><span class="p">(</span><span class="n">requests_future</span><span class="p">,</span>
                                     <span class="n">RequestsResponseAdapter</span><span class="p">,</span>
                                     <span class="n">operation</span><span class="p">,</span>
                                     <span class="n">response_callbacks</span><span class="p">,</span>
+                                    <span class="n">request_config</span><span class="o">=</span><span class="n">request_config</span><span class="p">,</span>
                                     <span class="n">cache</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">cache</span><span class="p">)</span><span class="o">.</span><span class="n">get</span><span class="p">()</span></div></div>
 
 

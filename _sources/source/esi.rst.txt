@@ -48,15 +48,6 @@ Alliance
       :rtype: dict
 
 
-   .. py:method:: get_alliances_names(alliance_ids=None)
-
-   Get alliance names
-
-      :param list alliance_ids: A comma separated list of alliance IDs
-      :return: List of id/name associations
-      :rtype: list
-
-
 
 
 Assets
@@ -358,15 +349,6 @@ Character
       :param int character_id: An EVE character ID
       :param str _token: ESI authorization token
       :return: A list of titles
-      :rtype: list
-
-
-   .. py:method:: get_characters_names(character_ids=None)
-
-   Get character names
-
-      :param list character_ids: A comma separated list of character IDs
-      :return: List of id/name associations
       :rtype: list
 
 
@@ -728,27 +710,6 @@ Corporation
       :rtype: list
 
 
-   .. py:method:: get_corporations_corporation_id_outposts(corporation_id=None, _token=None)
-
-   Get corporation outposts
-
-      :param int corporation_id: An EVE corporation ID
-      :param str _token: ESI authorization token
-      :return: List of corporation outpost IDs
-      :rtype: :class:`~esy.client.ESIPageGenerator` list
-
-
-   .. py:method:: get_corporations_corporation_id_outposts_outpost_id(corporation_id=None, outpost_id=None, _token=None)
-
-   Get corporation outpost details
-
-      :param int corporation_id: An EVE corporation ID
-      :param int outpost_id: A station (outpost) ID
-      :param str _token: ESI authorization token
-      :return: Details about the given outpost
-      :rtype: dict
-
-
    .. py:method:: get_corporations_corporation_id_roles(corporation_id=None, _token=None)
 
    Get corporation member roles
@@ -830,15 +791,6 @@ Corporation
       :param int corporation_id: An EVE corporation ID
       :param str _token: ESI authorization token
       :return: A list of titles
-      :rtype: list
-
-
-   .. py:method:: get_corporations_names(corporation_ids=None)
-
-   Get corporation names
-
-      :param list corporation_ids: A comma separated list of corporation IDs
-      :return: List of id/name associations
       :rtype: list
 
 

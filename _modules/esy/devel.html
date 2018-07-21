@@ -284,9 +284,13 @@
         <span class="n">username</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s1">&#39;Username: &#39;</span><span class="p">)</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">password</span><span class="p">:</span>
         <span class="n">password</span> <span class="o">=</span> <span class="n">getpass</span><span class="o">.</span><span class="n">getpass</span><span class="p">(</span><span class="s1">&#39;Password: &#39;</span><span class="p">)</span>
+    <span class="n">req_token</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">html</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;input[name=&quot;__RequestVerificationToken&quot;]&#39;</span><span class="p">,</span>
+                                   <span class="n">first</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">attrs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;value&#39;</span><span class="p">)</span>
     <span class="n">response</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">post_url</span><span class="p">,</span>
                                      <span class="n">data</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;UserName&#39;</span><span class="p">:</span> <span class="n">username</span><span class="p">,</span>
-                                           <span class="s1">&#39;Password&#39;</span><span class="p">:</span> <span class="n">password</span><span class="p">})</span>
+                                           <span class="s1">&#39;Password&#39;</span><span class="p">:</span> <span class="n">password</span><span class="p">,</span>
+                                           <span class="s1">&#39;__RequestVerificationToken&#39;</span><span class="p">:</span>
+                                               <span class="n">req_token</span><span class="p">})</span>
     <span class="n">response</span><span class="o">.</span><span class="n">raise_for_status</span><span class="p">()</span>
     <span class="c1"># Fetch the input values from the response and put them into the data we</span>
     <span class="c1"># will send back. Most of these are identical, but never know what funk</span>

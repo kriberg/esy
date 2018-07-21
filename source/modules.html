@@ -179,11 +179,11 @@
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>user_agent</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.6)"><em>str</em></a>) – </li>
+<li><strong>user_agent</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – </li>
 <li><strong>use_models</strong> – </li>
 <li><strong>spec</strong> – </li>
-<li><strong>endpoint</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.6)"><em>str</em></a>) – </li>
-<li><strong>datasource</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.6)"><em>str</em></a>) – </li>
+<li><strong>endpoint</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – </li>
+<li><strong>datasource</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – </li>
 <li><strong>cache</strong> – A class which implements the cache interface</li>
 </ul>
 </td>
@@ -207,8 +207,8 @@
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>endpoint</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.6)"><em>str</em></a>) – URL to the ESI endpoint. Defaults to latest.</li>
-<li><strong>datasource</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.6)"><em>str</em></a>) – ESI datasource to use. Defaults to Tranquility.</li>
+<li><strong>endpoint</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – URL to the ESI endpoint. Defaults to latest.</li>
+<li><strong>datasource</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – ESI datasource to use. Defaults to Tranquility.</li>
 <li><strong>cache</strong> – Optional cache</li>
 </ul>
 </td>
@@ -216,7 +216,7 @@
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Swagger specification</p>
 </td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.6)">dict</a></p>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.7)">dict</a></p>
 </td>
 </tr>
 </tbody>
@@ -227,7 +227,7 @@
 
 <dl class="class">
 <dt id="esy.client.ESIPageGenerator">
-<em class="property">class </em><code class="descclassname">esy.client.</code><code class="descname">ESIPageGenerator</code><span class="sig-paren">(</span><em>requests_future</em>, <em>requestsresponse_adapter</em>, <em>operation</em>, <em>response_callbacks</em>, <em>cache=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/esy/client.html#ESIPageGenerator"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#esy.client.ESIPageGenerator" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">esy.client.</code><code class="descname">ESIPageGenerator</code><span class="sig-paren">(</span><em>requests_future</em>, <em>requestsresponse_adapter</em>, <em>operation</em>, <em>response_callbacks</em>, <em>request_config</em>, <em>cache=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/esy/client.html#ESIPageGenerator"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#esy.client.ESIPageGenerator" title="Permalink to this definition">¶</a></dt>
 <dd><p>Generator for ESI API calls.</p>
 </dd></dl>
 
@@ -238,20 +238,17 @@
 per-request authorizations.</p>
 <dl class="method">
 <dt id="esy.client.ESIRequestsClient.request">
-<code class="descname">request</code><span class="sig-paren">(</span><em>request_params</em>, <em>operation=None</em>, <em>response_callbacks=None</em>, <em>authorization_token=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/esy/client.html#ESIRequestsClient.request"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#esy.client.ESIRequestsClient.request" title="Permalink to this definition">¶</a></dt>
+<code class="descname">request</code><span class="sig-paren">(</span><em>request_params</em>, <em>operation=None</em>, <em>response_callbacks=None</em>, <em>request_config=None</em>, <em>authorization_token=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/esy/client.html#ESIRequestsClient.request"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#esy.client.ESIRequestsClient.request" title="Permalink to this definition">¶</a></dt>
 <dd><table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>request_params</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.6)"><em>dict</em></a>) – complete request data.</li>
+<li><strong>request_params</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.7)"><em>dict</em></a>) – complete request data.</li>
 <li><strong>operation</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">bravado_core.operation.Operation</span></code>) – operation that this http request is for. Defaults
 to None - in which case, we’re obviously just retrieving a Swagger
 Spec.</li>
-<li><strong>response_callbacks</strong> – List of callables to post-process the
-incoming response. Expects args incoming_response and operation.</li>
-<li><strong>also_return_response</strong> – Consult the constructor documentation for
-<code class="xref py py-class docutils literal notranslate"><span class="pre">bravado.http_future.HttpFuture</span></code>.</li>
+<li><strong>request_config</strong> (<em>RequestConfig</em>) – per-request configuration</li>
 </ul>
 </td>
 </tr>
@@ -314,9 +311,9 @@ incoming response. Expects args incoming_response and operation.</li>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>refresh_token</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.6)"><em>str</em></a>) – The refresh token</li>
-<li><strong>client_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.6)"><em>str</em></a>) – The ESI ClientID</li>
-<li><strong>secret</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.6)"><em>str</em></a>) – The ESI Secret key</li>
+<li><strong>refresh_token</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – The refresh token</li>
+<li><strong>client_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – The ESI ClientID</li>
+<li><strong>secret</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – The ESI Secret key</li>
 <li><strong>session</strong> (<em>OAuth2Session</em>) – Existing session for reuse</li>
 <li><strong>auth</strong> (<em>HTTPBasicAuth</em>) – Existing authentication handler for reuse</li>
 </ul>
@@ -325,7 +322,7 @@ incoming response. Expects args incoming_response and operation.</li>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">New access token</p>
 </td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.6)">str</a></p>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)">str</a></p>
 </td>
 </tr>
 </tbody>
@@ -341,9 +338,9 @@ incoming response. Expects args incoming_response and operation.</li>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>token</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.6)"><em>str</em></a>) – The token to revoke</li>
-<li><strong>client_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.6)"><em>str</em></a>) – The ESI ClientID</li>
-<li><strong>secret</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.6)"><em>str</em></a>) – The ESI Secret key</li>
+<li><strong>token</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – The token to revoke</li>
+<li><strong>client_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – The ESI ClientID</li>
+<li><strong>secret</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – The ESI Secret key</li>
 <li><strong>session</strong> (<em>OAuth2Session</em>) – Existing session for reuse</li>
 <li><strong>auth</strong> (<em>HTTPBasicAuth</em>) – Existing authentication handler for reuse</li>
 </ul>
@@ -352,7 +349,7 @@ incoming response. Expects args incoming_response and operation.</li>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Token revocation status</p>
 </td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.6)">bool</a></p>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)">bool</a></p>
 </td>
 </tr>
 </tbody>
@@ -368,11 +365,11 @@ information.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>access_token</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.6)"><em>str</em></a>) – ESI access token</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>access_token</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – ESI access token</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">dict with CharacterID, CharacterName and CharacterOwnerHash</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.6)">dict</a></td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.7)">dict</a></td>
 </tr>
 </tbody>
 </table>
@@ -387,16 +384,16 @@ information.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>authorization_code</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.6)"><em>str</em></a>) – The authorization code returned from ESI</li>
-<li><strong>client_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.6)"><em>str</em></a>) – The ESI ClientID</li>
-<li><strong>secret</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.6)"><em>str</em></a>) – The ESI Secret key</li>
+<li><strong>authorization_code</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – The authorization code returned from ESI</li>
+<li><strong>client_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – The ESI ClientID</li>
+<li><strong>secret</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – The ESI Secret key</li>
 </ul>
 </td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">(refresh_token, access_token)</p>
 </td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.6)">tuple</a></p>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.7)">tuple</a></p>
 </td>
 </tr>
 </tbody>
@@ -439,22 +436,22 @@ Optionally prompts for username and password input, and character selection.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>cli_login</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.6)"><em>bool</em></a>) – Start CLI-based authentication or just print the SSO URL.</li>
-<li><strong>server_address</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.6)"><em>str</em></a>) – The address <a class="reference internal" href="#esy.devel.DevServer" title="esy.devel.DevServer"><code class="xref py py-class docutils literal notranslate"><span class="pre">DevServer</span></code></a> is binding to.</li>
-<li><strong>server_port</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.6)"><em>str</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a>) – The port <a class="reference internal" href="#esy.devel.DevServer" title="esy.devel.DevServer"><code class="xref py py-class docutils literal notranslate"><span class="pre">DevServer</span></code></a> is listening on.</li>
-<li><strong>client_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.6)"><em>str</em></a>) – The ESI ClientID</li>
-<li><strong>callback_url</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.6)"><em>str</em></a>) – The ESI CallbackURL</li>
-<li><strong>scopes</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.6)"><em>str</em></a>) – The selected ESI scopes, as space-delimited string.</li>
-<li><strong>character_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.6)"><em>str</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a>) – Pre-selected CharacterId to authorize</li>
-<li><strong>username</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.6)"><em>str</em></a>) – EVE Online SSO username</li>
-<li><strong>password</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.6)"><em>str</em></a>) – EVE Online SSO password</li>
+<li><strong>cli_login</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a>) – Start CLI-based authentication or just print the SSO URL.</li>
+<li><strong>server_address</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – The address <a class="reference internal" href="#esy.devel.DevServer" title="esy.devel.DevServer"><code class="xref py py-class docutils literal notranslate"><span class="pre">DevServer</span></code></a> is binding to.</li>
+<li><strong>server_port</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)"><em>int</em></a>) – The port <a class="reference internal" href="#esy.devel.DevServer" title="esy.devel.DevServer"><code class="xref py py-class docutils literal notranslate"><span class="pre">DevServer</span></code></a> is listening on.</li>
+<li><strong>client_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – The ESI ClientID</li>
+<li><strong>callback_url</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – The ESI CallbackURL</li>
+<li><strong>scopes</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – The selected ESI scopes, as space-delimited string.</li>
+<li><strong>character_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)"><em>int</em></a>) – Pre-selected CharacterId to authorize</li>
+<li><strong>username</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – EVE Online SSO username</li>
+<li><strong>password</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – EVE Online SSO password</li>
 </ul>
 </td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">authorization code</p>
 </td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.6)">str</a></p>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)">str</a></p>
 </td>
 </tr>
 </tbody>
