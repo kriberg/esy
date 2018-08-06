@@ -1,6 +1,7 @@
 from http.server import HTTPServer, BaseHTTPRequestHandler
 import os
 import threading
+import webbrowser
 import urllib.parse
 from requests_html import HTMLSession
 from requests import Request
@@ -103,6 +104,7 @@ def get_authorization_code(cli_login=False, server_address=SERVER_ADDRESS,
         }).prepare()
         print('Please complete the EVE SSO authentication: {}'.format(
             request.url))
+        webbrowser.open(request.url)
 
     dev_server.join()
     if SESSION['state'] != state:
