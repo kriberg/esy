@@ -1,6 +1,7 @@
 from http.server import HTTPServer, BaseHTTPRequestHandler
 import os
 import threading
+import urllib.parse
 from requests_html import HTMLSession
 from requests import Request
 import random
@@ -32,11 +33,9 @@ class AuthenticationHandler(BaseHTTPRequestHandler):
                            '</html>', encoding='utf-8')
 
     def do_GET(self):
-        # First split for the last /, then strip '?', then split by '&'
-        params = self.path.split('/')[-1][1:].split('&')
-        for param in params:
-            key, value = param.split('=')
-            SESSION[key] = value
+        parsed = urllib.parse.urlparse(self.path)
+        for k, v in urllib.parse.parse_qs(parsed.query).items():
+            SESSION[k] = ','.join(v)
         self.send_response(200)
         self.end_headers()
         self.request.send(self.DEVSERVER_HTML)
