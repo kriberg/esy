@@ -40,13 +40,13 @@ class ESIAuthenticator(object):
         :return: (refresh_token, access_token)
         :rtype: tuple
         """
-        session = OAuth2Session(client_id)
-        auth = HTTPBasicAuth(client_id,
-                             secret)
-        resp = session.fetch_token(self.access_token_endpoint,
-                                   code=authorization_code,
-                                   auth=auth)
-        return resp.get('refresh_token'), resp.get('access_token')
+        with OAuth2Session(client_id) as session:
+            auth = HTTPBasicAuth(client_id,
+                                 secret)
+            resp = session.fetch_token(self.access_token_endpoint,
+                                       code=authorization_code,
+                                       auth=auth)
+            return resp.get('refresh_token'), resp.get('access_token')
 
     def verify_access_token(self, access_token):
         """
@@ -84,15 +84,20 @@ class ESIAuthenticator(object):
         :return: New access token
         :rtype: str
         """
-        if session is None:
-            session = OAuth2Session(client_id)
         if auth is None:
             auth = HTTPBasicAuth(client_id,
                                  secret)
-        resp = session.refresh_token(self.access_token_endpoint,
-                                     refresh_token=refresh_token,
-                                     auth=auth)
-        return resp.get('access_token')
+        if session is None:
+            with OAuth2Session(client_id) as session:
+                resp = session.refresh_token(self.access_token_endpoint,
+                                             refresh_token=refresh_token,
+                                             auth=auth)
+                return resp.get('access_token')
+        else:
+            resp = session.refresh_token(self.access_token_endpoint,
+                                         refresh_token=refresh_token,
+                                         auth=auth)
+            return resp.get('access_token')
 
     def revoke_token(self, token, client_id, secret,
                      token_type='refresh_token', session=None, auth=None):
@@ -105,6 +110,8 @@ class ESIAuthenticator(object):
         :type client_id: str
         :param secret: The ESI Secret key
         :type secret: str
+        :param token_type: Token type to request from ESI
+        :type token_type: str
         :param session: Existing session for reuse
         :type session: OAuth2Session
         :param auth: Existing authentication handler for reuse
@@ -112,15 +119,24 @@ class ESIAuthenticator(object):
         :return: Token revocation status
         :rtype: bool
         """
-        if session is None:
-            session = OAuth2Session(client_id)
+
         if auth is None:
             auth = HTTPBasicAuth(client_id,
                                  secret)
-        resp = session.post(self.revoke_token_endpoint,
-                            data={
-                                'token_type': token_type,
-                                'token': token
-                            },
-                            auth=auth)
-        return resp.status_code == 200
+        if session is None:
+            with OAuth2Session(client_id) as session:
+                resp = session.post(self.revoke_token_endpoint,
+                                    data={
+                                        'token_type': token_type,
+                                        'token': token
+                                    },
+                                    auth=auth)
+                return resp.status_code == 200
+        else:
+            resp = session.post(self.revoke_token_endpoint,
+                                data={
+                                    'token_type': token_type,
+                                    'token': token
+                                },
+                                auth=auth)
+            return resp.status_code == 200

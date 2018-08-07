@@ -55,6 +55,7 @@ class DevServer(HTTPServer, threading.Thread):
 
     def run(self):
         self.handle_request()
+        self.server_close()
 
 
 def get_authorization_code(cli_login=False, server_address=SERVER_ADDRESS,
@@ -121,67 +122,67 @@ def _do_cli_login(callback_url, client_id, scopes, state, username=None,
     """
     My Little Browser.
     """
-    session = HTMLSession()
-    response = session.get(ESI_AUTHORIZE_ENDPOINT, params={
-        'response_type': 'code',
-        'redirect_uri': callback_url,
-        'client_id': client_id,
-        'scope': scopes,
-        'state': state
-    })
-    response.raise_for_status()
-    post_url = '/'.join(ESI_AUTHORIZE_ENDPOINT.split('/')[:3] +
-                        [response.html.find('form',
-                                            first=True).attrs.get('action')])
-    if not all((username, password)):
-        print('Logging in to EVE Online')
-    if not username:
-        username = input('Username: ')
-    if not password:
-        password = getpass.getpass('Password: ')
-    req_token = response.html.find('input[name="__RequestVerificationToken"]',
-                                   first=True).attrs.get('value')
-    response = response.session.post(post_url,
-                                     data={'UserName': username,
-                                           'Password': password,
-                                           '__RequestVerificationToken':
-                                               req_token})
-    response.raise_for_status()
-    # Fetch the input values from the response and put them into the data we
-    # will send back. Most of these are identical, but never know what funk
-    # will ensue.
-    post_data = {}
-    for input_name in ('ClientIdentifier', 'RedirectUri', 'State', 'Scope',
-                       'ResponseType', '__RequestVerificationToken'):
-        element = response.html.find('input[name="{}"]'.format(input_name),
-                                     first=True)
-        post_data[input_name] = element.attrs['value']
+    with HTMLSession() as session:
+        response = session.get(ESI_AUTHORIZE_ENDPOINT, params={
+            'response_type': 'code',
+            'redirect_uri': callback_url,
+            'client_id': client_id,
+            'scope': scopes,
+            'state': state
+        })
+        response.raise_for_status()
+        post_url = '/'.join(ESI_AUTHORIZE_ENDPOINT.split('/')[:3] +
+                            [response.html.find('form',
+                                                first=True).attrs.get('action')])
+        if not all((username, password)):
+            print('Logging in to EVE Online')
+        if not username:
+            username = input('Username: ')
+        if not password:
+            password = getpass.getpass('Password: ')
+        req_token = response.html.find('input[name="__RequestVerificationToken"]',
+                                       first=True).attrs.get('value')
+        response = response.session.post(post_url,
+                                         data={'UserName': username,
+                                               'Password': password,
+                                               '__RequestVerificationToken':
+                                                   req_token})
+        response.raise_for_status()
+        # Fetch the input values from the response and put them into the data we
+        # will send back. Most of these are identical, but never know what funk
+        # will ensue.
+        post_data = {}
+        for input_name in ('ClientIdentifier', 'RedirectUri', 'State', 'Scope',
+                           'ResponseType', '__RequestVerificationToken'):
+            element = response.html.find('input[name="{}"]'.format(input_name),
+                                         first=True)
+            post_data[input_name] = element.attrs['value']
 
-    # Get the list of characters from the selection box and get the user to
-    # choose
-    selection = response.html.find('select[name="CharacterId"] option')
-    if character_id is not None:
-        post_data['CharacterId'] = str(character_id)
-    else:  # pragma: nocover
-        choices = []
-        for option in selection:
-            value = option.attrs.get('value')
-            choices.append(value)
-            print('{}. {}'.format(len(choices), option.text))
+        # Get the list of characters from the selection box and get the user to
+        # choose
+        selection = response.html.find('select[name="CharacterId"] option')
+        if character_id is not None:
+            post_data['CharacterId'] = str(character_id)
+        else:  # pragma: nocover
+            choices = []
+            for option in selection:
+                value = option.attrs.get('value')
+                choices.append(value)
+                print('{}. {}'.format(len(choices), option.text))
 
-        while 'CharacterId' not in post_data:
-            choice = input('Chose character: ')
-            try:
-                post_data['CharacterId'] = choices[int(choice) - 1]
-                break
-            except ValueError:
-                print('Invalid choice')
-            except IndexError:
-                print('Invalid choice')
+            while 'CharacterId' not in post_data:
+                choice = input('Chose character: ')
+                try:
+                    post_data['CharacterId'] = choices[int(choice) - 1]
+                    break
+                except ValueError:
+                    print('Invalid choice')
+                except IndexError:
+                    print('Invalid choice')
 
-    # Send the request and wait for the redirect to our local http server
-    response = response.session.post(ESI_AUTHORIZE_ENDPOINT, data=post_data)
-    response.raise_for_status()
+        # Send the request and wait for the redirect to our local http server
+        response = response.session.post(ESI_AUTHORIZE_ENDPOINT, data=post_data)
+        response.raise_for_status()
 
 
 def verify_authorization_code(authorization_code, client_id=CLIENT_ID,
