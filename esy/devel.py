@@ -1,6 +1,8 @@
 from http.server import HTTPServer, BaseHTTPRequestHandler
 import os
 import threading
+import webbrowser
+import urllib.parse
 from requests_html import HTMLSession
 from requests import Request
 import random
@@ -32,11 +34,9 @@ class AuthenticationHandler(BaseHTTPRequestHandler):
                            '</html>', encoding='utf-8')
 
     def do_GET(self):
-        # First split for the last /, then strip '?', then split by '&'
-        params = self.path.split('/')[-1][1:].split('&')
-        for param in params:
-            key, value = param.split('=')
-            SESSION[key] = value
+        parsed = urllib.parse.urlparse(self.path)
+        for k, v in urllib.parse.parse_qs(parsed.query).items():
+            SESSION[k] = ','.join(v)
         self.send_response(200)
         self.end_headers()
         self.request.send(self.DEVSERVER_HTML)
@@ -104,6 +104,7 @@ def get_authorization_code(cli_login=False, server_address=SERVER_ADDRESS,
         }).prepare()
         print('Please complete the EVE SSO authentication: {}'.format(
             request.url))
+        webbrowser.open(request.url)
 
     dev_server.join()
     if SESSION['state'] != state:
