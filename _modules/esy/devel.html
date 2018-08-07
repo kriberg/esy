@@ -200,7 +200,8 @@
         <span class="n">threading</span><span class="o">.</span><span class="n">Thread</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
 
 <div class="viewcode-block" id="DevServer.run"><a class="viewcode-back" href="../../source/modules.html#esy.devel.DevServer.run">[docs]</a>    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">handle_request</span><span class="p">()</span></div></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">handle_request</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">server_close</span><span class="p">()</span></div></div>
 
 
 <div class="viewcode-block" id="get_authorization_code"><a class="viewcode-back" href="../../source/modules.html#esy.devel.get_authorization_code">[docs]</a><span class="k">def</span> <span class="nf">get_authorization_code</span><span class="p">(</span><span class="n">cli_login</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">server_address</span><span class="o">=</span><span class="n">SERVER_ADDRESS</span><span class="p">,</span>
@@ -267,67 +268,67 @@
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    My Little Browser.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">session</span> <span class="o">=</span> <span class="n">HTMLSession</span><span class="p">()</span>
-    <span class="n">response</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">ESI_AUTHORIZE_ENDPOINT</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{</span>
-        <span class="s1">&#39;response_type&#39;</span><span class="p">:</span> <span class="s1">&#39;code&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;redirect_uri&#39;</span><span class="p">:</span> <span class="n">callback_url</span><span class="p">,</span>
-        <span class="s1">&#39;client_id&#39;</span><span class="p">:</span> <span class="n">client_id</span><span class="p">,</span>
-        <span class="s1">&#39;scope&#39;</span><span class="p">:</span> <span class="n">scopes</span><span class="p">,</span>
-        <span class="s1">&#39;state&#39;</span><span class="p">:</span> <span class="n">state</span>
-    <span class="p">})</span>
-    <span class="n">response</span><span class="o">.</span><span class="n">raise_for_status</span><span class="p">()</span>
-    <span class="n">post_url</span> <span class="o">=</span> <span class="s1">&#39;/&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">ESI_AUTHORIZE_ENDPOINT</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)[:</span><span class="mi">3</span><span class="p">]</span> <span class="o">+</span>
-                        <span class="p">[</span><span class="n">response</span><span class="o">.</span><span class="n">html</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;form&#39;</span><span class="p">,</span>
-                                            <span class="n">first</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">attrs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;action&#39;</span><span class="p">)])</span>
-    <span class="k">if</span> <span class="ow">not</span> <span class="nb">all</span><span class="p">((</span><span class="n">username</span><span class="p">,</span> <span class="n">password</span><span class="p">)):</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Logging in to EVE Online&#39;</span><span class="p">)</span>
-    <span class="k">if</span> <span class="ow">not</span> <span class="n">username</span><span class="p">:</span>
-        <span class="n">username</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s1">&#39;Username: &#39;</span><span class="p">)</span>
-    <span class="k">if</span> <span class="ow">not</span> <span class="n">password</span><span class="p">:</span>
-        <span class="n">password</span> <span class="o">=</span> <span class="n">getpass</span><span class="o">.</span><span class="n">getpass</span><span class="p">(</span><span class="s1">&#39;Password: &#39;</span><span class="p">)</span>
-    <span class="n">req_token</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">html</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;input[name=&quot;__RequestVerificationToken&quot;]&#39;</span><span class="p">,</span>
-                                   <span class="n">first</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">attrs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;value&#39;</span><span class="p">)</span>
-    <span class="n">response</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">post_url</span><span class="p">,</span>
-                                     <span class="n">data</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;UserName&#39;</span><span class="p">:</span> <span class="n">username</span><span class="p">,</span>
-                                           <span class="s1">&#39;Password&#39;</span><span class="p">:</span> <span class="n">password</span><span class="p">,</span>
-                                           <span class="s1">&#39;__RequestVerificationToken&#39;</span><span class="p">:</span>
-                                               <span class="n">req_token</span><span class="p">})</span>
-    <span class="n">response</span><span class="o">.</span><span class="n">raise_for_status</span><span class="p">()</span>
-    <span class="c1"># Fetch the input values from the response and put them into the data we</span>
-    <span class="c1"># will send back. Most of these are identical, but never know what funk</span>
-    <span class="c1"># will ensue.</span>
-    <span class="n">post_data</span> <span class="o">=</span> <span class="p">{}</span>
-    <span class="k">for</span> <span class="n">input_name</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">&#39;ClientIdentifier&#39;</span><span class="p">,</span> <span class="s1">&#39;RedirectUri&#39;</span><span class="p">,</span> <span class="s1">&#39;State&#39;</span><span class="p">,</span> <span class="s1">&#39;Scope&#39;</span><span class="p">,</span>
-                       <span class="s1">&#39;ResponseType&#39;</span><span class="p">,</span> <span class="s1">&#39;__RequestVerificationToken&#39;</span><span class="p">):</span>
-        <span class="n">element</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">html</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;input[name=&quot;</span><span class="si">{}</span><span class="s1">&quot;]&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">input_name</span><span class="p">),</span>
-                                     <span class="n">first</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-        <span class="n">post_data</span><span class="p">[</span><span class="n">input_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">element</span><span class="o">.</span><span class="n">attrs</span><span class="p">[</span><span class="s1">&#39;value&#39;</span><span class="p">]</span>
+    <span class="k">with</span> <span class="n">HTMLSession</span><span class="p">()</span> <span class="k">as</span> <span class="n">session</span><span class="p">:</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">ESI_AUTHORIZE_ENDPOINT</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+            <span class="s1">&#39;response_type&#39;</span><span class="p">:</span> <span class="s1">&#39;code&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;redirect_uri&#39;</span><span class="p">:</span> <span class="n">callback_url</span><span class="p">,</span>
+            <span class="s1">&#39;client_id&#39;</span><span class="p">:</span> <span class="n">client_id</span><span class="p">,</span>
+            <span class="s1">&#39;scope&#39;</span><span class="p">:</span> <span class="n">scopes</span><span class="p">,</span>
+            <span class="s1">&#39;state&#39;</span><span class="p">:</span> <span class="n">state</span>
+        <span class="p">})</span>
+        <span class="n">response</span><span class="o">.</span><span class="n">raise_for_status</span><span class="p">()</span>
+        <span class="n">post_url</span> <span class="o">=</span> <span class="s1">&#39;/&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">ESI_AUTHORIZE_ENDPOINT</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)[:</span><span class="mi">3</span><span class="p">]</span> <span class="o">+</span>
+                            <span class="p">[</span><span class="n">response</span><span class="o">.</span><span class="n">html</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;form&#39;</span><span class="p">,</span>
+                                                <span class="n">first</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">attrs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;action&#39;</span><span class="p">)])</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">all</span><span class="p">((</span><span class="n">username</span><span class="p">,</span> <span class="n">password</span><span class="p">)):</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Logging in to EVE Online&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">username</span><span class="p">:</span>
+            <span class="n">username</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s1">&#39;Username: &#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">password</span><span class="p">:</span>
+            <span class="n">password</span> <span class="o">=</span> <span class="n">getpass</span><span class="o">.</span><span class="n">getpass</span><span class="p">(</span><span class="s1">&#39;Password: &#39;</span><span class="p">)</span>
+        <span class="n">req_token</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">html</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;input[name=&quot;__RequestVerificationToken&quot;]&#39;</span><span class="p">,</span>
+                                       <span class="n">first</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">attrs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;value&#39;</span><span class="p">)</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">post_url</span><span class="p">,</span>
+                                         <span class="n">data</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;UserName&#39;</span><span class="p">:</span> <span class="n">username</span><span class="p">,</span>
+                                               <span class="s1">&#39;Password&#39;</span><span class="p">:</span> <span class="n">password</span><span class="p">,</span>
+                                               <span class="s1">&#39;__RequestVerificationToken&#39;</span><span class="p">:</span>
+                                                   <span class="n">req_token</span><span class="p">})</span>
+        <span class="n">response</span><span class="o">.</span><span class="n">raise_for_status</span><span class="p">()</span>
+        <span class="c1"># Fetch the input values from the response and put them into the data we</span>
+        <span class="c1"># will send back. Most of these are identical, but never know what funk</span>
+        <span class="c1"># will ensue.</span>
+        <span class="n">post_data</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">input_name</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">&#39;ClientIdentifier&#39;</span><span class="p">,</span> <span class="s1">&#39;RedirectUri&#39;</span><span class="p">,</span> <span class="s1">&#39;State&#39;</span><span class="p">,</span> <span class="s1">&#39;Scope&#39;</span><span class="p">,</span>
+                           <span class="s1">&#39;ResponseType&#39;</span><span class="p">,</span> <span class="s1">&#39;__RequestVerificationToken&#39;</span><span class="p">):</span>
+            <span class="n">element</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">html</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;input[name=&quot;</span><span class="si">{}</span><span class="s1">&quot;]&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">input_name</span><span class="p">),</span>
+                                         <span class="n">first</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            <span class="n">post_data</span><span class="p">[</span><span class="n">input_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">element</span><span class="o">.</span><span class="n">attrs</span><span class="p">[</span><span class="s1">&#39;value&#39;</span><span class="p">]</span>
 
-    <span class="c1"># Get the list of characters from the selection box and get the user to</span>
-    <span class="c1"># choose</span>
-    <span class="n">selection</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">html</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;select[name=&quot;CharacterId&quot;] option&#39;</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">character_id</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="n">post_data</span><span class="p">[</span><span class="s1">&#39;CharacterId&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">character_id</span><span class="p">)</span>
-    <span class="k">else</span><span class="p">:</span>  <span class="c1"># pragma: nocover</span>
-        <span class="n">choices</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="k">for</span> <span class="n">option</span> <span class="ow">in</span> <span class="n">selection</span><span class="p">:</span>
-            <span class="n">value</span> <span class="o">=</span> <span class="n">option</span><span class="o">.</span><span class="n">attrs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;value&#39;</span><span class="p">)</span>
-            <span class="n">choices</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{}</span><span class="s1">. </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">choices</span><span class="p">),</span> <span class="n">option</span><span class="o">.</span><span class="n">text</span><span class="p">))</span>
+        <span class="c1"># Get the list of characters from the selection box and get the user to</span>
+        <span class="c1"># choose</span>
+        <span class="n">selection</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">html</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;select[name=&quot;CharacterId&quot;] option&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">character_id</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">post_data</span><span class="p">[</span><span class="s1">&#39;CharacterId&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">character_id</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>  <span class="c1"># pragma: nocover</span>
+            <span class="n">choices</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">for</span> <span class="n">option</span> <span class="ow">in</span> <span class="n">selection</span><span class="p">:</span>
+                <span class="n">value</span> <span class="o">=</span> <span class="n">option</span><span class="o">.</span><span class="n">attrs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;value&#39;</span><span class="p">)</span>
+                <span class="n">choices</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{}</span><span class="s1">. </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">choices</span><span class="p">),</span> <span class="n">option</span><span class="o">.</span><span class="n">text</span><span class="p">))</span>
 
-        <span class="k">while</span> <span class="s1">&#39;CharacterId&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">post_data</span><span class="p">:</span>
-            <span class="n">choice</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s1">&#39;Chose character: &#39;</span><span class="p">)</span>
-            <span class="k">try</span><span class="p">:</span>
-                <span class="n">post_data</span><span class="p">[</span><span class="s1">&#39;CharacterId&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">choices</span><span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">choice</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span>
-                <span class="k">break</span>
-            <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
-                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Invalid choice&#39;</span><span class="p">)</span>
-            <span class="k">except</span> <span class="ne">IndexError</span><span class="p">:</span>
-                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Invalid choice&#39;</span><span class="p">)</span>
+            <span class="k">while</span> <span class="s1">&#39;CharacterId&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">post_data</span><span class="p">:</span>
+                <span class="n">choice</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s1">&#39;Chose character: &#39;</span><span class="p">)</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="n">post_data</span><span class="p">[</span><span class="s1">&#39;CharacterId&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">choices</span><span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">choice</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span>
+                    <span class="k">break</span>
+                <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Invalid choice&#39;</span><span class="p">)</span>
+                <span class="k">except</span> <span class="ne">IndexError</span><span class="p">:</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Invalid choice&#39;</span><span class="p">)</span>
 
-    <span class="c1"># Send the request and wait for the redirect to our local http server</span>
-    <span class="n">response</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">ESI_AUTHORIZE_ENDPOINT</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">post_data</span><span class="p">)</span>
-    <span class="n">response</span><span class="o">.</span><span class="n">raise_for_status</span><span class="p">()</span>
+        <span class="c1"># Send the request and wait for the redirect to our local http server</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">ESI_AUTHORIZE_ENDPOINT</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">post_data</span><span class="p">)</span>
+        <span class="n">response</span><span class="o">.</span><span class="n">raise_for_status</span><span class="p">()</span>
 
 
 <span class="k">def</span> <span class="nf">verify_authorization_code</span><span class="p">(</span><span class="n">authorization_code</span><span class="p">,</span> <span class="n">client_id</span><span class="o">=</span><span class="n">CLIENT_ID</span><span class="p">,</span>

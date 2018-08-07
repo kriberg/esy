@@ -172,7 +172,7 @@
 <dd><p>Swagger client interface adapted to use with the ESI.</p>
 <dl class="staticmethod">
 <dt id="esy.client.ESIClient.get_client">
-<em class="property">static </em><code class="descname">get_client</code><span class="sig-paren">(</span><em>user_agent</em>, <em>use_models=False</em>, <em>spec=None</em>, <em>endpoint='https://esi.evetech.net/latest/swagger.json'</em>, <em>datasource='tranquility'</em>, <em>cache=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/esy/client.html#ESIClient.get_client"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#esy.client.ESIClient.get_client" title="Permalink to this definition">¶</a></dt>
+<em class="property">static </em><code class="descname">get_client</code><span class="sig-paren">(</span><em>user_agent='esy//vittoros&#64;slack'</em>, <em>use_models=False</em>, <em>spec=None</em>, <em>endpoint='https://esi.evetech.net/latest/swagger.json'</em>, <em>datasource='tranquility'</em>, <em>cache=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/esy/client.html#ESIClient.get_client"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#esy.client.ESIClient.get_client" title="Permalink to this definition">¶</a></dt>
 <dd><p>Generates a client interface for ESI.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -341,6 +341,7 @@ Spec.</li>
 <li><strong>token</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – The token to revoke</li>
 <li><strong>client_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – The ESI ClientID</li>
 <li><strong>secret</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – The ESI Secret key</li>
+<li><strong>token_type</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Token type to request from ESI</li>
 <li><strong>session</strong> (<em>OAuth2Session</em>) – Existing session for reuse</li>
 <li><strong>auth</strong> (<em>HTTPBasicAuth</em>) – Existing authentication handler for reuse</li>
 </ul>

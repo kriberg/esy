@@ -186,13 +186,13 @@
 <span class="sd">        :return: (refresh_token, access_token)</span>
 <span class="sd">        :rtype: tuple</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">session</span> <span class="o">=</span> <span class="n">OAuth2Session</span><span class="p">(</span><span class="n">client_id</span><span class="p">)</span>
-        <span class="n">auth</span> <span class="o">=</span> <span class="n">HTTPBasicAuth</span><span class="p">(</span><span class="n">client_id</span><span class="p">,</span>
-                             <span class="n">secret</span><span class="p">)</span>
-        <span class="n">resp</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">fetch_token</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">access_token_endpoint</span><span class="p">,</span>
-                                   <span class="n">code</span><span class="o">=</span><span class="n">authorization_code</span><span class="p">,</span>
-                                   <span class="n">auth</span><span class="o">=</span><span class="n">auth</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">resp</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;refresh_token&#39;</span><span class="p">),</span> <span class="n">resp</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;access_token&#39;</span><span class="p">)</span></div>
+        <span class="k">with</span> <span class="n">OAuth2Session</span><span class="p">(</span><span class="n">client_id</span><span class="p">)</span> <span class="k">as</span> <span class="n">session</span><span class="p">:</span>
+            <span class="n">auth</span> <span class="o">=</span> <span class="n">HTTPBasicAuth</span><span class="p">(</span><span class="n">client_id</span><span class="p">,</span>
+                                 <span class="n">secret</span><span class="p">)</span>
+            <span class="n">resp</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">fetch_token</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">access_token_endpoint</span><span class="p">,</span>
+                                       <span class="n">code</span><span class="o">=</span><span class="n">authorization_code</span><span class="p">,</span>
+                                       <span class="n">auth</span><span class="o">=</span><span class="n">auth</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">resp</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;refresh_token&#39;</span><span class="p">),</span> <span class="n">resp</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;access_token&#39;</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="ESIAuthenticator.verify_access_token"><a class="viewcode-back" href="../../source/modules.html#esy.auth.ESIAuthenticator.verify_access_token">[docs]</a>    <span class="k">def</span> <span class="nf">verify_access_token</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">access_token</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -230,15 +230,20 @@
 <span class="sd">        :return: New access token</span>
 <span class="sd">        :rtype: str</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="n">session</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">session</span> <span class="o">=</span> <span class="n">OAuth2Session</span><span class="p">(</span><span class="n">client_id</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">auth</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">auth</span> <span class="o">=</span> <span class="n">HTTPBasicAuth</span><span class="p">(</span><span class="n">client_id</span><span class="p">,</span>
                                  <span class="n">secret</span><span class="p">)</span>
-        <span class="n">resp</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">refresh_token</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">access_token_endpoint</span><span class="p">,</span>
-                                     <span class="n">refresh_token</span><span class="o">=</span><span class="n">refresh_token</span><span class="p">,</span>
-                                     <span class="n">auth</span><span class="o">=</span><span class="n">auth</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">resp</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;access_token&#39;</span><span class="p">)</span></div>
+        <span class="k">if</span> <span class="n">session</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">with</span> <span class="n">OAuth2Session</span><span class="p">(</span><span class="n">client_id</span><span class="p">)</span> <span class="k">as</span> <span class="n">session</span><span class="p">:</span>
+                <span class="n">resp</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">refresh_token</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">access_token_endpoint</span><span class="p">,</span>
+                                             <span class="n">refresh_token</span><span class="o">=</span><span class="n">refresh_token</span><span class="p">,</span>
+                                             <span class="n">auth</span><span class="o">=</span><span class="n">auth</span><span class="p">)</span>
+                <span class="k">return</span> <span class="n">resp</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;access_token&#39;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">resp</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">refresh_token</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">access_token_endpoint</span><span class="p">,</span>
+                                         <span class="n">refresh_token</span><span class="o">=</span><span class="n">refresh_token</span><span class="p">,</span>
+                                         <span class="n">auth</span><span class="o">=</span><span class="n">auth</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">resp</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;access_token&#39;</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="ESIAuthenticator.revoke_token"><a class="viewcode-back" href="../../source/modules.html#esy.auth.ESIAuthenticator.revoke_token">[docs]</a>    <span class="k">def</span> <span class="nf">revoke_token</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">token</span><span class="p">,</span> <span class="n">client_id</span><span class="p">,</span> <span class="n">secret</span><span class="p">,</span>
                      <span class="n">token_type</span><span class="o">=</span><span class="s1">&#39;refresh_token&#39;</span><span class="p">,</span> <span class="n">session</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">auth</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
@@ -251,6 +256,8 @@
 <span class="sd">        :type client_id: str</span>
 <span class="sd">        :param secret: The ESI Secret key</span>
 <span class="sd">        :type secret: str</span>
+<span class="sd">        :param token_type: Token type to request from ESI</span>
+<span class="sd">        :type token_type: str</span>
 <span class="sd">        :param session: Existing session for reuse</span>
 <span class="sd">        :type session: OAuth2Session</span>
 <span class="sd">        :param auth: Existing authentication handler for reuse</span>
@@ -258,18 +265,27 @@
 <span class="sd">        :return: Token revocation status</span>
 <span class="sd">        :rtype: bool</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="n">session</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">session</span> <span class="o">=</span> <span class="n">OAuth2Session</span><span class="p">(</span><span class="n">client_id</span><span class="p">)</span>
+
         <span class="k">if</span> <span class="n">auth</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">auth</span> <span class="o">=</span> <span class="n">HTTPBasicAuth</span><span class="p">(</span><span class="n">client_id</span><span class="p">,</span>
                                  <span class="n">secret</span><span class="p">)</span>
-        <span class="n">resp</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">revoke_token_endpoint</span><span class="p">,</span>
-                            <span class="n">data</span><span class="o">=</span><span class="p">{</span>
-                                <span class="s1">&#39;token_type&#39;</span><span class="p">:</span> <span class="n">token_type</span><span class="p">,</span>
-                                <span class="s1">&#39;token&#39;</span><span class="p">:</span> <span class="n">token</span>
-                            <span class="p">},</span>
-                            <span class="n">auth</span><span class="o">=</span><span class="n">auth</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">resp</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">200</span></div></div>
+        <span class="k">if</span> <span class="n">session</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">with</span> <span class="n">OAuth2Session</span><span class="p">(</span><span class="n">client_id</span><span class="p">)</span> <span class="k">as</span> <span class="n">session</span><span class="p">:</span>
+                <span class="n">resp</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">revoke_token_endpoint</span><span class="p">,</span>
+                                    <span class="n">data</span><span class="o">=</span><span class="p">{</span>
+                                        <span class="s1">&#39;token_type&#39;</span><span class="p">:</span> <span class="n">token_type</span><span class="p">,</span>
+                                        <span class="s1">&#39;token&#39;</span><span class="p">:</span> <span class="n">token</span>
+                                    <span class="p">},</span>
+                                    <span class="n">auth</span><span class="o">=</span><span class="n">auth</span><span class="p">)</span>
+                <span class="k">return</span> <span class="n">resp</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">200</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">resp</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">revoke_token_endpoint</span><span class="p">,</span>
+                                <span class="n">data</span><span class="o">=</span><span class="p">{</span>
+                                    <span class="s1">&#39;token_type&#39;</span><span class="p">:</span> <span class="n">token_type</span><span class="p">,</span>
+                                    <span class="s1">&#39;token&#39;</span><span class="p">:</span> <span class="n">token</span>
+                                <span class="p">},</span>
+                                <span class="n">auth</span><span class="o">=</span><span class="n">auth</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">resp</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">200</span></div></div>
 </pre></div>
 
            </div>
