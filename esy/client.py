@@ -15,7 +15,8 @@ from bravado.exception import HTTPInternalServerError, HTTPNotFound, \
     HTTPBadRequest, HTTPForbidden
 from .exceptions import ESIError, ESINotFound, ESIForbidden, \
     ESIAuthorizationError
-from .constants import ESI_ENDPOINT, ESI_DATASOURCE, ESI_SWAGGER_CACHE_TIMER
+from .constants import ESI_ENDPOINT, ESI_DATASOURCE, ESI_SWAGGER_CACHE_TIMER, \
+    ESY_USER_AGENT
 
 
 log = logging.getLogger(__name__)
@@ -230,7 +231,7 @@ class ESIClient(SwaggerClient):
         return '{}?datasource={}'.format(endpoint, datasource)
 
     @staticmethod
-    def get_client(user_agent, use_models=False, spec=None,
+    def get_client(user_agent=ESY_USER_AGENT, use_models=False, spec=None,
                    endpoint=ESI_ENDPOINT, datasource=ESI_DATASOURCE,
                    cache=None):
         """
