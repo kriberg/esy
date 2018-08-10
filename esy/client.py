@@ -146,6 +146,7 @@ class ESIPageGenerator(object):
 
     def __next__(self):
         if self.stop:
+            self.requests_future.session.close()
             raise StopIteration
         else:
             self.requests_future.request.params['page'] = self.page
@@ -192,12 +193,14 @@ class ESIRequestsClient(RequestsClient):
                                     request_config=request_config,
                                     cache=self.cache)
         else:
-            return ESIPageGenerator(requests_future,
+            data = ESIPageGenerator(requests_future,
                                     RequestsResponseAdapter,
                                     operation,
                                     response_callbacks,
                                     request_config=request_config,
                                     cache=self.cache).get()
+            session.close()
+            return data
 
 
 class ESIClient(SwaggerClient):
