@@ -262,6 +262,9 @@ class TestEntities(unittest.TestCase):
         ccp = Entity.from_name('C C P Alliance', _client=self.client)
         self.assertIsInstance(ccp, Alliance)
 
+        self.assertIn('get_blueprints', dir(vitt))
+        self.assertIn('security_status', dir(vitt))
+
     @unittest.skipIf('TRAVIS' in os.environ,
                      'Skipping authed tests on travis-ci.')
     def test_authed_character(self):
