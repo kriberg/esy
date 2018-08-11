@@ -268,8 +268,4 @@ class TestEntities(unittest.TestCase):
         self.do_login()
         char = Character(self.test_character_id, _token=self.access_token)
         self.assertIsInstance(char.get_blueprints(), ESIPageGenerator)
-        assets = char.get_assets()
-        self.assertIsInstance(assets, ESIPageGenerator)
-        for page in assets:
-            print(page)
         self.do_logout()
