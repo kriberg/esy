@@ -116,10 +116,12 @@ class ESIPageGenerator(object):
             else:
                 data, response = self._send()
                 self.num_pages = int(response.headers.get('x-pages', '1'))
-                expires = datetime(
-                    *parsedate(response.headers.get('expires'))[:7], pytz.UTC
-                )
-                self.cache.set(key, (data, self.num_pages), expires)
+                expire_header = response.headers.get('expires')
+                if expire_header is not None:
+                    expires = datetime(
+                        *parsedate(response.headers.get('expires'))[:7],
+                        pytz.UTC)
+                    self.cache.set(key, (data, self.num_pages), expires)
         else:
             try:
                 data, response = self._send()
