@@ -262,10 +262,12 @@
             <span class="k">else</span><span class="p">:</span>
                 <span class="n">data</span><span class="p">,</span> <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_send</span><span class="p">()</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">num_pages</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">headers</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;x-pages&#39;</span><span class="p">,</span> <span class="s1">&#39;1&#39;</span><span class="p">))</span>
-                <span class="n">expires</span> <span class="o">=</span> <span class="n">datetime</span><span class="p">(</span>
-                    <span class="o">*</span><span class="n">parsedate</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">headers</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;expires&#39;</span><span class="p">))[:</span><span class="mi">7</span><span class="p">],</span> <span class="n">pytz</span><span class="o">.</span><span class="n">UTC</span>
-                <span class="p">)</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">cache</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_pages</span><span class="p">),</span> <span class="n">expires</span><span class="p">)</span>
+                <span class="n">expire_header</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">headers</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;expires&#39;</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">expire_header</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="n">expires</span> <span class="o">=</span> <span class="n">datetime</span><span class="p">(</span>
+                        <span class="o">*</span><span class="n">parsedate</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">headers</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;expires&#39;</span><span class="p">))[:</span><span class="mi">7</span><span class="p">],</span>
+                        <span class="n">pytz</span><span class="o">.</span><span class="n">UTC</span><span class="p">)</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">cache</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_pages</span><span class="p">),</span> <span class="n">expires</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">try</span><span class="p">:</span>
                 <span class="n">data</span><span class="p">,</span> <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_send</span><span class="p">()</span>
@@ -292,6 +294,7 @@
 
     <span class="k">def</span> <span class="nf">__next__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">stop</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">requests_future</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
             <span class="k">raise</span> <span class="ne">StopIteration</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">requests_future</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="s1">&#39;page&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">page</span>
@@ -338,12 +341,14 @@
                                     <span class="n">request_config</span><span class="o">=</span><span class="n">request_config</span><span class="p">,</span>
                                     <span class="n">cache</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">cache</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">ESIPageGenerator</span><span class="p">(</span><span class="n">requests_future</span><span class="p">,</span>
+            <span class="n">data</span> <span class="o">=</span> <span class="n">ESIPageGenerator</span><span class="p">(</span><span class="n">requests_future</span><span class="p">,</span>
                                     <span class="n">RequestsResponseAdapter</span><span class="p">,</span>
                                     <span class="n">operation</span><span class="p">,</span>
                                     <span class="n">response_callbacks</span><span class="p">,</span>
                                     <span class="n">request_config</span><span class="o">=</span><span class="n">request_config</span><span class="p">,</span>
-                                    <span class="n">cache</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">cache</span><span class="p">)</span><span class="o">.</span><span class="n">get</span><span class="p">()</span></div></div>
+                                    <span class="n">cache</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">cache</span><span class="p">)</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+            <span class="n">session</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+            <span class="k">return</span> <span class="n">data</span></div></div>
 
 
 <div class="viewcode-block" id="ESIClient"><a class="viewcode-back" href="../../source/modules.html#esy.client.ESIClient">[docs]</a><span class="k">class</span> <span class="nc">ESIClient</span><span class="p">(</span><span class="n">SwaggerClient</span><span class="p">):</span>
