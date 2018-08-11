@@ -2,7 +2,9 @@ import unittest
 import os
 import os.path
 import json
+from collections import defaultdict
 from esy.client import ESIClient, ESIPageGenerator
+from esy.entities import Character, Corporation, Entity, Alliance
 from esy.exceptions import ESIError, ESIAuthorizationError, ESIForbidden
 import esy.devel
 
@@ -14,10 +16,12 @@ class DummyCache(object):
     def __init__(self):
         self.dummy = {}
         self.hits = 0
+        self.key_hits = defaultdict(lambda: 0)
 
     def get(self, key):
         if key in self.dummy:
             self.hits += 1
+            self.key_hits[key] += 1
         return self.dummy.get(key)
 
     def set(self, key, data, *args):
@@ -39,12 +43,12 @@ class TestESIClient(unittest.TestCase):
                                  'swagger.json')
         with open(spec_path, 'r') as spec_file:
             spec = json.load(spec_file)
-        self.client = ESIClient.get_client('test', spec=spec)
+        self.client = ESIClient.get_client(spec=spec)
         self.cache = DummyCache()
 
     def test_get_client(self):
         self.assertIsInstance(self.client, ESIClient)
-        self.assertIsInstance(ESIClient.get_client('test'),
+        self.assertIsInstance(ESIClient.get_client(),
                               ESIClient)
 
     def test_spec_parsing(self):
@@ -197,3 +201,75 @@ class TestDevel(unittest.TestCase):
                                             client_id=self.client_id,
                                             secret_key=self.secret_key)
             self.assertTrue(status)
+
+
+class TestEntities(unittest.TestCase):
+    def setUp(self):
+        spec_path = os.path.join(os.path.dirname(os.path.realpath(__file__)),
+                                 'swagger.json')
+        with open(spec_path, 'r') as spec_file:
+            spec = json.load(spec_file)
+        self.cache = DummyCache()
+        self.client = ESIClient.get_client(spec=spec, cache=self.cache)
+        self.test_charname = os.getenv('ESY_TEST_CHARACTER')
+        self.test_username = os.getenv('ESY_TEST_USERNAME')
+        self.test_password = os.getenv('ESY_TEST_PASSWORD')  # hunter2
+        self.test_character_id = os.getenv('ESY_CHARACTER_ID')
+        self.client_id = os.getenv('ESY_CLIENT_ID')
+        self.secret_key = os.getenv('ESY_SECRET_KEY')
+        self.scopes = os.getenv('ESY_SCOPES')
+
+    def do_login(self):
+        if not all((self.test_username, self.test_password, self.client_id,
+                    self.scopes, self.test_character_id)):
+            self.skipTest('Missing authorization parameters.')
+        authorization_code = esy.devel.get_authorization_code(
+            cli_login=True,
+            client_id=self.client_id,
+            scopes=self.scopes,
+            character_id=self.test_character_id,
+            username=self.test_username,
+            password=self.test_password)
+        refresh_token, access_token = esy.devel.verify_authorization_code(
+            authorization_code, client_id=self.client_id,
+            secret_key=self.secret_key)
+        self.refresh_token = refresh_token
+        self.access_token = access_token
+
+    def do_logout(self):
+        for token, token_type in ((self.access_token, 'access_token'),
+                                  (self.refresh_token, 'refresh_token')):
+            esy.devel.revoke_token(token,
+                                   token_type=token_type,
+                                   client_id=self.client_id,
+                                   secret_key=self.secret_key)
+
+    def test_public_entities(self):
+        vitt = Character(VITTOROS, _client=self.client)
+        self.assertEqual(vitt.id, VITTOROS)
+        self.assertEqual(vitt.name, 'Vittoros')
+        with self.assertRaises(AttributeError):
+            _ = vitt.elite
+        evol = Corporation(EVOLUTION, _client=self.client)
+        self.assertEqual(evol.id, EVOLUTION)
+        self.assertEqual(evol.name, 'Evolution')
+
+        self.assertIsInstance(vitt.corporation, Corporation)
+        self.assertEqual(vitt.corporation.name, 'Evolution')
+        self.assertEqual(vitt.corporation.id, EVOLUTION)
+        self.assertTrue(vitt.corporation == evol)
+
+        ccp = Entity.from_name('C C P Alliance', _client=self.client)
+        self.assertIsInstance(ccp, Alliance)
+
+    @unittest.skipIf('TRAVIS' in os.environ,
+                     'Skipping authed tests on travis-ci.')
+    def test_authed_character(self):
+        self.do_login()
+        char = Character(self.test_character_id, _token=self.access_token)
+        self.assertIsInstance(char.get_blueprints(), ESIPageGenerator)
+        assets = char.get_assets()
+        self.assertIsInstance(assets, ESIPageGenerator)
+        for page in assets:
+            print(page)
+        self.do_logout()
