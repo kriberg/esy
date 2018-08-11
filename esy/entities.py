@@ -38,6 +38,7 @@ class Entity(object):
                     resource_name.replace(self.resource_key, ''))
                 context = self._map_resource(operation)
                 self.resource_context[context_name] = context
+                self._public_attributes.append(context_name)
 
     def _map_resource(self, operation):
         context = {}
