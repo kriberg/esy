@@ -2,7 +2,9 @@
 import os.path
 import sys
 import json
+from types import MethodType
 from esy.client import ESIClient
+from esy.entities import Character, Corporation, Alliance
 
 PARAM_TYPES = {
     'integer': 'int',
@@ -11,9 +13,7 @@ PARAM_TYPES = {
     'object': 'dict'
 }
 
-INDEX_HEADER = '''ESI API
-#######
-
+INDEX_HEADER = '''
 .. toctree::
    :maxdepth: 4
    :caption: Namespaces
@@ -22,6 +22,10 @@ INDEX_HEADER = '''ESI API
    :toctree: generated
    
 '''
+
+VITTOROS = 941287462
+EVOLUTION = 144749962
+CCP = 434243723
 
 
 def t(text, indent):
@@ -86,6 +90,29 @@ def generate_namespace_doc(namespace, resource):
     yield '\n\n'
 
 
+def generate_entity_doc(entity_name, instance):
+    print(f'Generating docs for entity {entity_name}...')
+    yield f'{entity_name}\n'
+    yield f'{"-" * len(entity_name)}\n\n'
+    yield f'.. py:class:: {entity_name}\n\n'
+
+    for name in dir(instance):
+        operation = getattr(instance, name)
+        if type(operation) is MethodType and \
+                not operation.__name__.startswith('_'):
+            print(f'\tAdding {operation.__name__}...')
+            parameters = operation.__annotations__.get('parameters', [])
+            method_params = ', '.join(map(lambda p: f'{p}=None', parameters))
+            yield t(f'.. py:method:: {name}({method_params})\n\n', 3)
+            yield t(f'{operation.__doc__}\n\n', 6)
+            for parameter in parameters:
+                yield t(f':param int {parameter}: {parameter}\n', 6)
+            if parameters:
+                yield ('\n')
+
+    yield '\n\n'
+
+
 def update_docs():
     basedir = os.path.dirname(os.path.realpath(__file__))
     spec_path = os.path.join(basedir, 'tests', 'swagger.json')
@@ -101,11 +128,24 @@ def update_docs():
     doc_path = os.path.join(basedir, 'docs', 'source', 'esi.rst')
 
     with open(doc_path, 'w') as index:
+        index.write('ESI API\n#######\n')
         index.write(INDEX_HEADER)
 
         for namespace in sorted(dir(client)):
             resource = getattr(client, namespace)
             for output in generate_namespace_doc(namespace, resource):
+                index.write(output)
+
+    doc_path = os.path.join(basedir, 'docs', 'source', 'entities.rst')
+    with open(doc_path, 'w') as index:
+        index.write('Entities API\n############\n')
+        index.write(INDEX_HEADER)
+        for entity, entity_id in ((Character, VITTOROS),
+                                  (Corporation, EVOLUTION),
+                                  (Alliance, CCP)):
+            instance = entity(entity_id, _client=client)
+            for output in generate_entity_doc(entity.__name__,
+                                              instance):
                 index.write(output)
 
 

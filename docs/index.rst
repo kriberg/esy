@@ -14,6 +14,7 @@ ESY Documentation
    :caption: Contents:
 
    readme.rst
+   source/entities.rst
    source/esi.rst
    source/modules.rst
 

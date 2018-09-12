@@ -248,6 +248,9 @@ class TestEntities(unittest.TestCase):
         vitt = Character(VITTOROS, _client=self.client)
         self.assertEqual(vitt.id, VITTOROS)
         self.assertEqual(vitt.name, 'Vittoros')
+        self.assertEqual(
+            vitt.get_portrait().get('px64x64'),
+            'http://image.eveonline.com/Character/941287462_64.jpg')
         with self.assertRaises(AttributeError):
             _ = vitt.elite
         evol = Corporation(EVOLUTION, _client=self.client)
@@ -264,11 +267,17 @@ class TestEntities(unittest.TestCase):
 
         self.assertIn('get_blueprints', dir(vitt))
         self.assertIn('security_status', dir(vitt))
+        self.assertIn('get_assets', dir(vitt))
+        self.assertIn('get_contracts', dir(vitt))
+
 
     @unittest.skipIf('TRAVIS' in os.environ,
                      'Skipping authed tests on travis-ci.')
     def test_authed_character(self):
         self.do_login()
         char = Character(self.test_character_id, _token=self.access_token)
-        self.assertIsInstance(char.get_blueprints(), ESIPageGenerator)
+        assets_generator = char.get_assets()
+        self.assertIsInstance(assets_generator, ESIPageGenerator)
+        assets = list(assets_generator)
+        self.assertIsInstance(assets, list)
         self.do_logout()

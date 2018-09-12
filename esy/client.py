@@ -333,3 +333,15 @@ class ESIResourceDecorator(ResourceDecorator):
         :rtype: :class:`CallableOperation`
         """
         return ESICallableOperation(getattr(self.resource, name))
+
+    def __eq__(self, other):
+        """
+        :param other: instance to compare to
+        :type other: ESIResourceDecorator
+        :return: equality of instances
+        :rtype: bool
+        """
+        return self.resource.name == other.resource.name
+
+    def __str__(self):
+        return self.resource.name
