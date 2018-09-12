@@ -110,7 +110,7 @@ Assets
 
    .. py:method:: post_corporations_corporation_id_assets_names(corporation_id=None, item_ids=None, _token=None)
 
-   Get coporation asset names
+   Get corporation asset names
 
       :param int corporation_id: An EVE corporation ID
       :param None item_ids: A list of item ids
@@ -212,7 +212,7 @@ Calendar
 
       :param int character_id: An EVE character ID
       :param int event_id: The ID of the event requested
-      :param None response: The response value to set, overriding current value.
+      :param None response: The response value to set, overriding current value
       :param str _token: ESI authorization token
       :return: None
       :rtype: None
@@ -356,7 +356,7 @@ Character
 
    Character affiliation
 
-      :param None characters: The character IDs to fetch affiliations for. All characters must exist, or none will be returned.
+      :param None characters: The character IDs to fetch affiliations for. All characters must exist, or none will be returned
       :return: Character corporation, alliance and faction IDs
       :rtype: list
 
@@ -542,6 +542,33 @@ Contracts
       :param str _token: ESI authorization token
       :return: A list of items in this contract
       :rtype: list
+
+
+   .. py:method:: get_contracts_public_bids_contract_id(contract_id=None)
+
+   Get public contract bids
+
+      :param int contract_id: ID of a contract
+      :return: A list of bids
+      :rtype: :class:`~esy.client.ESIPageGenerator` list
+
+
+   .. py:method:: get_contracts_public_items_contract_id(contract_id=None)
+
+   Get public contract items
+
+      :param int contract_id: ID of a contract
+      :return: A list of items in this contract
+      :rtype: :class:`~esy.client.ESIPageGenerator` list
+
+
+   .. py:method:: get_contracts_public_region_id(region_id=None)
+
+   Get public contracts
+
+      :param int region_id: An EVE region id
+      :return: A list of contracts
+      :rtype: :class:`~esy.client.ESIPageGenerator` list
 
 
    .. py:method:: get_corporations_corporation_id_contracts(corporation_id=None, _token=None)
@@ -884,7 +911,7 @@ Faction_Warfare
 
    List of the top factions in faction warfare
 
-      :return: Corporation leaderboard of kills and victory points within faction warfare.
+      :return: Corporation leaderboard of kills and victory points within faction warfare
       :rtype: dict
 
 
@@ -892,7 +919,7 @@ Faction_Warfare
 
    List of the top pilots in faction warfare
 
-      :return: Character leaderboard of kills and victory points within faction warfare.
+      :return: Character leaderboard of kills and victory points within faction warfare
       :rtype: dict
 
 
@@ -900,7 +927,7 @@ Faction_Warfare
 
    List of the top corporations in faction warfare
 
-      :return: Corporation leaderboard of kills and victory points within faction warfare.
+      :return: Corporation leaderboard of kills and victory points within faction warfare
       :rtype: dict
 
 
@@ -1157,7 +1184,7 @@ Industry
    List character industry jobs
 
       :param int character_id: An EVE character ID
-      :param boolean include_completed: Whether retrieve completed character industry jobs as well
+      :param boolean include_completed: Whether to retrieve completed character industry jobs. Only includes jobs from the past 90 days
       :param str _token: ESI authorization token
       :return: Industry jobs placed by a character
       :rtype: list
@@ -1209,7 +1236,7 @@ Industry
    List corporation industry jobs
 
       :param int corporation_id: An EVE corporation ID
-      :param boolean include_completed: Whether retrieve completed industry jobs as well
+      :param boolean include_completed: Whether to retrieve completed corporation industry jobs. Only includes jobs from the past 90 days
       :param str _token: ESI authorization token
       :return: A list of corporation industry jobs
       :rtype: :class:`~esy.client.ESIPageGenerator` list
@@ -1298,7 +1325,7 @@ Location
 
       :param int character_id: An EVE character ID
       :param str _token: ESI authorization token
-      :return: Information about the characters current location. Returns the current solar system id, and also the current station or structure ID if applicable.
+      :return: Information about the characters current location. Returns the current solar system id, and also the current station or structure ID if applicable
       :rtype: dict
 
 
@@ -1542,7 +1569,7 @@ Market
 
    List orders in a region
 
-      :param str order_type: Filter buy/sell orders, return all orders by default. If you query without type_id, we always return both buy and sell orders.
+      :param str order_type: Filter buy/sell orders, return all orders by default. If you query without type_id, we always return both buy and sell orders
       :param int region_id: Return orders in this region
       :param int type_id: Return orders only for this type
       :return: A list of orders
@@ -2079,7 +2106,7 @@ Universe
       :param str Accept_Language: Language to use in the response
       :param str language: Language to use in the response, takes precedence over Accept-Language
       :param None names: The names to resolve
-      :return: List of id/name associations for a set of names divided by category. Any name passed in that did not have a match will be ommitted.
+      :return: List of id/name associations for a set of names divided by category. Any name passed in that did not have a match will be ommitted
       :rtype: dict
 
 
@@ -2088,7 +2115,7 @@ Universe
    Get names and categories for a set of ID's
 
       :param None ids: The ids to resolve
-      :return: List of id/name associations for a set of ID's. All ID's must resolve to a name, or nothing will be returned.
+      :return: List of id/name associations for a set of ID's. All ID's must resolve to a name, or nothing will be returned
       :rtype: list
 
 
@@ -2233,8 +2260,8 @@ Wars
 
    List wars
 
-      :param int max_war_id: Only return wars with ID smaller than this.
-      :return: A list of war IDs, in decending order by war_id.
+      :param int max_war_id: Only return wars with ID smaller than this
+      :return: A list of war IDs, in descending order by war_id
       :rtype: list
 
 
