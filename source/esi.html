@@ -29,7 +29,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="modules" href="modules.html" />
-    <link rel="prev" title="Introduction" href="../readme.html" /> 
+    <link rel="prev" title="Entities API" href="entities.html" /> 
 
   
   <script src="../_static/js/modernizr.min.js"></script>
@@ -81,6 +81,7 @@
               <p class="caption"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../readme.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="entities.html">Entities API</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">ESI API</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#alliance">Alliance</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#assets">Assets</a></li>
@@ -421,7 +422,7 @@
 <code class="descname">post_corporations_corporation_id_assets_names</code><span class="sig-paren">(</span><em>corporation_id=None</em>, <em>item_ids=None</em>, <em>_token=None</em><span class="sig-paren">)</span><a class="headerlink" href="#Assets.post_corporations_corporation_id_assets_names" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<p>Get coporation asset names</p>
+<p>Get corporation asset names</p>
 <blockquote>
 <div><table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -654,7 +655,7 @@
 <tr class="field-even field"><td>&#160;</td><td class="field-body">The ID of the event requested</td>
 </tr>
 <tr class="field-odd field"><th class="field-name" colspan="2">param None response:</th></tr>
-<tr class="field-odd field"><td>&#160;</td><td class="field-body">The response value to set, overriding current value.</td>
+<tr class="field-odd field"><td>&#160;</td><td class="field-body">The response value to set, overriding current value</td>
 </tr>
 <tr class="field-even field"><th class="field-name" colspan="2">param str _token:</th></tr>
 <tr class="field-even field"><td>&#160;</td><td class="field-body">ESI authorization token</td>
@@ -989,7 +990,7 @@
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name" colspan="2">param None characters:</th></tr>
-<tr class="field-odd field"><td>&#160;</td><td class="field-body">The character IDs to fetch affiliations for. All characters must exist, or none will be returned.</td>
+<tr class="field-odd field"><td>&#160;</td><td class="field-body">The character IDs to fetch affiliations for. All characters must exist, or none will be returned</td>
 </tr>
 <tr class="field-even field"><th class="field-name">return:</th><td class="field-body">Character corporation, alliance and faction IDs</td>
 </tr>
@@ -1414,6 +1415,69 @@
 <tr class="field-even field"><th class="field-name">return:</th><td class="field-body">A list of items in this contract</td>
 </tr>
 <tr class="field-odd field"><th class="field-name">rtype:</th><td class="field-body">list</td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+<dl class="method">
+<dt id="Contracts.get_contracts_public_bids_contract_id">
+<code class="descname">get_contracts_public_bids_contract_id</code><span class="sig-paren">(</span><em>contract_id=None</em><span class="sig-paren">)</span><a class="headerlink" href="#Contracts.get_contracts_public_bids_contract_id" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p>Get public contract bids</p>
+<blockquote>
+<div><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name" colspan="2">param int contract_id:</th></tr>
+<tr class="field-odd field"><td>&#160;</td><td class="field-body">ID of a contract</td>
+</tr>
+<tr class="field-even field"><th class="field-name">return:</th><td class="field-body">A list of bids</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">rtype:</th><td class="field-body"><a class="reference internal" href="modules.html#esy.client.ESIPageGenerator" title="esy.client.ESIPageGenerator"><code class="xref py py-class docutils literal notranslate"><span class="pre">ESIPageGenerator</span></code></a> list</td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+<dl class="method">
+<dt id="Contracts.get_contracts_public_items_contract_id">
+<code class="descname">get_contracts_public_items_contract_id</code><span class="sig-paren">(</span><em>contract_id=None</em><span class="sig-paren">)</span><a class="headerlink" href="#Contracts.get_contracts_public_items_contract_id" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p>Get public contract items</p>
+<blockquote>
+<div><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name" colspan="2">param int contract_id:</th></tr>
+<tr class="field-odd field"><td>&#160;</td><td class="field-body">ID of a contract</td>
+</tr>
+<tr class="field-even field"><th class="field-name">return:</th><td class="field-body">A list of items in this contract</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">rtype:</th><td class="field-body"><a class="reference internal" href="modules.html#esy.client.ESIPageGenerator" title="esy.client.ESIPageGenerator"><code class="xref py py-class docutils literal notranslate"><span class="pre">ESIPageGenerator</span></code></a> list</td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+<dl class="method">
+<dt id="Contracts.get_contracts_public_region_id">
+<code class="descname">get_contracts_public_region_id</code><span class="sig-paren">(</span><em>region_id=None</em><span class="sig-paren">)</span><a class="headerlink" href="#Contracts.get_contracts_public_region_id" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p>Get public contracts</p>
+<blockquote>
+<div><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name" colspan="2">param int region_id:</th></tr>
+<tr class="field-odd field"><td>&#160;</td><td class="field-body">An EVE region id</td>
+</tr>
+<tr class="field-even field"><th class="field-name">return:</th><td class="field-body">A list of contracts</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">rtype:</th><td class="field-body"><a class="reference internal" href="modules.html#esy.client.ESIPageGenerator" title="esy.client.ESIPageGenerator"><code class="xref py py-class docutils literal notranslate"><span class="pre">ESIPageGenerator</span></code></a> list</td>
 </tr>
 </tbody>
 </table>
@@ -2206,7 +2270,7 @@
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">return:</th><td class="field-body">Corporation leaderboard of kills and victory points within faction warfare.</td>
+<tr class="field-odd field"><th class="field-name">return:</th><td class="field-body">Corporation leaderboard of kills and victory points within faction warfare</td>
 </tr>
 <tr class="field-even field"><th class="field-name">rtype:</th><td class="field-body">dict</td>
 </tr>
@@ -2224,7 +2288,7 @@
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">return:</th><td class="field-body">Character leaderboard of kills and victory points within faction warfare.</td>
+<tr class="field-odd field"><th class="field-name">return:</th><td class="field-body">Character leaderboard of kills and victory points within faction warfare</td>
 </tr>
 <tr class="field-even field"><th class="field-name">rtype:</th><td class="field-body">dict</td>
 </tr>
@@ -2242,7 +2306,7 @@
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">return:</th><td class="field-body">Corporation leaderboard of kills and victory points within faction warfare.</td>
+<tr class="field-odd field"><th class="field-name">return:</th><td class="field-body">Corporation leaderboard of kills and victory points within faction warfare</td>
 </tr>
 <tr class="field-even field"><th class="field-name">rtype:</th><td class="field-body">dict</td>
 </tr>
@@ -2830,7 +2894,7 @@
 <tr class="field-odd field"><td>&#160;</td><td class="field-body">An EVE character ID</td>
 </tr>
 <tr class="field-even field"><th class="field-name" colspan="2">param boolean include_completed:</th></tr>
-<tr class="field-even field"><td>&#160;</td><td class="field-body">Whether retrieve completed character industry jobs as well</td>
+<tr class="field-even field"><td>&#160;</td><td class="field-body">Whether to retrieve completed character industry jobs. Only includes jobs from the past 90 days</td>
 </tr>
 <tr class="field-odd field"><th class="field-name" colspan="2">param str _token:</th></tr>
 <tr class="field-odd field"><td>&#160;</td><td class="field-body">ESI authorization token</td>
@@ -2956,7 +3020,7 @@
 <tr class="field-odd field"><td>&#160;</td><td class="field-body">An EVE corporation ID</td>
 </tr>
 <tr class="field-even field"><th class="field-name" colspan="2">param boolean include_completed:</th></tr>
-<tr class="field-even field"><td>&#160;</td><td class="field-body">Whether retrieve completed industry jobs as well</td>
+<tr class="field-even field"><td>&#160;</td><td class="field-body">Whether to retrieve completed corporation industry jobs. Only includes jobs from the past 90 days</td>
 </tr>
 <tr class="field-odd field"><th class="field-name" colspan="2">param str _token:</th></tr>
 <tr class="field-odd field"><td>&#160;</td><td class="field-body">ESI authorization token</td>
@@ -3141,7 +3205,7 @@
 <tr class="field-even field"><th class="field-name" colspan="2">param str _token:</th></tr>
 <tr class="field-even field"><td>&#160;</td><td class="field-body">ESI authorization token</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">return:</th><td class="field-body">Information about the characters current location. Returns the current solar system id, and also the current station or structure ID if applicable.</td>
+<tr class="field-odd field"><th class="field-name">return:</th><td class="field-body">Information about the characters current location. Returns the current solar system id, and also the current station or structure ID if applicable</td>
 </tr>
 <tr class="field-even field"><th class="field-name">rtype:</th><td class="field-body">dict</td>
 </tr>
@@ -3703,7 +3767,7 @@
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name" colspan="2">param str order_type:</th></tr>
-<tr class="field-odd field"><td>&#160;</td><td class="field-body">Filter buy/sell orders, return all orders by default. If you query without type_id, we always return both buy and sell orders.</td>
+<tr class="field-odd field"><td>&#160;</td><td class="field-body">Filter buy/sell orders, return all orders by default. If you query without type_id, we always return both buy and sell orders</td>
 </tr>
 <tr class="field-even field"><th class="field-name" colspan="2">param int region_id:</th></tr>
 <tr class="field-even field"><td>&#160;</td><td class="field-body">Return orders in this region</td>
@@ -4908,7 +4972,7 @@
 <tr class="field-odd field"><th class="field-name" colspan="2">param None names:</th></tr>
 <tr class="field-odd field"><td>&#160;</td><td class="field-body">The names to resolve</td>
 </tr>
-<tr class="field-even field"><th class="field-name">return:</th><td class="field-body">List of id/name associations for a set of names divided by category. Any name passed in that did not have a match will be ommitted.</td>
+<tr class="field-even field"><th class="field-name">return:</th><td class="field-body">List of id/name associations for a set of names divided by category. Any name passed in that did not have a match will be ommitted</td>
 </tr>
 <tr class="field-odd field"><th class="field-name">rtype:</th><td class="field-body">dict</td>
 </tr>
@@ -4928,7 +4992,7 @@
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">param None ids:</th><td class="field-body">The ids to resolve</td>
 </tr>
-<tr class="field-even field"><th class="field-name">return:</th><td class="field-body">List of id/name associations for a set of ID’s. All ID’s must resolve to a name, or nothing will be returned.</td>
+<tr class="field-even field"><th class="field-name">return:</th><td class="field-body">List of id/name associations for a set of ID’s. All ID’s must resolve to a name, or nothing will be returned</td>
 </tr>
 <tr class="field-odd field"><th class="field-name">rtype:</th><td class="field-body">list</td>
 </tr>
@@ -5253,9 +5317,9 @@
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name" colspan="2">param int max_war_id:</th></tr>
-<tr class="field-odd field"><td>&#160;</td><td class="field-body">Only return wars with ID smaller than this.</td>
+<tr class="field-odd field"><td>&#160;</td><td class="field-body">Only return wars with ID smaller than this</td>
 </tr>
-<tr class="field-even field"><th class="field-name">return:</th><td class="field-body">A list of war IDs, in decending order by war_id.</td>
+<tr class="field-even field"><th class="field-name">return:</th><td class="field-body">A list of war IDs, in descending order by war_id</td>
 </tr>
 <tr class="field-odd field"><th class="field-name">rtype:</th><td class="field-body">list</td>
 </tr>
@@ -5320,7 +5384,7 @@
         <a href="modules.html" class="btn btn-neutral float-right" title="modules" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="../readme.html" class="btn btn-neutral" title="Introduction" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="entities.html" class="btn btn-neutral" title="Entities API" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -5362,6 +5426,7 @@
       <script type="text/javascript" src="../_static/jquery.js"></script>
       <script type="text/javascript" src="../_static/underscore.js"></script>
       <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
   
 

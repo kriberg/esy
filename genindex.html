@@ -80,6 +80,7 @@
               <p class="caption"><span class="caption-text">Contents:</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="readme.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="source/entities.html">Entities API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="source/esi.html">ESI API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="source/modules.html">modules</a></li>
 </ul>
@@ -171,7 +172,7 @@
 <h2 id="A">A</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="source/esi.html#Alliance">Alliance (built-in class)</a>
+      <li><a href="source/entities.html#Alliance">Alliance (built-in class)</a>, <a href="source/esi.html#Alliance">[1]</a>
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
@@ -195,7 +196,7 @@
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="source/esi.html#Calendar">Calendar (built-in class)</a>
 </li>
-      <li><a href="source/esi.html#Character">Character (built-in class)</a>
+      <li><a href="source/entities.html#Character">Character (built-in class)</a>, <a href="source/esi.html#Character">[1]</a>
 </li>
       <li><a href="source/esi.html#Clones">Clones (built-in class)</a>
 </li>
@@ -205,7 +206,7 @@
 </li>
       <li><a href="source/esi.html#Contracts">Contracts (built-in class)</a>
 </li>
-      <li><a href="source/esi.html#Corporation">Corporation (built-in class)</a>
+      <li><a href="source/entities.html#Corporation">Corporation (built-in class)</a>, <a href="source/esi.html#Corporation">[1]</a>
 </li>
   </ul></td>
 </tr></table>
@@ -281,12 +282,28 @@
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="source/esi.html#Faction_Warfare">Faction_Warfare (built-in class)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="source/esi.html#Fittings">Fittings (built-in class)</a>
 </li>
       <li><a href="source/esi.html#Fleets">Fleets (built-in class)</a>
 </li>
+      <li><a href="source/entities.html#Alliance.from_name">from_name() (Alliance method)</a>
+
+      <ul>
+        <li><a href="source/entities.html#Character.from_name">(Character method)</a>
+</li>
+        <li><a href="source/entities.html#Corporation.from_name">(Corporation method)</a>
+</li>
+      </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="source/entities.html#Alliance.from_names">from_names() (Alliance method)</a>
+
+      <ul>
+        <li><a href="source/entities.html#Character.from_names">(Character method)</a>
+</li>
+        <li><a href="source/entities.html#Corporation.from_names">(Corporation method)</a>
+</li>
+      </ul></li>
   </ul></td>
 </tr></table>
 
@@ -294,6 +311,10 @@
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="source/modules.html#esy.auth.ESIAuthenticator.get_access_token">get_access_token() (esy.auth.ESIAuthenticator method)</a>
+</li>
+      <li><a href="source/entities.html#Character.get_agents_research">get_agents_research() (Character method)</a>
+</li>
+      <li><a href="source/entities.html#Corporation.get_alliancehistory">get_alliancehistory() (Corporation method)</a>
 </li>
       <li><a href="source/esi.html#Alliance.get_alliances">get_alliances() (Alliance method)</a>
 </li>
@@ -307,7 +328,39 @@
 </li>
       <li><a href="source/esi.html#Alliance.get_alliances_alliance_id_icons">get_alliances_alliance_id_icons() (Alliance method)</a>
 </li>
+      <li><a href="source/entities.html#Character.get_assets">get_assets() (Character method)</a>
+
+      <ul>
+        <li><a href="source/entities.html#Corporation.get_assets">(Corporation method)</a>
+</li>
+      </ul></li>
+      <li><a href="source/entities.html#Character.get_attributes">get_attributes() (Character method)</a>
+</li>
       <li><a href="source/modules.html#esy.devel.get_authorization_code">get_authorization_code() (in module esy.devel)</a>
+</li>
+      <li><a href="source/entities.html#Character.get_blueprints">get_blueprints() (Character method)</a>
+
+      <ul>
+        <li><a href="source/entities.html#Corporation.get_blueprints">(Corporation method)</a>
+</li>
+      </ul></li>
+      <li><a href="source/entities.html#Character.get_bookmarks">get_bookmarks() (Character method)</a>
+
+      <ul>
+        <li><a href="source/entities.html#Corporation.get_bookmarks">(Corporation method)</a>
+</li>
+      </ul></li>
+      <li><a href="source/entities.html#Character.get_bookmarks_folders">get_bookmarks_folders() (Character method)</a>
+
+      <ul>
+        <li><a href="source/entities.html#Corporation.get_bookmarks_folders">(Corporation method)</a>
+</li>
+      </ul></li>
+      <li><a href="source/entities.html#Character.get_calendar">get_calendar() (Character method)</a>
+</li>
+      <li><a href="source/entities.html#Character.get_calendar_event">get_calendar_event() (Character method)</a>
+</li>
+      <li><a href="source/entities.html#Character.get_calendar_event_attendees">get_calendar_event_attendees() (Character method)</a>
 </li>
       <li><a href="source/esi.html#Character.get_characters_character_id">get_characters_character_id() (Character method)</a>
 </li>
@@ -415,11 +468,59 @@
 </li>
       <li><a href="source/modules.html#esy.client.ESIClient.get_client">get_client() (esy.client.ESIClient static method)</a>
 </li>
+      <li><a href="source/entities.html#Character.get_clones">get_clones() (Character method)</a>
+</li>
+      <li><a href="source/entities.html#Alliance.get_contacts">get_contacts() (Alliance method)</a>
+
+      <ul>
+        <li><a href="source/entities.html#Character.get_contacts">(Character method)</a>
+</li>
+        <li><a href="source/entities.html#Corporation.get_contacts">(Corporation method)</a>
+</li>
+      </ul></li>
+      <li><a href="source/entities.html#Alliance.get_contacts_labels">get_contacts_labels() (Alliance method)</a>
+
+      <ul>
+        <li><a href="source/entities.html#Character.get_contacts_labels">(Character method)</a>
+</li>
+        <li><a href="source/entities.html#Corporation.get_contacts_labels">(Corporation method)</a>
+</li>
+      </ul></li>
+      <li><a href="source/entities.html#Corporation.get_containers_logs">get_containers_logs() (Corporation method)</a>
+</li>
+      <li><a href="source/entities.html#Character.get_contracts">get_contracts() (Character method)</a>
+
+      <ul>
+        <li><a href="source/entities.html#Corporation.get_contracts">(Corporation method)</a>
+</li>
+      </ul></li>
+      <li><a href="source/entities.html#Character.get_contracts_contract_bids">get_contracts_contract_bids() (Character method)</a>
+
+      <ul>
+        <li><a href="source/entities.html#Corporation.get_contracts_contract_bids">(Corporation method)</a>
+</li>
+      </ul></li>
+      <li><a href="source/entities.html#Character.get_contracts_contract_items">get_contracts_contract_items() (Character method)</a>
+
+      <ul>
+        <li><a href="source/entities.html#Corporation.get_contracts_contract_items">(Corporation method)</a>
+</li>
+      </ul></li>
+      <li><a href="source/esi.html#Contracts.get_contracts_public_bids_contract_id">get_contracts_public_bids_contract_id() (Contracts method)</a>
+</li>
+      <li><a href="source/esi.html#Contracts.get_contracts_public_items_contract_id">get_contracts_public_items_contract_id() (Contracts method)</a>
+</li>
+      <li><a href="source/esi.html#Contracts.get_contracts_public_region_id">get_contracts_public_region_id() (Contracts method)</a>
+</li>
       <li><a href="source/esi.html#Industry.get_corporation_corporation_id_mining_extractions">get_corporation_corporation_id_mining_extractions() (Industry method)</a>
 </li>
       <li><a href="source/esi.html#Industry.get_corporation_corporation_id_mining_observers">get_corporation_corporation_id_mining_observers() (Industry method)</a>
 </li>
       <li><a href="source/esi.html#Industry.get_corporation_corporation_id_mining_observers_observer_id">get_corporation_corporation_id_mining_observers_observer_id() (Industry method)</a>
+</li>
+      <li><a href="source/entities.html#Character.get_corporationhistory">get_corporationhistory() (Character method)</a>
+</li>
+      <li><a href="source/entities.html#Alliance.get_corporations">get_corporations() (Alliance method)</a>
 </li>
       <li><a href="source/esi.html#Corporation.get_corporations_corporation_id">get_corporations_corporation_id() (Corporation method)</a>
 </li>
@@ -465,8 +566,6 @@
 </li>
       <li><a href="source/esi.html#Corporation.get_corporations_corporation_id_members">get_corporations_corporation_id_members() (Corporation method)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="source/esi.html#Corporation.get_corporations_corporation_id_members_limit">get_corporations_corporation_id_members_limit() (Corporation method)</a>
 </li>
       <li><a href="source/esi.html#Corporation.get_corporations_corporation_id_members_titles">get_corporations_corporation_id_members_titles() (Corporation method)</a>
@@ -497,9 +596,15 @@
 </li>
       <li><a href="source/esi.html#Wallet.get_corporations_corporation_id_wallets_division_journal">get_corporations_corporation_id_wallets_division_journal() (Wallet method)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="source/esi.html#Wallet.get_corporations_corporation_id_wallets_division_transactions">get_corporations_corporation_id_wallets_division_transactions() (Wallet method)</a>
 </li>
       <li><a href="source/esi.html#Corporation.get_corporations_npccorps">get_corporations_npccorps() (Corporation method)</a>
+</li>
+      <li><a href="source/entities.html#Corporation.get_customs_offices">get_customs_offices() (Corporation method)</a>
+</li>
+      <li><a href="source/entities.html#Corporation.get_divisions">get_divisions() (Corporation method)</a>
 </li>
       <li><a href="source/esi.html#Dogma.get_dogma_attributes">get_dogma_attributes() (Dogma method)</a>
 </li>
@@ -510,6 +615,14 @@
       <li><a href="source/esi.html#Dogma.get_dogma_effects">get_dogma_effects() (Dogma method)</a>
 </li>
       <li><a href="source/esi.html#Dogma.get_dogma_effects_effect_id">get_dogma_effects_effect_id() (Dogma method)</a>
+</li>
+      <li><a href="source/entities.html#Corporation.get_facilities">get_facilities() (Corporation method)</a>
+</li>
+      <li><a href="source/entities.html#Character.get_fatigue">get_fatigue() (Character method)</a>
+</li>
+      <li><a href="source/entities.html#Character.get_fittings">get_fittings() (Character method)</a>
+</li>
+      <li><a href="source/entities.html#Character.get_fleet">get_fleet() (Character method)</a>
 </li>
       <li><a href="source/esi.html#Fleets.get_fleets_fleet_id">get_fleets_fleet_id() (Fleets method)</a>
 </li>
@@ -523,23 +636,61 @@
 </li>
       <li><a href="source/esi.html#Faction_Warfare.get_fw_leaderboards_corporations">get_fw_leaderboards_corporations() (Faction_Warfare method)</a>
 </li>
-      <li><a href="source/esi.html#Faction_Warfare.get_fw_stats">get_fw_stats() (Faction_Warfare method)</a>
+      <li><a href="source/entities.html#Character.get_fw_stats">get_fw_stats() (Character method)</a>
+
+      <ul>
+        <li><a href="source/entities.html#Corporation.get_fw_stats">(Corporation method)</a>
 </li>
+        <li><a href="source/esi.html#Faction_Warfare.get_fw_stats">(Faction_Warfare method)</a>
+</li>
+      </ul></li>
       <li><a href="source/esi.html#Faction_Warfare.get_fw_systems">get_fw_systems() (Faction_Warfare method)</a>
 </li>
       <li><a href="source/esi.html#Faction_Warfare.get_fw_wars">get_fw_wars() (Faction_Warfare method)</a>
+</li>
+      <li><a href="source/entities.html#Alliance.get_icons">get_icons() (Alliance method)</a>
+
+      <ul>
+        <li><a href="source/entities.html#Corporation.get_icons">(Corporation method)</a>
+</li>
+      </ul></li>
+      <li><a href="source/entities.html#Character.get_implants">get_implants() (Character method)</a>
 </li>
       <li><a href="source/esi.html#Incursions.get_incursions">get_incursions() (Incursions method)</a>
 </li>
       <li><a href="source/esi.html#Industry.get_industry_facilities">get_industry_facilities() (Industry method)</a>
 </li>
+      <li><a href="source/entities.html#Character.get_industry_jobs">get_industry_jobs() (Character method)</a>
+
+      <ul>
+        <li><a href="source/entities.html#Corporation.get_industry_jobs">(Corporation method)</a>
+</li>
+      </ul></li>
       <li><a href="source/esi.html#Industry.get_industry_systems">get_industry_systems() (Industry method)</a>
 </li>
       <li><a href="source/esi.html#Insurance.get_insurance_prices">get_insurance_prices() (Insurance method)</a>
 </li>
       <li><a href="source/esi.html#Killmails.get_killmails_killmail_id_killmail_hash">get_killmails_killmail_id_killmail_hash() (Killmails method)</a>
 </li>
+      <li><a href="source/entities.html#Character.get_killmails_recent">get_killmails_recent() (Character method)</a>
+
+      <ul>
+        <li><a href="source/entities.html#Corporation.get_killmails_recent">(Corporation method)</a>
+</li>
+      </ul></li>
+      <li><a href="source/entities.html#Character.get_location">get_location() (Character method)</a>
+</li>
+      <li><a href="source/entities.html#Character.get_loyalty_points">get_loyalty_points() (Character method)</a>
+</li>
       <li><a href="source/esi.html#Loyalty.get_loyalty_stores_corporation_id_offers">get_loyalty_stores_corporation_id_offers() (Loyalty method)</a>
+</li>
+      <li><a href="source/entities.html#Character.get_mail">get_mail() (Character method)</a>
+</li>
+      <li><a href="source/entities.html#Character.get_mail_labels">get_mail_labels() (Character method)</a>
+</li>
+      <li><a href="source/entities.html#Character.get_mail_lists">get_mail_lists() (Character method)</a>
+</li>
+      <li><a href="source/entities.html#Character.get_mail_mail">get_mail_mail() (Character method)</a>
 </li>
       <li><a href="source/esi.html#Market.get_markets_groups">get_markets_groups() (Market method)</a>
 </li>
@@ -555,6 +706,32 @@
 </li>
       <li><a href="source/esi.html#Market.get_markets_structures_structure_id">get_markets_structures_structure_id() (Market method)</a>
 </li>
+      <li><a href="source/entities.html#Character.get_medals">get_medals() (Character method)</a>
+
+      <ul>
+        <li><a href="source/entities.html#Corporation.get_medals">(Corporation method)</a>
+</li>
+      </ul></li>
+      <li><a href="source/entities.html#Corporation.get_medals_issued">get_medals_issued() (Corporation method)</a>
+</li>
+      <li><a href="source/entities.html#Corporation.get_members">get_members() (Corporation method)</a>
+</li>
+      <li><a href="source/entities.html#Corporation.get_members_limit">get_members_limit() (Corporation method)</a>
+</li>
+      <li><a href="source/entities.html#Corporation.get_members_titles">get_members_titles() (Corporation method)</a>
+</li>
+      <li><a href="source/entities.html#Corporation.get_membertracking">get_membertracking() (Corporation method)</a>
+</li>
+      <li><a href="source/entities.html#Character.get_mining">get_mining() (Character method)</a>
+</li>
+      <li><a href="source/entities.html#Character.get_notifications">get_notifications() (Character method)</a>
+</li>
+      <li><a href="source/entities.html#Character.get_notifications_contacts">get_notifications_contacts() (Character method)</a>
+</li>
+      <li><a href="source/entities.html#Character.get_online">get_online() (Character method)</a>
+</li>
+      <li><a href="source/entities.html#Character.get_opportunities">get_opportunities() (Character method)</a>
+</li>
       <li><a href="source/esi.html#Opportunities.get_opportunities_groups">get_opportunities_groups() (Opportunities method)</a>
 </li>
       <li><a href="source/esi.html#Opportunities.get_opportunities_groups_group_id">get_opportunities_groups_group_id() (Opportunities method)</a>
@@ -563,9 +740,47 @@
 </li>
       <li><a href="source/esi.html#Opportunities.get_opportunities_tasks_task_id">get_opportunities_tasks_task_id() (Opportunities method)</a>
 </li>
+      <li><a href="source/entities.html#Character.get_orders">get_orders() (Character method)</a>
+
+      <ul>
+        <li><a href="source/entities.html#Corporation.get_orders">(Corporation method)</a>
+</li>
+      </ul></li>
+      <li><a href="source/entities.html#Character.get_orders_history">get_orders_history() (Character method)</a>
+
+      <ul>
+        <li><a href="source/entities.html#Corporation.get_orders_history">(Corporation method)</a>
+</li>
+      </ul></li>
+      <li><a href="source/entities.html#Character.get_planets">get_planets() (Character method)</a>
+</li>
+      <li><a href="source/entities.html#Character.get_planets_planet">get_planets_planet() (Character method)</a>
+</li>
+      <li><a href="source/entities.html#Character.get_portrait">get_portrait() (Character method)</a>
+</li>
+      <li><a href="source/entities.html#Character.get_roles">get_roles() (Character method)</a>
+
+      <ul>
+        <li><a href="source/entities.html#Corporation.get_roles">(Corporation method)</a>
+</li>
+      </ul></li>
+      <li><a href="source/entities.html#Corporation.get_roles_history">get_roles_history() (Corporation method)</a>
+</li>
       <li><a href="source/esi.html#Routes.get_route_origin_destination">get_route_origin_destination() (Routes method)</a>
 </li>
-      <li><a href="source/esi.html#Search.get_search">get_search() (Search method)</a>
+      <li><a href="source/entities.html#Character.get_search">get_search() (Character method)</a>
+
+      <ul>
+        <li><a href="source/esi.html#Search.get_search">(Search method)</a>
+</li>
+      </ul></li>
+      <li><a href="source/entities.html#Corporation.get_shareholders">get_shareholders() (Corporation method)</a>
+</li>
+      <li><a href="source/entities.html#Character.get_ship">get_ship() (Character method)</a>
+</li>
+      <li><a href="source/entities.html#Character.get_skillqueue">get_skillqueue() (Character method)</a>
+</li>
+      <li><a href="source/entities.html#Character.get_skills">get_skills() (Character method)</a>
 </li>
       <li><a href="source/esi.html#Sovereignty.get_sovereignty_campaigns">get_sovereignty_campaigns() (Sovereignty method)</a>
 </li>
@@ -573,10 +788,30 @@
 </li>
       <li><a href="source/esi.html#Sovereignty.get_sovereignty_structures">get_sovereignty_structures() (Sovereignty method)</a>
 </li>
+      <li><a href="source/entities.html#Character.get_standings">get_standings() (Character method)</a>
+
+      <ul>
+        <li><a href="source/entities.html#Corporation.get_standings">(Corporation method)</a>
+</li>
+      </ul></li>
+      <li><a href="source/entities.html#Corporation.get_starbases">get_starbases() (Corporation method)</a>
+</li>
+      <li><a href="source/entities.html#Corporation.get_starbases_starbase">get_starbases_starbase() (Corporation method)</a>
+</li>
+      <li><a href="source/entities.html#Character.get_stats">get_stats() (Character method)</a>
+</li>
       <li><a href="source/esi.html#Status.get_status">get_status() (Status method)</a>
+</li>
+      <li><a href="source/entities.html#Corporation.get_structures">get_structures() (Corporation method)</a>
 </li>
       <li><a href="source/modules.html#esy.client.ESIClient.get_swagger_spec">get_swagger_spec() (esy.client.ESIClient static method)</a>
 </li>
+      <li><a href="source/entities.html#Character.get_titles">get_titles() (Character method)</a>
+
+      <ul>
+        <li><a href="source/entities.html#Corporation.get_titles">(Corporation method)</a>
+</li>
+      </ul></li>
       <li><a href="source/esi.html#Universe.get_universe_ancestries">get_universe_ancestries() (Universe method)</a>
 </li>
       <li><a href="source/esi.html#Universe.get_universe_asteroid_belts_asteroid_belt_id">get_universe_asteroid_belts_asteroid_belt_id() (Universe method)</a>
@@ -634,6 +869,18 @@
       <li><a href="source/esi.html#Universe.get_universe_types">get_universe_types() (Universe method)</a>
 </li>
       <li><a href="source/esi.html#Universe.get_universe_types_type_id">get_universe_types_type_id() (Universe method)</a>
+</li>
+      <li><a href="source/entities.html#Character.get_wallet">get_wallet() (Character method)</a>
+</li>
+      <li><a href="source/entities.html#Character.get_wallet_journal">get_wallet_journal() (Character method)</a>
+</li>
+      <li><a href="source/entities.html#Character.get_wallet_transactions">get_wallet_transactions() (Character method)</a>
+</li>
+      <li><a href="source/entities.html#Corporation.get_wallets">get_wallets() (Corporation method)</a>
+</li>
+      <li><a href="source/entities.html#Corporation.get_wallets_division_journal">get_wallets_division_journal() (Corporation method)</a>
+</li>
+      <li><a href="source/entities.html#Corporation.get_wallets_division_transactions">get_wallets_division_transactions() (Corporation method)</a>
 </li>
       <li><a href="source/esi.html#Wars.get_wars">get_wars() (Wars method)</a>
 </li>
@@ -783,10 +1030,18 @@
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="source/esi.html#Search">Search (built-in class)</a>
 </li>
-      <li><a href="source/esi.html#Skills">Skills (built-in class)</a>
+      <li><a href="source/entities.html#Alliance.set_token">set_token() (Alliance method)</a>
+
+      <ul>
+        <li><a href="source/entities.html#Character.set_token">(Character method)</a>
 </li>
+        <li><a href="source/entities.html#Corporation.set_token">(Corporation method)</a>
+</li>
+      </ul></li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="source/esi.html#Skills">Skills (built-in class)</a>
+</li>
       <li><a href="source/esi.html#Sovereignty">Sovereignty (built-in class)</a>
 </li>
       <li><a href="source/esi.html#Status">Status (built-in class)</a>
@@ -875,6 +1130,7 @@
       <script type="text/javascript" src="_static/jquery.js"></script>
       <script type="text/javascript" src="_static/underscore.js"></script>
       <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
   
 
