@@ -171,7 +171,7 @@ class Entity(object):
         :param str _token:
         :return:
         '''
-        return cls.from_names([name], _client=_client, _token=_token).get(name)
+        return cls.from_names(name, _client=_client, _token=_token).get(name)
 
 
 class Character(Entity):
