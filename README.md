@@ -80,8 +80,8 @@ evolution = Corporation(144749962)
 ccp = Alliance(434243723)
 
 
-# To speed up initialization, it's recommended to create and share an ESIClient among instances. If no client is 
-# supplied, a new one will be created for each entity instance.
+# To speed up initialization, it's recommended to create and share an ESIClient among instances. 
+# If no client is supplied, a new one will be created for each entity instance.
 from esy.client import ESIClient
 client = ESIClient.get_client(user_agent='my-user-agent')
 
