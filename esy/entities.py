@@ -21,6 +21,9 @@ class Entity(object):
         self._register_resources(self._entity_type)
         self._augment_operations()
 
+    def __str__(self):
+        return f'{self._entity_type} {self._entity_id}'
+
     @property
     def id(self):
         return self._entity_id
@@ -129,11 +132,11 @@ class Entity(object):
         return entries
 
     @classmethod
-    def from_names(cls, names, _client=None, _token=None):
+    def from_names(cls, *names, _client=None, _token=None):
         '''
         Initialize a set of entities from a list of names
 
-        :param list names:
+        :param list *names:
         :param ESIClient _client:
         :param str _token:
         :return:
