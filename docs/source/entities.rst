@@ -29,7 +29,7 @@ Character
       
         Initialize a set of entities from a list of names
 
-        :param list names:
+        :param list *names:
         :param ESIClient _client:
         :param str _token:
         :return:
@@ -284,7 +284,7 @@ Corporation
       
         Initialize a set of entities from a list of names
 
-        :param list names:
+        :param list *names:
         :param ESIClient _client:
         :param str _token:
         :return:
@@ -477,7 +477,7 @@ Alliance
       
         Initialize a set of entities from a list of names
 
-        :param list names:
+        :param list *names:
         :param ESIClient _client:
         :param str _token:
         :return:
