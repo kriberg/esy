@@ -273,7 +273,7 @@ char_info = esy.devel.verify_access_token(access_token)
 from esy.client import ESIClient
 client = ESIClient.get_client(user_agent='your-user-agent')
 assets = client.Assets.get_characters_character_id_assets(
-    character_id=char_info.get('CharacterId'), _token=access_token)
+    character_id=char_info.get('CharacterID'), _token=access_token)
 
 for page in assets:
     print(page)
