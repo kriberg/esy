@@ -2027,10 +2027,11 @@ Universe
       :rtype: dict
 
 
-   .. py:method:: get_universe_structures()
+   .. py:method:: get_universe_structures([filter=None])
 
    List all public structures
 
+      :param str filter: Only list public structures that have this service online
       :return: List of public structure IDs
       :rtype: list
 

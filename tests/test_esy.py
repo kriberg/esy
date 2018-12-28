@@ -250,7 +250,7 @@ class TestEntities(unittest.TestCase):
         self.assertEqual(vitt.name, 'Vittoros')
         self.assertEqual(
             vitt.get_portrait().get('px64x64'),
-            'http://image.eveonline.com/Character/941287462_64.jpg')
+            'http://imageserver.eveonline.com/Character/941287462_64.jpg')
         with self.assertRaises(AttributeError):
             _ = vitt.elite
         evol = Corporation(EVOLUTION, _client=self.client)
