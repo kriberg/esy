@@ -2113,10 +2113,10 @@ Universe
 
    .. py:method:: post_universe_names(ids=None)
 
-   Get names and categories for a set of ID's
+   Get names and categories for a set of IDs
 
       :param None ids: The ids to resolve
-      :return: List of id/name associations for a set of ID's. All ID's must resolve to a name, or nothing will be returned
+      :return: List of id/name associations for a set of IDs. All IDs must resolve to a name, or nothing will be returned
       :rtype: list
 
 

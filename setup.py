@@ -104,7 +104,7 @@ setup(
     setup_requires=['pytest-runner'],
     tests_require=['pytest'],
     include_package_data=True,
-    license='MIT',
+    license='LGPLv3',
     classifiers=[
         'License :: OSI Approved :: GNU Lesser General Public License v3 (LGPLv3)',
         'Development Status :: 4 - Beta',
