@@ -2027,10 +2027,11 @@ Universe
       :rtype: dict
 
 
-   .. py:method:: get_universe_structures()
+   .. py:method:: get_universe_structures([filter=None])
 
    List all public structures
 
+      :param str filter: Only list public structures that have this service online
       :return: List of public structure IDs
       :rtype: list
 
@@ -2112,10 +2113,10 @@ Universe
 
    .. py:method:: post_universe_names(ids=None)
 
-   Get names and categories for a set of ID's
+   Get names and categories for a set of IDs
 
       :param None ids: The ids to resolve
-      :return: List of id/name associations for a set of ID's. All ID's must resolve to a name, or nothing will be returned
+      :return: List of id/name associations for a set of IDs. All IDs must resolve to a name, or nothing will be returned
       :rtype: list
 
 

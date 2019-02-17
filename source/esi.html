@@ -17,34 +17,36 @@
   
 
   
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
 
-  
-  
     
 
   
-
   <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="modules" href="modules.html" />
     <link rel="prev" title="Entities API" href="entities.html" /> 
-
-  
-  <script src="../_static/js/modernizr.min.js"></script>
-
 </head>
 
 <body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
-
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
-        <div class="wy-side-nav-search">
+        <div class="wy-side-nav-search" >
           
 
           
@@ -4790,7 +4792,7 @@
 </div></blockquote>
 <dl class="method">
 <dt id="Universe.get_universe_structures">
-<code class="descname">get_universe_structures</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Universe.get_universe_structures" title="Permalink to this definition">¶</a></dt>
+<code class="descname">get_universe_structures</code><span class="sig-paren">(</span><span class="optional">[</span><em>filter=None</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#Universe.get_universe_structures" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <p>List all public structures</p>
@@ -4799,9 +4801,12 @@
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">return:</th><td class="field-body">List of public structure IDs</td>
+<tr class="field-odd field"><th class="field-name" colspan="2">param str filter:</th></tr>
+<tr class="field-odd field"><td>&#160;</td><td class="field-body">Only list public structures that have this service online</td>
 </tr>
-<tr class="field-even field"><th class="field-name">rtype:</th><td class="field-body">list</td>
+<tr class="field-even field"><th class="field-name">return:</th><td class="field-body">List of public structure IDs</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">rtype:</th><td class="field-body">list</td>
 </tr>
 </tbody>
 </table>
@@ -4988,7 +4993,7 @@
 <code class="descname">post_universe_names</code><span class="sig-paren">(</span><em>ids=None</em><span class="sig-paren">)</span><a class="headerlink" href="#Universe.post_universe_names" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<p>Get names and categories for a set of ID’s</p>
+<p>Get names and categories for a set of IDs</p>
 <blockquote>
 <div><table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -4996,7 +5001,7 @@
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">param None ids:</th><td class="field-body">The ids to resolve</td>
 </tr>
-<tr class="field-even field"><th class="field-name">return:</th><td class="field-body">List of id/name associations for a set of ID’s. All ID’s must resolve to a name, or nothing will be returned</td>
+<tr class="field-even field"><th class="field-name">return:</th><td class="field-body">List of id/name associations for a set of IDs. All IDs must resolve to a name, or nothing will be returned</td>
 </tr>
 <tr class="field-odd field"><th class="field-name">rtype:</th><td class="field-body">list</td>
 </tr>
@@ -5388,7 +5393,7 @@
         <a href="modules.html" class="btn btn-neutral float-right" title="modules" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="entities.html" class="btn btn-neutral" title="Entities API" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="entities.html" class="btn btn-neutral float-left" title="Entities API" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -5414,26 +5419,16 @@
   
 
 
-  
-
-    
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../_static/jquery.js"></script>
-        <script type="text/javascript" src="../_static/underscore.js"></script>
-        <script type="text/javascript" src="../_static/doctools.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    
-
-  
-
-  <script type="text/javascript" src="../_static/js/theme.js"></script>
-
   <script type="text/javascript">
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script> 
+  </script>
+
+  
+  
+    
+   
 
 </body>
 </html>
