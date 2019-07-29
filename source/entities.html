@@ -163,434 +163,406 @@
 <h1>Entities API<a class="headerlink" href="#entities-api" title="Permalink to this headline">¶</a></h1>
 <div class="toctree-wrapper compound">
 </div>
-<table border="1" class="longtable docutils">
+<table class="longtable docutils align-default">
 <colgroup>
-<col width="10%" />
-<col width="90%" />
+<col style="width: 10%" />
+<col style="width: 90%" />
 </colgroup>
-<tbody valign="top">
+<tbody>
 </tbody>
 </table>
 <div class="section" id="character">
 <h2>Character<a class="headerlink" href="#character" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="Character">
-<em class="property">class </em><code class="descname">Character</code><a class="headerlink" href="#Character" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-name descname">Character</code><a class="headerlink" href="#Character" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="method">
 <dt id="Character.from_name">
-<code class="descname">from_name</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Character.from_name" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">from_name</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Character.from_name" title="Permalink to this definition">¶</a></dt>
 <dd><p>Initialize an entity from a name</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – </li>
-<li><strong>_client</strong> (<a class="reference internal" href="modules.html#esy.client.ESIClient" title="esy.client.ESIClient"><em>ESIClient</em></a>) – </li>
-<li><strong>_token</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – </li>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – </p></li>
+<li><p><strong>_client</strong> (<a class="reference internal" href="modules.html#esy.client.ESIClient" title="esy.client.ESIClient"><em>ESIClient</em></a>) – </p></li>
+<li><p><strong>_token</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – </p></li>
 </ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"></p>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="Character.from_names">
-<code class="descname">from_names</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Character.from_names" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">from_names</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Character.from_names" title="Permalink to this definition">¶</a></dt>
 <dd><p>Initialize a set of entities from a list of names</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>*names</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.7)"><em>list</em></a>) – </li>
-<li><strong>_client</strong> (<a class="reference internal" href="modules.html#esy.client.ESIClient" title="esy.client.ESIClient"><em>ESIClient</em></a>) – </li>
-<li><strong>_token</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – </li>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>*names</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.7)"><em>list</em></a>) – </p></li>
+<li><p><strong>_client</strong> (<a class="reference internal" href="modules.html#esy.client.ESIClient" title="esy.client.ESIClient"><em>ESIClient</em></a>) – </p></li>
+<li><p><strong>_token</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – </p></li>
 </ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"></p>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.7)">dict</a></p>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.7)">dict</a></p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="Character.get_agents_research">
-<code class="descname">get_agents_research</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Character.get_agents_research" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_agents_research</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Character.get_agents_research" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get agents research</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="Character.get_assets">
-<code class="descname">get_assets</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Character.get_assets" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_assets</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Character.get_assets" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get character assets</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="Character.get_attributes">
-<code class="descname">get_attributes</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Character.get_attributes" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_attributes</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Character.get_attributes" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get character attributes</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="Character.get_blueprints">
-<code class="descname">get_blueprints</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Character.get_blueprints" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_blueprints</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Character.get_blueprints" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get blueprints</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="Character.get_bookmarks">
-<code class="descname">get_bookmarks</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Character.get_bookmarks" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_bookmarks</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Character.get_bookmarks" title="Permalink to this definition">¶</a></dt>
 <dd><p>List bookmarks</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="Character.get_bookmarks_folders">
-<code class="descname">get_bookmarks_folders</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Character.get_bookmarks_folders" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_bookmarks_folders</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Character.get_bookmarks_folders" title="Permalink to this definition">¶</a></dt>
 <dd><p>List bookmark folders</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="Character.get_calendar">
-<code class="descname">get_calendar</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Character.get_calendar" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_calendar</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Character.get_calendar" title="Permalink to this definition">¶</a></dt>
 <dd><p>List calendar event summaries</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="Character.get_calendar_event">
-<code class="descname">get_calendar_event</code><span class="sig-paren">(</span><em>event_id=None</em><span class="sig-paren">)</span><a class="headerlink" href="#Character.get_calendar_event" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_calendar_event</code><span class="sig-paren">(</span><em class="sig-param">event_id=None</em><span class="sig-paren">)</span><a class="headerlink" href="#Character.get_calendar_event" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get an event</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>event_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)"><em>int</em></a>) – event_id</td>
-</tr>
-</tbody>
-</table>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>event_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)"><em>int</em></a>) – event_id</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="Character.get_calendar_event_attendees">
-<code class="descname">get_calendar_event_attendees</code><span class="sig-paren">(</span><em>event_id=None</em><span class="sig-paren">)</span><a class="headerlink" href="#Character.get_calendar_event_attendees" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_calendar_event_attendees</code><span class="sig-paren">(</span><em class="sig-param">event_id=None</em><span class="sig-paren">)</span><a class="headerlink" href="#Character.get_calendar_event_attendees" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get attendees</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>event_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)"><em>int</em></a>) – event_id</td>
-</tr>
-</tbody>
-</table>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>event_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)"><em>int</em></a>) – event_id</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="Character.get_clones">
-<code class="descname">get_clones</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Character.get_clones" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_clones</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Character.get_clones" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get clones</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="Character.get_contacts">
-<code class="descname">get_contacts</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Character.get_contacts" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_contacts</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Character.get_contacts" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get contacts</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="Character.get_contacts_labels">
-<code class="descname">get_contacts_labels</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Character.get_contacts_labels" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_contacts_labels</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Character.get_contacts_labels" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get contact labels</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="Character.get_contracts">
-<code class="descname">get_contracts</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Character.get_contracts" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_contracts</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Character.get_contracts" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get contracts</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="Character.get_contracts_contract_bids">
-<code class="descname">get_contracts_contract_bids</code><span class="sig-paren">(</span><em>contract_id=None</em><span class="sig-paren">)</span><a class="headerlink" href="#Character.get_contracts_contract_bids" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_contracts_contract_bids</code><span class="sig-paren">(</span><em class="sig-param">contract_id=None</em><span class="sig-paren">)</span><a class="headerlink" href="#Character.get_contracts_contract_bids" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get contract bids</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>contract_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)"><em>int</em></a>) – contract_id</td>
-</tr>
-</tbody>
-</table>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>contract_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)"><em>int</em></a>) – contract_id</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="Character.get_contracts_contract_items">
-<code class="descname">get_contracts_contract_items</code><span class="sig-paren">(</span><em>contract_id=None</em><span class="sig-paren">)</span><a class="headerlink" href="#Character.get_contracts_contract_items" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_contracts_contract_items</code><span class="sig-paren">(</span><em class="sig-param">contract_id=None</em><span class="sig-paren">)</span><a class="headerlink" href="#Character.get_contracts_contract_items" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get contract items</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>contract_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)"><em>int</em></a>) – contract_id</td>
-</tr>
-</tbody>
-</table>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>contract_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)"><em>int</em></a>) – contract_id</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="Character.get_corporationhistory">
-<code class="descname">get_corporationhistory</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Character.get_corporationhistory" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_corporationhistory</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Character.get_corporationhistory" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get corporation history</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="Character.get_fatigue">
-<code class="descname">get_fatigue</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Character.get_fatigue" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_fatigue</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Character.get_fatigue" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get jump fatigue</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="Character.get_fittings">
-<code class="descname">get_fittings</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Character.get_fittings" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_fittings</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Character.get_fittings" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get fittings</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="Character.get_fleet">
-<code class="descname">get_fleet</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Character.get_fleet" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_fleet</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Character.get_fleet" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get character fleet info</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="Character.get_fw_stats">
-<code class="descname">get_fw_stats</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Character.get_fw_stats" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_fw_stats</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Character.get_fw_stats" title="Permalink to this definition">¶</a></dt>
 <dd><p>Overview of a character involved in faction warfare</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="Character.get_implants">
-<code class="descname">get_implants</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Character.get_implants" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_implants</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Character.get_implants" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get active implants</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="Character.get_industry_jobs">
-<code class="descname">get_industry_jobs</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Character.get_industry_jobs" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_industry_jobs</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Character.get_industry_jobs" title="Permalink to this definition">¶</a></dt>
 <dd><p>List character industry jobs</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="Character.get_killmails_recent">
-<code class="descname">get_killmails_recent</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Character.get_killmails_recent" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_killmails_recent</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Character.get_killmails_recent" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get a character’s recent kills and losses</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="Character.get_location">
-<code class="descname">get_location</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Character.get_location" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_location</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Character.get_location" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get character location</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="Character.get_loyalty_points">
-<code class="descname">get_loyalty_points</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Character.get_loyalty_points" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_loyalty_points</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Character.get_loyalty_points" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get loyalty points</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="Character.get_mail">
-<code class="descname">get_mail</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Character.get_mail" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_mail</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Character.get_mail" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return mail headers</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="Character.get_mail_labels">
-<code class="descname">get_mail_labels</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Character.get_mail_labels" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_mail_labels</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Character.get_mail_labels" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get mail labels and unread counts</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="Character.get_mail_lists">
-<code class="descname">get_mail_lists</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Character.get_mail_lists" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_mail_lists</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Character.get_mail_lists" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return mailing list subscriptions</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="Character.get_mail_mail">
-<code class="descname">get_mail_mail</code><span class="sig-paren">(</span><em>mail_id=None</em><span class="sig-paren">)</span><a class="headerlink" href="#Character.get_mail_mail" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_mail_mail</code><span class="sig-paren">(</span><em class="sig-param">mail_id=None</em><span class="sig-paren">)</span><a class="headerlink" href="#Character.get_mail_mail" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return a mail</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>mail_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)"><em>int</em></a>) – mail_id</td>
-</tr>
-</tbody>
-</table>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>mail_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)"><em>int</em></a>) – mail_id</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="Character.get_medals">
-<code class="descname">get_medals</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Character.get_medals" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_medals</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Character.get_medals" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get medals</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="Character.get_mining">
-<code class="descname">get_mining</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Character.get_mining" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_mining</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Character.get_mining" title="Permalink to this definition">¶</a></dt>
 <dd><p>Character mining ledger</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="Character.get_notifications">
-<code class="descname">get_notifications</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Character.get_notifications" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_notifications</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Character.get_notifications" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get character notifications</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="Character.get_notifications_contacts">
-<code class="descname">get_notifications_contacts</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Character.get_notifications_contacts" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_notifications_contacts</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Character.get_notifications_contacts" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get new contact notifications</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="Character.get_online">
-<code class="descname">get_online</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Character.get_online" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_online</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Character.get_online" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get character online</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="Character.get_opportunities">
-<code class="descname">get_opportunities</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Character.get_opportunities" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_opportunities</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Character.get_opportunities" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get a character’s completed tasks</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="Character.get_orders">
-<code class="descname">get_orders</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Character.get_orders" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_orders</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Character.get_orders" title="Permalink to this definition">¶</a></dt>
 <dd><p>List open orders from a character</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="Character.get_orders_history">
-<code class="descname">get_orders_history</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Character.get_orders_history" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_orders_history</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Character.get_orders_history" title="Permalink to this definition">¶</a></dt>
 <dd><p>List historical orders by a character</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="Character.get_planets">
-<code class="descname">get_planets</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Character.get_planets" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_planets</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Character.get_planets" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get colonies</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="Character.get_planets_planet">
-<code class="descname">get_planets_planet</code><span class="sig-paren">(</span><em>planet_id=None</em><span class="sig-paren">)</span><a class="headerlink" href="#Character.get_planets_planet" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_planets_planet</code><span class="sig-paren">(</span><em class="sig-param">planet_id=None</em><span class="sig-paren">)</span><a class="headerlink" href="#Character.get_planets_planet" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get colony layout</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>planet_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)"><em>int</em></a>) – planet_id</td>
-</tr>
-</tbody>
-</table>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>planet_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)"><em>int</em></a>) – planet_id</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="Character.get_portrait">
-<code class="descname">get_portrait</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Character.get_portrait" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_portrait</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Character.get_portrait" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get character portraits</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="Character.get_roles">
-<code class="descname">get_roles</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Character.get_roles" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_roles</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Character.get_roles" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get character corporation roles</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="Character.get_search">
-<code class="descname">get_search</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Character.get_search" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_search</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Character.get_search" title="Permalink to this definition">¶</a></dt>
 <dd><p>Search on a string</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="Character.get_ship">
-<code class="descname">get_ship</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Character.get_ship" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_ship</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Character.get_ship" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get current ship</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="Character.get_skillqueue">
-<code class="descname">get_skillqueue</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Character.get_skillqueue" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_skillqueue</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Character.get_skillqueue" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get character’s skill queue</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="Character.get_skills">
-<code class="descname">get_skills</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Character.get_skills" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_skills</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Character.get_skills" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get character skills</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="Character.get_standings">
-<code class="descname">get_standings</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Character.get_standings" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_standings</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Character.get_standings" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get standings</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="Character.get_stats">
-<code class="descname">get_stats</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Character.get_stats" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_stats</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Character.get_stats" title="Permalink to this definition">¶</a></dt>
 <dd><p>Yearly aggregate stats</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="Character.get_titles">
-<code class="descname">get_titles</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Character.get_titles" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_titles</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Character.get_titles" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get character corporation titles</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="Character.get_wallet">
-<code class="descname">get_wallet</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Character.get_wallet" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_wallet</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Character.get_wallet" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get a character’s wallet balance</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="Character.get_wallet_journal">
-<code class="descname">get_wallet_journal</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Character.get_wallet_journal" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_wallet_journal</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Character.get_wallet_journal" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get character wallet journal</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="Character.get_wallet_transactions">
-<code class="descname">get_wallet_transactions</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Character.get_wallet_transactions" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_wallet_transactions</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Character.get_wallet_transactions" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get wallet transactions</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="Character.set_token">
-<code class="descname">set_token</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Character.set_token" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">set_token</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Character.set_token" title="Permalink to this definition">¶</a></dt>
 <dd><p>Sets the token used for calling ESI operations.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>token</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – ESI authorization token</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"></td>
-</tr>
-</tbody>
-</table>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>token</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – ESI authorization token</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+</dl>
 </dd></dl>
 
 </dd></dl>
@@ -600,314 +572,295 @@
 <h2>Corporation<a class="headerlink" href="#corporation" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="Corporation">
-<em class="property">class </em><code class="descname">Corporation</code><a class="headerlink" href="#Corporation" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-name descname">Corporation</code><a class="headerlink" href="#Corporation" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="method">
 <dt id="Corporation.from_name">
-<code class="descname">from_name</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Corporation.from_name" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">from_name</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Corporation.from_name" title="Permalink to this definition">¶</a></dt>
 <dd><p>Initialize an entity from a name</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – </li>
-<li><strong>_client</strong> (<a class="reference internal" href="modules.html#esy.client.ESIClient" title="esy.client.ESIClient"><em>ESIClient</em></a>) – </li>
-<li><strong>_token</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – </li>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – </p></li>
+<li><p><strong>_client</strong> (<a class="reference internal" href="modules.html#esy.client.ESIClient" title="esy.client.ESIClient"><em>ESIClient</em></a>) – </p></li>
+<li><p><strong>_token</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – </p></li>
 </ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"></p>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="Corporation.from_names">
-<code class="descname">from_names</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Corporation.from_names" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">from_names</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Corporation.from_names" title="Permalink to this definition">¶</a></dt>
 <dd><p>Initialize a set of entities from a list of names</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>*names</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.7)"><em>list</em></a>) – </li>
-<li><strong>_client</strong> (<a class="reference internal" href="modules.html#esy.client.ESIClient" title="esy.client.ESIClient"><em>ESIClient</em></a>) – </li>
-<li><strong>_token</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – </li>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>*names</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.7)"><em>list</em></a>) – </p></li>
+<li><p><strong>_client</strong> (<a class="reference internal" href="modules.html#esy.client.ESIClient" title="esy.client.ESIClient"><em>ESIClient</em></a>) – </p></li>
+<li><p><strong>_token</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – </p></li>
 </ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"></p>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.7)">dict</a></p>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.7)">dict</a></p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="Corporation.get_alliancehistory">
-<code class="descname">get_alliancehistory</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Corporation.get_alliancehistory" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_alliancehistory</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Corporation.get_alliancehistory" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get alliance history</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="Corporation.get_assets">
-<code class="descname">get_assets</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Corporation.get_assets" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_assets</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Corporation.get_assets" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get corporation assets</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="Corporation.get_blueprints">
-<code class="descname">get_blueprints</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Corporation.get_blueprints" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_blueprints</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Corporation.get_blueprints" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get corporation blueprints</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="Corporation.get_bookmarks">
-<code class="descname">get_bookmarks</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Corporation.get_bookmarks" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_bookmarks</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Corporation.get_bookmarks" title="Permalink to this definition">¶</a></dt>
 <dd><p>List corporation bookmarks</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="Corporation.get_bookmarks_folders">
-<code class="descname">get_bookmarks_folders</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Corporation.get_bookmarks_folders" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_bookmarks_folders</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Corporation.get_bookmarks_folders" title="Permalink to this definition">¶</a></dt>
 <dd><p>List corporation bookmark folders</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="Corporation.get_contacts">
-<code class="descname">get_contacts</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Corporation.get_contacts" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_contacts</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Corporation.get_contacts" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get corporation contacts</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="Corporation.get_contacts_labels">
-<code class="descname">get_contacts_labels</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Corporation.get_contacts_labels" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_contacts_labels</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Corporation.get_contacts_labels" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get corporation contact labels</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="Corporation.get_containers_logs">
-<code class="descname">get_containers_logs</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Corporation.get_containers_logs" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_containers_logs</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Corporation.get_containers_logs" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get all corporation ALSC logs</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="Corporation.get_contracts">
-<code class="descname">get_contracts</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Corporation.get_contracts" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_contracts</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Corporation.get_contracts" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get corporation contracts</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="Corporation.get_contracts_contract_bids">
-<code class="descname">get_contracts_contract_bids</code><span class="sig-paren">(</span><em>contract_id=None</em><span class="sig-paren">)</span><a class="headerlink" href="#Corporation.get_contracts_contract_bids" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_contracts_contract_bids</code><span class="sig-paren">(</span><em class="sig-param">contract_id=None</em><span class="sig-paren">)</span><a class="headerlink" href="#Corporation.get_contracts_contract_bids" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get corporation contract bids</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>contract_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)"><em>int</em></a>) – contract_id</td>
-</tr>
-</tbody>
-</table>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>contract_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)"><em>int</em></a>) – contract_id</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="Corporation.get_contracts_contract_items">
-<code class="descname">get_contracts_contract_items</code><span class="sig-paren">(</span><em>contract_id=None</em><span class="sig-paren">)</span><a class="headerlink" href="#Corporation.get_contracts_contract_items" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_contracts_contract_items</code><span class="sig-paren">(</span><em class="sig-param">contract_id=None</em><span class="sig-paren">)</span><a class="headerlink" href="#Corporation.get_contracts_contract_items" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get corporation contract items</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>contract_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)"><em>int</em></a>) – contract_id</td>
-</tr>
-</tbody>
-</table>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>contract_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)"><em>int</em></a>) – contract_id</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="Corporation.get_customs_offices">
-<code class="descname">get_customs_offices</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Corporation.get_customs_offices" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_customs_offices</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Corporation.get_customs_offices" title="Permalink to this definition">¶</a></dt>
 <dd><p>List corporation customs offices</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="Corporation.get_divisions">
-<code class="descname">get_divisions</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Corporation.get_divisions" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_divisions</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Corporation.get_divisions" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get corporation divisions</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="Corporation.get_facilities">
-<code class="descname">get_facilities</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Corporation.get_facilities" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_facilities</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Corporation.get_facilities" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get corporation facilities</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="Corporation.get_fw_stats">
-<code class="descname">get_fw_stats</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Corporation.get_fw_stats" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_fw_stats</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Corporation.get_fw_stats" title="Permalink to this definition">¶</a></dt>
 <dd><p>Overview of a corporation involved in faction warfare</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="Corporation.get_icons">
-<code class="descname">get_icons</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Corporation.get_icons" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_icons</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Corporation.get_icons" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get corporation icon</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="Corporation.get_industry_jobs">
-<code class="descname">get_industry_jobs</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Corporation.get_industry_jobs" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_industry_jobs</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Corporation.get_industry_jobs" title="Permalink to this definition">¶</a></dt>
 <dd><p>List corporation industry jobs</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="Corporation.get_killmails_recent">
-<code class="descname">get_killmails_recent</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Corporation.get_killmails_recent" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_killmails_recent</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Corporation.get_killmails_recent" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get a corporation’s recent kills and losses</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="Corporation.get_medals">
-<code class="descname">get_medals</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Corporation.get_medals" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_medals</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Corporation.get_medals" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get corporation medals</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="Corporation.get_medals_issued">
-<code class="descname">get_medals_issued</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Corporation.get_medals_issued" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_medals_issued</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Corporation.get_medals_issued" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get corporation issued medals</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="Corporation.get_members">
-<code class="descname">get_members</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Corporation.get_members" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_members</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Corporation.get_members" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get corporation members</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="Corporation.get_members_limit">
-<code class="descname">get_members_limit</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Corporation.get_members_limit" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_members_limit</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Corporation.get_members_limit" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get corporation member limit</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="Corporation.get_members_titles">
-<code class="descname">get_members_titles</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Corporation.get_members_titles" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_members_titles</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Corporation.get_members_titles" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get corporation’s members’ titles</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="Corporation.get_membertracking">
-<code class="descname">get_membertracking</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Corporation.get_membertracking" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_membertracking</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Corporation.get_membertracking" title="Permalink to this definition">¶</a></dt>
 <dd><p>Track corporation members</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="Corporation.get_orders">
-<code class="descname">get_orders</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Corporation.get_orders" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_orders</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Corporation.get_orders" title="Permalink to this definition">¶</a></dt>
 <dd><p>List open orders from a corporation</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="Corporation.get_orders_history">
-<code class="descname">get_orders_history</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Corporation.get_orders_history" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_orders_history</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Corporation.get_orders_history" title="Permalink to this definition">¶</a></dt>
 <dd><p>List historical orders from a corporation</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="Corporation.get_roles">
-<code class="descname">get_roles</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Corporation.get_roles" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_roles</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Corporation.get_roles" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get corporation member roles</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="Corporation.get_roles_history">
-<code class="descname">get_roles_history</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Corporation.get_roles_history" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_roles_history</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Corporation.get_roles_history" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get corporation member roles history</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="Corporation.get_shareholders">
-<code class="descname">get_shareholders</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Corporation.get_shareholders" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_shareholders</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Corporation.get_shareholders" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get corporation shareholders</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="Corporation.get_standings">
-<code class="descname">get_standings</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Corporation.get_standings" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_standings</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Corporation.get_standings" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get corporation standings</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="Corporation.get_starbases">
-<code class="descname">get_starbases</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Corporation.get_starbases" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_starbases</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Corporation.get_starbases" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get corporation starbases (POSes)</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="Corporation.get_starbases_starbase">
-<code class="descname">get_starbases_starbase</code><span class="sig-paren">(</span><em>starbase_id=None</em><span class="sig-paren">)</span><a class="headerlink" href="#Corporation.get_starbases_starbase" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_starbases_starbase</code><span class="sig-paren">(</span><em class="sig-param">starbase_id=None</em><span class="sig-paren">)</span><a class="headerlink" href="#Corporation.get_starbases_starbase" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get starbase (POS) detail</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>starbase_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)"><em>int</em></a>) – starbase_id</td>
-</tr>
-</tbody>
-</table>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>starbase_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)"><em>int</em></a>) – starbase_id</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="Corporation.get_structures">
-<code class="descname">get_structures</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Corporation.get_structures" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_structures</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Corporation.get_structures" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get corporation structures</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="Corporation.get_titles">
-<code class="descname">get_titles</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Corporation.get_titles" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_titles</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Corporation.get_titles" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get corporation titles</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="Corporation.get_wallets">
-<code class="descname">get_wallets</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Corporation.get_wallets" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_wallets</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Corporation.get_wallets" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns a corporation’s wallet balance</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="Corporation.get_wallets_division_journal">
-<code class="descname">get_wallets_division_journal</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Corporation.get_wallets_division_journal" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_wallets_division_journal</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Corporation.get_wallets_division_journal" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get corporation wallet journal</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="Corporation.get_wallets_division_transactions">
-<code class="descname">get_wallets_division_transactions</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Corporation.get_wallets_division_transactions" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_wallets_division_transactions</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Corporation.get_wallets_division_transactions" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get corporation wallet transactions</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="Corporation.set_token">
-<code class="descname">set_token</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Corporation.set_token" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">set_token</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Corporation.set_token" title="Permalink to this definition">¶</a></dt>
 <dd><p>Sets the token used for calling ESI operations.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>token</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – ESI authorization token</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"></td>
-</tr>
-</tbody>
-</table>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>token</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – ESI authorization token</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+</dl>
 </dd></dl>
 
 </dd></dl>
@@ -917,92 +870,82 @@
 <h2>Alliance<a class="headerlink" href="#alliance" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="Alliance">
-<em class="property">class </em><code class="descname">Alliance</code><a class="headerlink" href="#Alliance" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-name descname">Alliance</code><a class="headerlink" href="#Alliance" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="method">
 <dt id="Alliance.from_name">
-<code class="descname">from_name</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Alliance.from_name" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">from_name</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Alliance.from_name" title="Permalink to this definition">¶</a></dt>
 <dd><p>Initialize an entity from a name</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – </li>
-<li><strong>_client</strong> (<a class="reference internal" href="modules.html#esy.client.ESIClient" title="esy.client.ESIClient"><em>ESIClient</em></a>) – </li>
-<li><strong>_token</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – </li>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – </p></li>
+<li><p><strong>_client</strong> (<a class="reference internal" href="modules.html#esy.client.ESIClient" title="esy.client.ESIClient"><em>ESIClient</em></a>) – </p></li>
+<li><p><strong>_token</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – </p></li>
 </ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"></p>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="Alliance.from_names">
-<code class="descname">from_names</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Alliance.from_names" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">from_names</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Alliance.from_names" title="Permalink to this definition">¶</a></dt>
 <dd><p>Initialize a set of entities from a list of names</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>*names</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.7)"><em>list</em></a>) – </li>
-<li><strong>_client</strong> (<a class="reference internal" href="modules.html#esy.client.ESIClient" title="esy.client.ESIClient"><em>ESIClient</em></a>) – </li>
-<li><strong>_token</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – </li>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>*names</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.7)"><em>list</em></a>) – </p></li>
+<li><p><strong>_client</strong> (<a class="reference internal" href="modules.html#esy.client.ESIClient" title="esy.client.ESIClient"><em>ESIClient</em></a>) – </p></li>
+<li><p><strong>_token</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – </p></li>
 </ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"></p>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.7)">dict</a></p>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.7)">dict</a></p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="Alliance.get_contacts">
-<code class="descname">get_contacts</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Alliance.get_contacts" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_contacts</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Alliance.get_contacts" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get alliance contacts</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="Alliance.get_contacts_labels">
-<code class="descname">get_contacts_labels</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Alliance.get_contacts_labels" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_contacts_labels</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Alliance.get_contacts_labels" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get alliance contact labels</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="Alliance.get_corporations">
-<code class="descname">get_corporations</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Alliance.get_corporations" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_corporations</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Alliance.get_corporations" title="Permalink to this definition">¶</a></dt>
 <dd><p>List alliance’s corporations</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="Alliance.get_icons">
-<code class="descname">get_icons</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Alliance.get_icons" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_icons</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Alliance.get_icons" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get alliance icon</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="Alliance.set_token">
-<code class="descname">set_token</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Alliance.set_token" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">set_token</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Alliance.set_token" title="Permalink to this definition">¶</a></dt>
 <dd><p>Sets the token used for calling ESI operations.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>token</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – ESI authorization token</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"></td>
-</tr>
-</tbody>
-</table>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>token</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – ESI authorization token</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+</dl>
 </dd></dl>
 
 </dd></dl>
