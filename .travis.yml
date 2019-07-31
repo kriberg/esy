@@ -11,11 +11,14 @@ script:
   - cd docs; make html
 after_success:
   - coveralls
-deploy:
-  provider: pages
-  skip-cleanup: true
-  github-token: $GITHUB_TOKEN
-  keep-history: true
-  local-dir: docs/_build/html
-  on:
-    branch: master
+jobs:
+  include:
+    - stage: deploy
+      deploy:
+        provider: pages
+        skip-cleanup: true
+        github-token: $GITHUB_TOKEN
+        keep-history: true
+        local-dir: docs/_build/html
+        on:
+          branch: master
